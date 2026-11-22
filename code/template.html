@@ -317,7 +317,9 @@ function tabNumbers(n) {
 function tabLean(n) {
   if (!n.key) return '<p class="sub">No declaration found in this file.</p>';
   const file = n.module.split('.').join('/') + '.lean';
-  const src = DATA.source_url ? `<p><a class="ext" href="${esc(DATA.source_url + file)}" target="_blank" rel="noopener">Open ${esc(n.module.split('.').pop())}.lean in the source repository ↗</a></p>` : '';
+  const short = esc(n.module.split('.').pop()) + '.lean';
+  const src = (DATA.source_url ? `<p><a class="ext" href="${esc(DATA.source_url + file)}" target="_blank" rel="noopener">Open ${short} in the source repository ↗</a></p>` : '') +
+    (DATA.archive_url ? `<p><a class="ext" href="${esc(DATA.archive_url + file)}" target="_blank" rel="noopener">Open ${short} in the Software Heritage archive ↗</a><br><span class="small">A permanent copy of the same file at the same commit, in case the first link stops working.</span></p>` : '');
   const head = `<p class="small">Last theorem of the file <span class="mono">${esc(n.module.split('.').pop())}.lean</span>${n.key.declarations > 1 ? ' (' + n.key.declarations + ' declarations in the file)' : ''}.</p>`;
   if (!n.key.statement) return head + `<div class="stmt mono"><b>${esc(n.key.kind)} ${esc(n.key.name)}</b></div>${src}
     <p class="small">The Lean text of the statement is not reproduced here, because the proof was published without a licence. Follow the link to read it.</p>`;

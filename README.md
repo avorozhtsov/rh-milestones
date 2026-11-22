@@ -1,7 +1,9 @@
 # rh-milestones
 
-A map of the Lean proof of the Riemann Hypothesis, coarsened to 20, 100 and 1000
-milestones.
+A map of the Lean proof of the Riemann Hypothesis that Levent Alpöge published on
+20 November 2026 at [alpo.ge](https://alpo.ge/) (announcement note:
+[remark.pdf](https://alpo.ge/remark.pdf)), coarsened to 20, 100 and 1000 milestones.
+The proof is not ours; only the map is.
 
 **View the map: <https://avorozhtsov.github.io/rh-milestones/>**
 
@@ -38,8 +40,32 @@ Riemann Hypothesis for Dirichlet L-functions.
 
 The proof was published without a licence. This repository therefore contains none
 of its Lean text: only the names of its files and declarations, graph data derived
-from its import structure, and generated descriptions. Each milestone links to its
-file in the source repository.
+from its import structure, and generated descriptions.
+
+### Reading the source
+
+Every milestone on the map has two links to its Lean file, both fixed to the exact
+commit the map was built from, so later changes to the source do not affect them:
+
+- in the source repository on GitHub;
+- in the [Software Heritage archive](https://archive.softwareheritage.org/browse/revision/7cce738ba719a32964ca3822d0994f4c6952c7ae/?path=src),
+  an independent archive of source code. Use it if the GitHub link stops working.
+
+To browse the files locally, check out the same commit (1.9 GB):
+
+```bash
+git clone https://github.com/leanprover-community/riemann-hypothesis.git
+cd riemann-hypothesis
+git checkout 7cce738ba719a32964ca3822d0994f4c6952c7ae
+```
+
+A module `A.B.C` shown on the map is the file `src/A/B/C.lean`.
+
+The source repository records the archive the author published: `lean.tar.gz`,
+239,275,554 bytes, sha256
+`9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc`. Its first commit,
+`40e56bab`, is that archive unchanged; see its
+[verification notes](https://github.com/leanprover-community/riemann-hypothesis/blob/7cce738ba719a32964ca3822d0994f4c6952c7ae/verification/NOTES.md).
 
 ## What the map shows
 
@@ -56,7 +82,7 @@ Click a node to see:
   level, caveats, and whether it looks new or known from the literature;
 - **Numbers** — how much of the proof it depends on, how much is left to do once its
   inputs are available, how much work flows through it;
-- **Lean** — the name of the declaration and a link to its file in the source;
+- **Lean** — the name of the declaration and links to its file in the source;
 - **Links** — what it depends on and what uses it.
 
 | Level | Links | Largest step | Most inputs of one milestone |

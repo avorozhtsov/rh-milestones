@@ -22,6 +22,7 @@ for rule in plan relative absolute; do
   python3 -I code/render_html.py "data/levels_$rule.json" "$page" "$TITLE" \
     --descriptions data/descriptions --pages "$PAGES" --no-statements \
     --source-url "$REPO/blob/$COMMIT/src/" \
+    --archive-url "https://archive.softwareheritage.org/browse/revision/$COMMIT/?path=src/" \
     --source-home "$REPO/tree/$COMMIT" \
     --source-label "leanprover-community/riemann-hypothesis at commit 7cce738"
 done

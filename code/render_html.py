@@ -8,6 +8,7 @@ Usage: python3 -I render_html.py <levels.json> <out.html> <title>
 --pages:        pages built with each rule, for the switch in the header,
                 e.g. plan=rh_milestones.html,absolute=rh_milestones_absolute.html
 --source-url:   base URL of the Lean sources; a link to each file is shown.
+--archive-url:  base URL of a second, archival copy of the same sources.
 --source-label: name of the source proof, shown on the page (with --source-home
                 as its link).
 --no-statements: do not embed the Lean text of the statements.
@@ -228,6 +229,7 @@ def main():
     desc = load_descriptions(option('--descriptions'))
     pages = option('--pages') or ''
     source_url = option('--source-url') or ''
+    archive_url = option('--archive-url') or ''
     source_label = option('--source-label') or ''
     source_home = option('--source-home') or ''
     no_statements = '--no-statements' in sys.argv
@@ -238,6 +240,7 @@ def main():
     data = json.load(open(src))
     data['pages'] = [p.split('=', 1) for p in pages.split(',') if '=' in p]
     data['source_url'], data['source_label'], data['source_home'] = source_url, source_label, source_home
+    data['archive_url'] = archive_url
     if no_statements:
         for level in data['levels']:
             for n in level['nodes']:
