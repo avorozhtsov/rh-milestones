@@ -24,12 +24,48 @@ Balanced split
 """
 import heapq
 import json
+import os
 import sys
 
 
 def load(path):
+    """Load a graph: the JSON format of extract_lean_modules.py, or the .npz
+    declaration graph written by decl-graph/build_graph.py."""
+    if path.endswith('.npz'):
+        return load_declarations(path)
     with open(path) as fh:
         return json.load(fh)
+
+
+ROOT = 'Main'            # name of the added root node of a declaration graph
+
+
+def load_declarations(path, root_module='Main'):
+    """Declaration graph as a graph dict.  A root node is added that depends on
+    every theorem of `root_module` (the final theorems of the proof)."""
+    import numpy as np
+    z = np.load(path)
+    names_path = path[:-4] + '_names.txt'
+    if os.path.exists(names_path):
+        with open(names_path, encoding='utf-8') as fh:
+            names = fh.read().split('\n')[:-1]
+    else:
+        import gzip
+        with gzip.open(names_path + '.gz', 'rt', encoding='utf-8') as fh:
+            names = fh.read().split('\n')[:-1]
+    indptr, indices = z['indptr'].tolist(), z['indices'].tolist()
+    modules = [str(m) for m in z['modules']]
+    module, kind, size = z['module'].tolist(), z['kind'].tolist(), z['size'].tolist()
+    n = len(names)
+    deps = [indices[indptr[i]:indptr[i + 1]] for i in range(n)]
+    root_mod = modules.index(root_module)
+    deps.append([i for i in range(n) if module[i] == root_mod and kind[i] == 0])
+    label = ('thm', 'def', 'ind', 'other')
+    info = [{'thm': int(kind[i] == 0), 'def': int(kind[i] != 0), 'kind': label[kind[i]],
+             'module': modules[module[i]]} for i in range(n)]
+    info.append({'thm': 0, 'def': 0, 'kind': 'thm', 'module': root_module})
+    return {'nodes': names + [ROOT], 'deps': deps, 'weight': [1 + x for x in size] + [0],
+            'info': info, 'declarations': True}
 
 
 def rpo_from(deps, root):
@@ -183,7 +219,7 @@ class FlowCoarsening:
     statement of a stream is taken.
     """
 
-    def __init__(self, graph, root_name, window=None, same_stream=0.9):
+    def __init__(self, graph, root_name, window=None, same_stream=0.9, exact_cones=True):
         self.nodes = graph['nodes']
         self.deps = graph['deps']
         self.weight = graph['weight']
@@ -204,6 +240,8 @@ class FlowCoarsening:
             self.flow[n] = weight[n] + sum(self.flow[d] / users[d] for d in deps[n])
             self.unit_flow[n] = 1 + sum(self.unit_flow[d] / users[d] for d in deps[n])
             self.height[n] = 1 + max((self.height[d] for d in deps[n]), default=0)
+            if not exact_cones:               # too large for exact cones; see PlanCoarsening
+                continue
             b = 1 << pos[n]
             for d in deps[n]:
                 b |= reach[d]
@@ -216,7 +254,7 @@ class FlowCoarsening:
         # typical flow at a height: median over a window of heights with enough statements
         self.window = window
         self.typical = level_quantile(rpo, self.height, self.flow, window, 0.5)
-        self.score = {n: self.flow[n] / self.typical[self.height[n]] for n in rpo}
+        self.score = {n: self.flow[n] / max(self.typical[self.height[n]], 1e-9) for n in rpo}
         # streams: an edge that carries almost all the flow of both its ends
         stream = {n: n for n in rpo}
 
@@ -284,35 +322,78 @@ class PlanCoarsening(FlowCoarsening):
        of its step that groups several of them.
 
     The order of selection gives nested levels.
+
+    Large graphs.  Cones are kept as bitsets, which is exact but needs
+    (statements x eligible statements) bits.  With `sample=N` the size of a
+    cone or of a step is instead measured on a random sample of N statements,
+    and only the `max_candidates` eligible statements with the largest flow for
+    their level are kept as candidates.  Dependencies stay exact; only sizes are
+    estimated.
     """
 
     def __init__(self, graph, root_name, flow_quantile=0.5, near_best=0.5, max_inputs=7,
-                 skip_wrappers=0.1, **kw):
-        super().__init__(graph, root_name, **kw)
+                 skip_wrappers=0.1, sample=None, max_candidates=None, seed=0, **kw):
+        super().__init__(graph, root_name, exact_cones=sample is None, **kw)
         self.max_inputs, self.skip, self.near_best = max_inputs, skip_wrappers, near_best
         rpo, deps = self.rpo, self.deps
-        self.pos = pos = {n: i for i, n in enumerate(rpo)}
         gate = level_quantile(rpo, self.height, self.flow, self.window, flow_quantile)
-        eligible = {n for n in rpo if self.flow[n] >= gate[self.height[n]]}
-        eligible.add(self.root)
+        eligible = [n for n in rpo if self.flow[n] >= gate[self.height[n]] and n != self.root]
+        if max_candidates and len(eligible) > max_candidates:
+            eligible = sorted(eligible, key=lambda n: -self.score[n])[:max_candidates]
+        eligible.append(self.root)
+        if sample is None:
+            # exact: one bit per statement, used both to measure and to name candidates
+            self.pos = {n: i for i, n in enumerate(rpo)}
+            self.bitnode = rpo
+            self.count_mask = -1
+            own_bits = {n: 1 << i for i, n in enumerate(rpo)}
+        else:
+            # sampled: bits [0, sample) measure sizes, the bits after them name candidates
+            import random
+            sampled = random.Random(seed).sample(rpo, min(sample, len(rpo)))
+            base = len(sampled)
+            self.count_mask = (1 << base) - 1
+            self.pos = {n: base + j for j, n in enumerate(eligible)}
+            self.bitnode = [None] * base + eligible
+            own_bits = {n: 1 << p for n, p in self.pos.items()}
+            for i, n in enumerate(sampled):
+                own_bits[n] = own_bits.get(n, 0) | 1 << i
+        wanted = set(eligible)
         pending, reach, keep = dict(self.users), {}, {}
         for n in reversed(rpo):               # cones of the eligible statements, as bitsets
-            b = 1 << pos[n]
+            b = own_bits.get(n, 0)
             for d in deps[n]:
                 b |= reach[d]
                 pending[d] -= 1
-                if pending[d] == 0 and d not in eligible:
+                if pending[d] == 0 and d not in wanted:
                     del reach[d]
             reach[n] = b
-            if n in eligible:
+            if n in wanted:
                 keep[n] = b
         self.reach = keep
+        self.measure = (keep[self.root] & self.count_mask).bit_count()   # size of everything
+        if sample is not None:
+            scale = len(rpo) / self.measure
+            self.cone = {n: (b & self.count_mask).bit_count() * scale for n, b in keep.items()}
         self.eligible = 0
         for n in eligible:
-            self.eligible |= 1 << pos[n]
+            self.eligible |= 1 << self.pos[n]
+
+    def cone_share(self, m):
+        """Share of all statements that m depends on (estimated when sampled)."""
+        return (self.reach[m] & self.count_mask).bit_count() / self.measure
+
+    def step_shares(self, ms, edges):
+        """Share of all statements in the own step of every milestone."""
+        covered = {m: 0 for m in ms}
+        for a, b in edges:
+            covered[a] |= self.reach[b]
+        return {m: (self.reach[m] & ~covered[m] & self.count_mask).bit_count() / self.measure
+                for m in ms}
 
     def select(self, k, by=None):
-        rpo, reach, pos, stream = self.rpo, self.reach, self.pos, self.stream
+        rpo, reach, pos, stream = self.bitnode, self.reach, self.pos, self.stream
+        cm = self.count_mask
         ms, index = [self.root], {self.root: 0}
         below = {self.root: 0}                # milestones inside the cone, as a bitset over `ms`
         placed = 1 << pos[self.root]
@@ -333,7 +414,7 @@ class PlanCoarsening(FlowCoarsening):
                 mask = reach[m]
                 for c in inputs(m):
                     mask &= ~reach[c]
-                step_cache[m] = (mask, mask.bit_count())
+                step_cache[m] = (mask, (mask & cm).bit_count())
             return step_cache[m]
 
         def add(v):
@@ -391,7 +472,7 @@ class PlanCoarsening(FlowCoarsening):
                 v = rpo[p]
                 if stream[v] in used:
                     continue
-                r = (reach[v] & mask).bit_count()
+                r = (reach[v] & mask & cm).bit_count()
                 if 1 < r <= limit:
                     found.append((r, v))
                     best_r = max(best_r, r)

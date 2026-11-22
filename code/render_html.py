@@ -12,6 +12,9 @@ Usage: python3 -I render_html.py <levels.json> <out.html> <title>
 --source-label: name of the source proof, shown on the page (with --source-home
                 as its link).
 --no-statements: do not embed the Lean text of the statements.
+--variants:     pages built on different graphs, for a second switch in the
+                header, e.g. "Files=index.html,Declarations=declarations.html".
+                The entry whose page is the output file is marked as current.
 
 Layout is nested.  The coarsest level is laid out as a layered graph.  On a
 finer level every coarse milestone becomes a box, and the finer milestones of
@@ -36,7 +39,7 @@ HEADER = 22
 
 
 def title_of(module):
-    last = module.split('.')[-1]
+    last = module.split('.')[-1].replace('_', ' ').strip()
     return re.sub(r'(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])', ' ', last)
 
 
@@ -228,6 +231,7 @@ def load_descriptions(folder):
 def main():
     desc = load_descriptions(option('--descriptions'))
     pages = option('--pages') or ''
+    variants = option('--variants') or ''
     source_url = option('--source-url') or ''
     archive_url = option('--archive-url') or ''
     source_label = option('--source-label') or ''
@@ -239,6 +243,8 @@ def main():
     title = sys.argv[3] if len(sys.argv) > 3 else 'Milestones'
     data = json.load(open(src))
     data['pages'] = [p.split('=', 1) for p in pages.split(',') if '=' in p]
+    data['variants'] = [p.split('=', 1) + [p.split('=', 1)[1] == os.path.basename(out)]
+                        for p in variants.split(',') if '=' in p]
     data['source_url'], data['source_label'], data['source_home'] = source_url, source_label, source_home
     data['archive_url'] = archive_url
     if no_statements:
@@ -254,6 +260,13 @@ def main():
             n['title'] = title_of(n['module'])
             if n['module'] in desc:
                 n['desc'] = desc[n['module']]
+            elif n.get('file') in desc:
+                # a description written for the last theorem of a file fits a
+                # declaration node when it is that same declaration
+                d = desc[n['file']]
+                told, name = d.get('statement_name', ''), n['module']
+                if told and (name == told or name.endswith('.' + told) or told.endswith('.' + name)):
+                    n['desc'] = d
     data['described'] = [lv['k'] for lv in levels if all('desc' in n for n in lv['nodes'])]
     described = sum(1 for n in levels[0]['nodes'] if 'desc' in n)
     print(f'{len(desc)} descriptions loaded; {described} of {len(levels[0]["nodes"])} top-level milestones described')

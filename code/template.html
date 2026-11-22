@@ -120,6 +120,8 @@ svg.focus .gedge { opacity: .15; }
 <header>
   <h1>/*TITLE*/</h1>
   <div class="seg" id="levels"></div>
+  <span class="lbl" id="variant-lbl">Built on</span>
+  <div class="seg" id="variant"></div>
   <span class="lbl">Ranked by</span>
   <div class="seg" id="ranking"></div>
   <input type="search" id="q" placeholder="Search by name">
@@ -148,6 +150,9 @@ const flowPct = n => pct(n.flow, n.flow < 0.01 ? 2 : 1);
 const times = n => '×' + fmt(Math.round(n.score));
 const name = n => n.desc ? n.desc.title : n.title;
 const PLAN = DATA.ranking === 'plan';
+const DECL = DATA.unit === 'declaration';        // nodes are declarations, not files
+const UNITS = DECL ? 'declarations' : 'files';
+const fileOf = n => n.file || n.module;
 const rankKey = n => PLAN ? n.cone : n.flow;
 const mainPct = n => PLAN ? pct(n.cone) : flowPct(n);
 const lit = n => (n.desc && n.desc.literature && n.desc.literature.status) || '';
@@ -164,6 +169,14 @@ function buildHeader() {
     b.onclick = () => show(i, null);
     $('levels').appendChild(b);
   });
+  if (!DATA.variants || !DATA.variants.length) { $('variant').remove(); $('variant-lbl').remove(); }
+  else for (const [label, page, current] of DATA.variants) {
+    const a = document.createElement('a');
+    a.textContent = label;
+    if (current) a.className = 'on'; else a.href = page;
+    $('variant').appendChild(a);
+  }
+  if (DATA.pages.length < 2) { $('ranking').previousElementSibling.remove(); $('ranking').remove(); return; }
   const labels = { plan: 'Plan (cone + flow)', relative: 'Flow relative to level', absolute: 'Absolute flow' };
   for (const [key, page] of DATA.pages) {
     const a = document.createElement('a');
@@ -303,24 +316,26 @@ function tabNumbers(n) {
       <div class="stat"><b>${flowPct(n)}</b><span>of all work in the proof flows through this statement</span></div>
       <div class="stat"><b>${times(n)}</b><span>the typical flow of statements at its level</span></div>
       <div class="stat"><b>${n.height} of ${DATA.max_height}</b><span>level: longest chain of dependencies below it</span></div>
-      <div class="stat"><b>${pct(n.cone)}</b><span>of all files are below it (its cone)</span></div>
-      <div class="stat"><b>${pct(n.through, 0)}</b><span>of the files below it send their work through it</span></div>
-      <div class="stat"><b>${fmt(n.users)}</b><span>files import it directly</span></div>
+      <div class="stat"><b>${pct(n.cone)}</b><span>of all ${UNITS} are below it (its cone${DECL ? ', estimated on a sample' : ''})</span></div>
+      <div class="stat"><b>${pct(n.through, 0)}</b><span>of the ${UNITS} below it send their work through it</span></div>
+      <div class="stat"><b>${fmt(n.users)}</b><span>${DECL ? 'declarations use it directly' : 'files import it directly'}</span></div>
     </div>
     <h3>Work attributed to this milestone</h3>
-    <p class="small">${fmt(n.modules)} files, ${fmt(n.theorems)} theorems and lemmas, ${fmt(n.weight)} lines.
-      A file is attributed to the nearest milestone above it.</p>
+    <p class="small">${DECL ? fmt(n.modules) + ' declarations, of them ' + fmt(n.theorems) + ' theorems and lemmas.'
+        : fmt(n.modules) + ' files, ' + fmt(n.theorems) + ' theorems and lemmas, ' + fmt(n.weight) + ' lines.'}
+      A ${DECL ? 'declaration' : 'file'} is attributed to the nearest milestone above it.</p>
     <h3>Folders of that work</h3>` + n.dirs.map(([d, s]) =>
       `<div class="small">${esc(d)} — ${Math.round(100 * s)}%</div><div class="bar"><i style="width:${100 * s}%"></i></div>`).join('');
 }
 
 function tabLean(n) {
   if (!n.key) return '<p class="sub">No declaration found in this file.</p>';
-  const file = n.module.split('.').join('/') + '.lean';
-  const short = esc(n.module.split('.').pop()) + '.lean';
+  const file = fileOf(n).split('.').join('/') + '.lean';
+  const short = esc(fileOf(n).split('.').pop()) + '.lean';
   const src = (DATA.source_url ? `<p><a class="ext" href="${esc(DATA.source_url + file)}" target="_blank" rel="noopener">Open ${short} in the source repository ↗</a></p>` : '') +
     (DATA.archive_url ? `<p><a class="ext" href="${esc(DATA.archive_url + file)}" target="_blank" rel="noopener">Open ${short} in the Software Heritage archive ↗</a><br><span class="small">A permanent copy of the same file at the same commit, in case the first link stops working.</span></p>` : '');
-  const head = `<p class="small">Last theorem of the file <span class="mono">${esc(n.module.split('.').pop())}.lean</span>${n.key.declarations > 1 ? ' (' + n.key.declarations + ' declarations in the file)' : ''}.</p>`;
+  const head = DECL ? `<p class="small">Declared in the file <span class="mono">${esc(fileOf(n))}</span>.</p>`
+    : `<p class="small">Last theorem of the file <span class="mono">${short}</span>${n.key.declarations > 1 ? ' (' + n.key.declarations + ' declarations in the file)' : ''}.</p>`;
   if (!n.key.statement) return head + `<div class="stmt mono"><b>${esc(n.key.kind)} ${esc(n.key.name)}</b></div>${src}
     <p class="small">The Lean text of the statement is not reproduced here, because the proof was published without a licence. Follow the link to read it.</p>`;
   return head + `<div class="stmt mono"><b>${esc(n.key.kind)} ${esc(n.key.name)}</b>\n${esc(n.key.statement)}${n.key.truncated ? ' …' : ''}</div>${src}`;
@@ -375,12 +390,13 @@ function intro() {
   const notice = `<div class="note">This map was produced automatically with an AI model. It coarsens an existing Lean proof into milestones and does not check or explain that proof. The descriptions and the new / known marks are generated text and have not been checked by a mathematician.</div>`;
   const source = DATA.source_label ? `<p class="small">Source proof: ${DATA.source_home ? `<a class="ext" href="${esc(DATA.source_home)}" target="_blank" rel="noopener">${esc(DATA.source_label)}</a>` : esc(DATA.source_label)}.</p>` : '';
   return `<h2>How to read this map</h2>${notice}
-    <p>Each node is a milestone of the proof: a file, named after its last theorem. An arrow A → B means A is used in the proof of B. The final theorem is at the bottom and outlined.</p>
+    <p>Each node is a milestone of the proof: ${DECL ? 'a single theorem or definition' : 'a file, named after its last theorem'}. An arrow A → B means A is used in the proof of B. The final theorem is at the bottom and outlined.</p>
     ${planText}
-    <p><b>Flow.</b> Every file is a source of work, measured in lines. Work flows up along dependencies to the final theorem and is split equally when a file has several users. The flow through a statement is the work that passes through it. ${rule}</p>
+    <p><b>Flow.</b> Every ${DECL ? 'declaration' : 'file'} is a source of work, measured ${DECL ? 'by the number of constants its proof or body refers to' : 'in lines'}. Work flows up along dependencies to the final theorem and is split equally when a ${DECL ? 'declaration' : 'file'} has several users. The flow through a statement is the work that passes through it. ${rule}</p>
     ${legend}
     <p>The levels are nested: the ${DATA.levels[0].k} milestones also appear on the finer levels. On a finer level a box is a coarse milestone and the nodes in it are its parts. Thick arrows join boxes. A node's links to nodes in other boxes appear as dashed lines when you hover over it.</p>
-    <p class="small">The proof has ${fmt(DATA.total_nodes)} files and ${fmt(Math.round(DATA.total_weight))} non-blank lines. The graph is the import graph of the files. Names come from the author's file and theorem names; plain-English titles, where present, were written by an AI model.</p>
+    <p class="small">${DECL ? 'The final theorems depend on ' + fmt(DATA.total_nodes) + ' declarations of the proof. The graph is the graph of which declaration uses which, read from the compiled proof. Sizes of cones and steps are estimated on a random sample of declarations.'
+      : 'The proof has ' + fmt(DATA.total_nodes) + ' files and ' + fmt(Math.round(DATA.total_weight)) + ' non-blank lines. The graph is the import graph of the files.'} Names come from the author's file and theorem names; plain-English titles, where present, were written by an AI model.</p>
     ${source}
     <h3>This level: ${L.k} milestones, ${L.edges.length} links</h3>
     <ul class="links">${big.map(m => `<li>${link(m, state.li)}</li>`).join('')}</ul>

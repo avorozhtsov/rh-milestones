@@ -6,11 +6,12 @@ are measurements; the choice of rule is a judgement.
 
 ## The graph
 
-The graph is the import graph of the proof: 164,282 files, 700,597 import edges, and
-a longest import chain of 201. The files are small (median 60 lines, about five
-theorems each), so the file graph is close to a graph of statements.
+The first graph is the import graph of the proof: 164,282 files, 700,597 import
+edges, and a longest import chain of 201. The weight of a file is its number of
+non-blank lines. Most of this document describes the maps built on that graph.
 
-The weight of a file is its number of non-blank lines.
+A second graph, of declarations, was built later; see
+[Files or declarations](#files-or-declarations).
 
 ## Terms
 
@@ -105,6 +106,92 @@ three flat clusters, the largest holding 37% of the weight, because tens of
 thousands of files are used along two or more independent paths) and repeated
 balanced splitting of a tree (even clusters, but evenness is not importance).
 
+## Files or declarations
+
+The maps above were first built on the import graph of files, because that graph can
+be read off the source without compiling anything. A file is a unit of compilation,
+not of meaning, so a second map was built on the graph of declarations: which
+theorem or definition uses which. Both maps are kept. The page header switches
+between them.
+
+### Where the declaration graph comes from
+
+From the compiled proof. The community mirror publishes a build cache: one archive
+per file, 4.94 GB compressed and 99 GB unpacked. It does not fit on the disk used
+here, so the modules were unpacked in batches; from every compiled module its
+declarations and what they refer to were written out, and the batch was deleted.
+Each compiled module is read on its own, without loading the rest of the proof.
+
+The cache corresponds to commit `e50d098` of the mirror: the proof as its author
+published it (175,187 files) plus one added file. It was not compiled or checked
+here; the archives were verified against the mirror's list of checksums.
+
+- 1,173,961 declarations after folding auxiliary constants into their owners:
+  907,937 theorems, 257,476 definitions, 8,450 structures and inductive types.
+- 15.2 million dependencies between them.
+- The final theorems depend on 873,689 declarations, 74% of all. The other 26% are
+  written in the files of the proof but take no part in the final derivation.
+- The longest chain of dependencies is 159.
+
+### How far imports are from real dependencies
+
+Measured on the 164,100 files present in both graphs. A file really depends on
+another when one of its declarations uses a declaration of the other.
+
+| Measure | Value |
+|---|---:|
+| Imports between common files | 695,159 |
+| Imports that carry a direct real dependency | 62.9% |
+| Imports with no direct use | 37.1% |
+| Real dependencies between files | 1,659,141 |
+| Real dependencies that are not a direct import (reached through other imports) | 73.7% |
+| Real cone of a file / its cone by imports, median | 0.51 |
+| The same, 10th and 90th percentiles | 0.03 and 0.87 |
+
+The import cone of a file is typically twice its real cone, and for a tenth of the
+files more than thirty times. That matters for the map, because both the step and
+the flow are computed from cones.
+
+### Computing the levels on a million nodes
+
+Exact cones (one bit per pair of declarations) do not fit in memory. Sizes of cones
+and steps are therefore estimated on a random sample of 65,536 declarations, and the
+candidates for milestones are the 120,000 declarations with the largest flow for
+their level. Dependencies stay exact; only sizes are estimated. The weight of a
+declaration is the number of distinct constants its proof or body refers to.
+
+The sampled mode was checked on the file graph, where the exact computation is
+available: the first 20 milestones were identical, and 79 of the first 100. So part
+of the difference between the two maps on the finer levels is sampling noise.
+
+### The two maps side by side
+
+| Level | Built on | Links | Largest step | Most inputs | Milestones with more than 7 inputs |
+|---:|---|---:|---:|---:|---:|
+| 20 | files | 24 | 14.0% | 3 | 0 |
+| 20 | declarations | 21 | 10.4% | 3 | 0 |
+| 100 | files | 163 | 4.5% | 12 | 1 |
+| 100 | declarations | 124 | 3.2% | 6 | 0 |
+| 1000 | files | 3039 | 0.7% | 34 | 7 |
+| 1000 | declarations | 2432 | 0.5% | 26 | 40 |
+
+The step is a share of files in one case and a share of declarations in the other,
+so the numbers are only roughly comparable.
+
+- On the 20 and 100 levels the declaration map has smaller steps and fewer inputs
+  per milestone.
+- On the 1000 level it has more overloaded milestones: 40 against 7.
+- The two sets of milestones differ a lot. The files that contain the declaration
+  milestones coincide with the file milestones in 6 cases out of 20, 15 out of 100
+  and 202 out of 1000.
+- On the 1000 level the declaration milestones are 969 theorems, 17 definitions and
+  14 structures.
+
+These measures do not say which map is better: they are close, and there is no
+reference to compare with. The case for the declaration map is not in the measures.
+It is that the map rests on real dependencies and that its node is one specific
+theorem, not "the last theorem of a file".
+
 ## Check on theorems with a known plan
 
 The declaration graph of Mathlib was exported from Lean (771,133 constants;
@@ -176,5 +263,5 @@ What the helpers reported, and what a reader should keep in mind:
 - Nobody has checked the descriptions.
 - The claim behind the "largest step" measure, that a smaller step is easier to
   prove, has not been tested.
-- The graph has not been rebuilt at the level of declarations.
+- The sampled computation for the declaration map has been run with one random seed.
 - The rule has been compared with a human plan on one project only.

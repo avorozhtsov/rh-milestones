@@ -67,8 +67,11 @@ def main():
     graph_path, root, src, out = args[:4]
     levels = [int(x) for x in args[4:]] or [20, 100, 1000]
     g = load(graph_path)
+    decls = bool(g.get('declarations'))       # nodes are declarations, not files
     if rule == 'plan':
-        c = PlanCoarsening(g, root)
+        # a declaration graph is too large for exact cones: measure them on a sample
+        c = PlanCoarsening(g, root, sample=65536, max_candidates=120000) if decls \
+            else PlanCoarsening(g, root)
         c.select(max(levels))
     else:
         c = FlowCoarsening(g, root)
@@ -83,7 +86,7 @@ def main():
 
     clusters = {}
     result = {'root': root, 'total_weight': c.total, 'total_nodes': len(c.rpo),
-              'ranking': rule, 'max_height': height[c.root],
+              'ranking': rule, 'max_height': height[c.root], 'unit': 'declaration' if decls else 'file',
               'levels': []}
     for k in levels:
         ms, own, edges, raw, cluster = c.level(k)
@@ -96,7 +99,8 @@ def main():
             if info:
                 s['thm'] += info[n]['thm']
                 s['def'] += info[n]['def']
-            s['dirs']['.'.join(c.nodes[n].split('.')[:3])] += c.weight[n]
+            where = info[n]['module'] if decls else c.nodes[n]
+            s['dirs']['.'.join(where.split('.')[:3])] += c.weight[n]
             if all(cluster[u] == cluster[n] for u in users[n]):
                 s['private'] += c.weight[n]
         index = {m: i for i, m in enumerate(ms)}
@@ -105,10 +109,7 @@ def main():
         for a, b in edges:
             n_inputs[a] += 1
         if rule == 'plan':
-            covered = {m: 0 for m in ms}
-            for a, b in edges:
-                covered[a] |= c.reach[b]
-            step = {m: (c.reach[m] & ~covered[m]).bit_count() / len(c.rpo) for m in ms}
+            step = c.step_shares(ms, edges)
         nodes = []
         for m in ms:
             s = stats[m]
@@ -123,8 +124,8 @@ def main():
                 'score': round(c.score[m], 1),
                 # share of all files this statement depends on
                 'cone': round(c.cone[m] / len(c.rpo), 6),
-                # share of the files below it whose work passes through it
-                'through': round(c.unit_flow[m] / c.cone[m], 4),
+                # share of the statements below it whose work passes through it
+                'through': round(min(1.0, c.unit_flow[m] / max(1.0, c.cone[m])), 4),
                 'users': c.users[m],
                 'inputs': n_inputs[m],
                 # share of all files in its own step (None for rules that do not build a plan)
@@ -139,7 +140,12 @@ def main():
                 'dirs': [[d, round(w / max(1, own[m]), 3)] for d, w in s['dirs'].most_common(4)],
                 'parents': {str(kk): clusters[kk][m] for kk in levels if kk < k},
             }
-            if k <= 1000:
+            if decls:
+                # the node is the declaration itself; `file` is the module it lives in
+                node['file'] = info[m]['module']
+                node['key'] = {'kind': {'thm': 'theorem', 'def': 'def', 'ind': 'structure'}.get(
+                    info[m]['kind'], info[m]['kind']), 'name': name, 'declarations': 1}
+            elif k <= 1000:
                 node['key'] = key_statement(os.path.join(src, *name.split('.')) + '.lean')
                 if node['key'] and not keep_text:
                     del node['key']['statement'], node['key']['truncated']
