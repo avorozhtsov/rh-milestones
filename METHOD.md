@@ -236,9 +236,10 @@ declarations) the largest-cone rule is closer to the authors.
 
 ## Descriptions and marks
 
-For every milestone of the 20 and 100 levels a helper instance of the model read the
-file, took the last theorem in it, unfolded the project's own definitions two or
-three levels deep, and wrote: a title, what the statement says, its role, a
+For every milestone of the 20 and 100 levels of both maps a helper instance of the
+model read the file, took the statement (the last theorem of the file on the file
+map, the declaration itself on the declaration map), unfolded the project's own
+definitions two or three levels deep, and wrote: a title, what the statement says, its role, a
 confidence level, caveats, and a judgement of whether the statement is known from
 the literature or new to this proof.
 
@@ -252,8 +253,14 @@ What the helpers reported, and what a reader should keep in mind:
 - **Some "published" statements are proved inside the proof** rather than assumed.
   Those chains were not checked.
 - **A few theorems take a literature hypothesis that their proof does not use.**
-- **Low confidence (26 of 100)** means the statement is phrased in the proof's own
-  machinery and could not be reduced to ordinary mathematics; the description then
+- **The top-level hypothesis bundle looks small.** Several helpers independently
+  reported that the bundle of "open literature statements" assumed near the top has
+  three fields, two of them the same proposition (Galois representations attached
+  to polarized regular algebraic cuspidal representations over CM fields) and the
+  third local Langlands for GL(n), and that many theorems which take the bundle do
+  not use it. This is read from the text of the files, not checked with Lean.
+- **Low confidence (about a quarter of the descriptions)** means the statement is
+  phrased in the proof's own machinery and could not be reduced to ordinary mathematics; the description then
   gives only its logical shape.
 - **The "new / known" marks rest on the Lean source and on naming inside the
   proof.** No literature search was done.

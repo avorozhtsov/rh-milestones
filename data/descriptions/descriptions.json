@@ -35,6 +35,18 @@
    "basis": "The statement is the project's own 'Theorem B' step (`StepThmBG`): a weighted point-sum bound quantified over the project's data, settings and context bundle. Nothing in the naming or the files read marks it as a published theorem, and it does not restate a result with a standard name."
   }
  },
+ "CompanionTheory.FamilyDerivativeExpansion.M1.be_rank_one": {
+  "title": "Bessel integral of a discrete series is a rank-one operator",
+  "summary": "Setting: the unitary group of a fixed Hermitian form of signature (r+k, r+1) on C^n, n = 2r+k+1, k ≥ 1. Let σ be a discrete series representation with Harish-Chandra parameter λ (strictly decreasing, integral after the usual half-integer shift) such that compact and noncompact entries of λ differ by at least h, where h ≥ 120·n³. Let z be a vector in the middle (k+1)-dimensional block with negative norm, π a finite-dimensional irreducible unitary representation of the stabiliser U_W of z and of the chosen isotropic vectors (a compact unitary group in k variables), and μW, μN Haar measures on U_W and on the unipotent subgroup N. Conclusion: there is a map L from the space of σ to the space of π such that for all smooth vectors w, v of σ, the Bessel integrand ⟨v, σ(hn)w⟩·conj ψ(n)·π(h)⁻¹ is integrable over U_W × N, and its integral, an operator on the space of π, equals the rank-one operator ξ ↦ ⟨L v, ξ⟩·L w.",
+  "role": "Derived from the project's multiplicity-one theorem `thmM` applied to a normalised 'diagonal' real-place datum, together with decay bounds for discrete-series matrix coefficients, a convergence result for the Bessel integral, and measure bookkeeping (rescaling μW to total mass one and a change of variables on U_W × N). It establishes existence of the functional L with a factorisation identity.",
+  "statement_name": "CompanionTheory.FamilyDerivativeExpansion.M1.be_rank_one",
+  "confidence": "medium",
+  "caveat": "The integral, the Hermitian form, the sets U_W and N, and the predicates for discrete series and for π were read. The Bessel character ψ (defined through a linear functional `ell` and the constant −2i) and the precise form of `thmM` were not unfolded.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The statement is the integral form of uniqueness of Bessel models for real unitary groups (multiplicity one, as in Sun–Zhu and Jiang–Sun–Zhu) applied to discrete series; the specific gap condition and normalisations are the project's, so I cannot point to a verbatim reference."
+  }
+ },
  "Development.AbelianVarietyTheory.Definitions.AutomorphicMembership.CmHostRootComplexEqPmSqrt": {
   "title": "Existence of a pinned source family of unitary moduli data",
   "summary": "Setting: one of the project's global records D (type `D7`) and a `Host` structure A on its CM field matching the record (same prime d, same square root of −d, same complex embedding). Hypotheses: for every unitary lattice datum of rank at least 2 and every family of moduli schemes, a system of local integral models together with global toroidal models exists (`SysEx`); the coefficient ring of D is the full ring of integers of its field and contains the root of unity of order g0·g1 (`OFull`, `OZeta`); two primes of the quadratic subfield lie over the two primes g0 and g1 of D; an exponent ex > 0; and the coefficient field is large enough for levels g0·g1 and lcm(g0·g1, 15^ex) (it contains the relevant root of unity and a certain CM curve with torsion is defined over it). Conclusion: there is a `SrcFam`, a package giving for every rank N ≥ 2 and every j ≤ N a signature-(j, N−j) datum with moduli schemes, model systems and toroidal systems, complex uniformisation families at every admissible level, and two distinguished levels (one of conductor g0·g1, one with extra level 15^c), such that the first level's ideal is the product of the two chosen primes and the second has auxiliary level exactly 15^ex.",
@@ -1367,6 +1379,30 @@
    "basis": "Several hypotheses are literature statements (Bernstein's irreducibility theorem is in the project's `Published` namespace; the Siegel–Weil formula and Eisenstein continuation are classical), but the conclusion is an identity between theta integrals with project-specific matching data and normalisations, which I could not identify with a named published theorem."
   }
  },
+ "Formalism.FourierDecayAlt.P.CutMP.SmoothTransferRegularity.model_place_built_holds": {
+  "title": "Every built real place has a model place",
+  "summary": "No hypotheses. It proves `ModelPlaceBuilt2`: there is a constant Cc such that for every CM number field, every setting S of the project's analysis at real places, and every tower, test functions f, cutoff χ and auxiliary data forming a 'built place' with constant Cc (which includes unramifiedness, grid conditions, a long cut interval, smoothness of f and a size budget), under a validity condition at each place and two word conditions, the following holds for every cut with cutoff χ and every real place v. There exist level data L, a map j into a space of smooth functions, real parameters lam and positive constants Cm, σ such that `IsModelPlace` holds: the level and interlacing conditions on the cut interval, square-integrability of j under words of bounded length, an adjointness identity, an eigenvalue identity where a degree-(k+2r+1) operator acts on j by the product of (Y + lam_s), the identity principal Hermitian form of the ε-cut-off of f = Cm × model cutoff energy form at scale σ·ε for every admissible word, and agreement of admissibility and sizes with the model system.",
+  "role": "A two-line corollary: `modelPlaceBuilt2_of_chartEqs` applied to `chart_equations_holds`, the latter being a statement that solutions of the project's invariant differential equations satisfy, in local charts, a system of differential operators whose common characteristic directions are confined to nilpotent directions; that statement is in turn deduced from three Capelli-type identities. It is one of the three inputs bundled in `carrierNeedsFromD`.",
+  "statement_name": "Formalism.FourierDecayAlt.P.CutMP.SmoothTransferRegularity.model_place_built_holds",
+  "confidence": "medium",
+  "caveat": "`IsModelPlace`, `IsBuiltPlace`, the setting structure and `ChartEqs` were read; the objects inside them (level data, the algebra acting on j, the principal Hermitian form, the cutoff energy form, the model system) were not unfolded, so the summary follows the structure of the definitions. The description of the proof route through regularity of solutions rests on reading `ChartEqs` and on the namespace name.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The statement is entirely about the project's own notion of 'built place' and 'model place'; nothing in it restates a named theorem."
+  }
+ },
+ "Formalism.L2.G.linkG_concrete5": {
+  "title": "Group compatibility and one admissibility condition give the link condition",
+  "summary": "The statement concerns the project's parameter families `FamP`: for each real x and index i, a master datum with size data, parameter choices and many attached constants. For a class of such families, 'closed' means: for every sufficiently small ε there are threshold constants such that the property holds for every family in the class whose constants exceed the thresholds. Hypotheses: (1) closedness of 'group compatibility', i.e. for large x every member carries a compatibility package (Hermitian data, forms, a comparison of lattices, ring compatibility, and a description of its local data as coming from a level structure); (2) closedness of the second admissibility condition, which bounds the size of a selected index set between n·δ/2 and 2n·δ and bounds a quantity `BTT` by that size times x^(−2+ε). Conclusion: closedness of `LinkG`, which asserts constants C, x0 and a function δ(x) → 0 such that for x ≥ x0 every member satisfies a five-part local condition: bounds on local lattice lengths at each place, a bound on certain orbit sums by 2m·N·a/p, an inequality at inert places of small residue characteristic comparing sums of von Mangoldt-type class sums (minus explicit error terms) with 'gains', containment of served orbits, and a mean bound.",
+  "role": "A reduction step: it is the preceding lemma `linkG_concrete_noKer` with its extra hypothesis `Loc` discharged by `loc_proved`. That lemma derives trivial stabilisers, a standard-subgroup property and a descent property from group compatibility and feeds them into the closed forms of the project's 'first' and 'second' theorems.",
+  "statement_name": "Formalism.L2.G.linkG_concrete5",
+  "confidence": "medium",
+  "caveat": "The parameter family structure `FamP` has dozens of fields and the five clauses of the link condition involve further project quantities (`VV`, `Sv`, `gain`, `tau`, `vonMangoldtClassSum`, `BTT`) that I read only at the level of their use in the statement. Their mathematical meaning is not established here.",
+  "literature": {
+   "status": "probably new",
+   "basis": "All objects (parameter families, group compatibility, link condition) exist only inside this project's construction; no standard theorem is restated."
+  }
+ },
  "Formalism.LocalToGlobal.IndefiniteReal.TrISepWith": {
   "title": "Record of real-place data and its frame-existence condition",
   "summary": "The file contains no theorem. It defines the predicate `TrISepWith` (a given family of transformations of index-valued functions keeps distinct points of a certain finite index set distinct), a few auxiliary constructions, and the large structure `RealT`: a record with about forty fields attached to the project's datum `D7`, tying a 'real data' package to previously built row-side, column and spectral objects (equalities between them, a conjugate-linear map into a space of automorphic functions with a norm identity, sign and level conditions, standard orthonormal lattice frames, positivity of the Hermitian spaces). The last definition, `RealT.FramesEx`, is the proposition that there exist lattices in the Hermitian spaces of the datum and finite-adelic matrices that form 'SD frames' and satisfy the 'normal frame conditions' at the finite set of places recorded in the real data.",
@@ -1415,6 +1451,42 @@
    "basis": "The bound concerns kernel maps, lattices and weights attached to the project's own data objects (`D7`), and the statement is only a repackaging of constants for such bounds."
   }
  },
+ "FunctorialResolution.EmbeddedResolution.strongResolutionOfSingularitiesCharZero": {
+  "title": "Functorial strong resolution of singularities in characteristic zero",
+  "summary": "No hypotheses. Conclusion: there is a rule that assigns to every reduced scheme X of finite type over a field k of characteristic zero a finite sequence of blow-ups ending in a scheme X' such that X' is smooth over k, the map from X' to X is proper and is an isomorphism over the smooth locus of X, the preimage of the smooth locus is dense, all blow-up centres lie over the singular locus, and the reduced preimage of the singular locus is a strict normal crossings divisor. The rule commutes with pullback along smooth morphisms and with extension of the base field.",
+  "role": "Final assembly of the resolution part of the project: it applies a general theorem that turns a functorial principalization algorithm for ideals on smooth varieties into a resolution rule, using the project's algorithm with radical centres and the affine case proved just above in the same file.",
+  "statement_name": "FunctorialResolution.EmbeddedResolution.strongResolutionOfSingularitiesCharZero",
+  "confidence": "high",
+  "caveat": "",
+  "literature": {
+   "status": "known",
+   "basis": "This is Hironaka's theorem in its functorial form (Hironaka 1964; Villamayor, Bierstone–Milman, Włodarczyk, Kollár)."
+  }
+ },
+ "GlobalTheory.ArcCM.known_holds": {
+  "title": "The bundled background facts on abelian varieties all hold",
+  "summary": "No hypotheses. The conclusion is the project's bundle `Known`, a structure with 14 fields, each a general statement about polarized abelian schemes and their moduli. The fields are: a list of about 24 algebraic laws for polarized abelian varieties and semi-abelian schemes (rank of global sections, theorem of the cube and of the square, rigidity, Weil pairing and its nondegeneracy, ampleness, Serre-type statements, extension of semi-abelian schemes and cubical structures, quotients, unramified extensions of complete discrete valuation rings); further base-change laws for sections and for the uniformization of degenerating abelian varieties; complex-analytic theta uniformization of a polarized complex abelian variety (lattice, Hermitian form, semi-character, theta functions corresponding to sections, Weil pairing given by the exponential of the Riemann form); existence of moduli spaces with level structure for abelian schemes with an action of the integers of a CM field of signature (p, q), with integral models at every prime, families of complex uniformizations with theta functions with half-integer characteristics, and an archimedean condition on arcs into the toroidal boundary; unique extension of homomorphisms of semi-abelian schemes over a discrete valuation ring; a 'key formula' giving a canonical unit attached to a polarized abelian variety with theta section and Lie basis; existence of CM points over number fields; a formula equating twice the degree of a CM eigen-line with a logarithmic period quantity built from a Kronecker character; and well-definedness and base-change laws for evaluating forms at framed points of the moduli space.",
+  "role": "Final assembly of a hypothesis bundle: each field is filled by a theorem proved elsewhere in the project (the 'first five laws', the moduli existence theorem, the theta-uniformization theorem, the key formula, CM existence, the eigen-line degree formula, and so on). Its effect is that later results stated conditionally on `Known` become unconditional.",
+  "statement_name": "GlobalTheory.ArcCM.known_holds",
+  "confidence": "medium",
+  "caveat": "I read the definitions of all 14 fields only at the top level; the supporting notions (degeneration data, moduli objects `Moduli`, models, arcs, frames) were not unfolded, so the short descriptions of the moduli, toroidal and 'key formula' fields rest partly on names. The exact strength of each field relative to the literature theorem it resembles was not checked.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The bundle is called `Known` and its fields restate classical theorems in the project's language (theorem of the cube, Weil pairing, Appell-Humbert/theta uniformization, Mumford and Faltings-Chai degeneration theory, moduli of PEL type, a Moret-Bailly style key formula, a Chowla-Selberg type degree formula). The project-specific formulations of the moduli and arc clauses could not be matched to a precise reference."
+  }
+ },
+ "GlobalTheory.ArithmeticHeightTower.ArakelovDirectHeights.arCalc_direct": {
+  "title": "Arithmetic intersection calculus from Poincaré–Lelong and resolution",
+  "summary": "Hypotheses: the arithmetic Poincaré–Lelong formula in the project's formulation (the integral of the log-norm of a section against Chern forms equals a sum over horizontal components of its divisor minus a correction integral), and embedded resolution of singularities over fields of characteristic zero (a projective variety with a dense open set admits a projectively embedded smooth modification that is an isomorphism over the open set and has normal-crossing coordinates on the complement). Conclusion: the seven-part package `ArCalc` for Hermitian line bundles on arithmetic varieties: existence of heights and of arithmetic and geometric intersection functionals; the effect of changing a metric by a smooth function; the effect of a constant shift of the metric; the inductive formula expressing an intersection number through the height of a divisor minus an archimedean integral; the projection formula for generically finite maps; invariance under isometry and under integer linear combinations; and a second metric-change formula.",
+  "role": "Assembly of a toolkit statement. It builds a full intersection system from the two hypotheses (`arith_intersection_system_of_poincare_lelong`), proves three intermediate statements in the same file (heights form a polynomial functional, the mixed formula, the projection formula), passes them through `bridge3`, and concludes with `arithIntersectionCalculus_of_form_mixed_projection`.",
+  "statement_name": "GlobalTheory.ArithmeticHeightTower.ArakelovDirectHeights.arCalc_direct",
+  "confidence": "medium",
+  "caveat": "The seven components of `ArCalc`, the Poincaré–Lelong statement and the resolution statement were read. The underlying notions `HermLB`, `IsArithVar`, `IsArFun`, `IsArithHeight`, `chInt`, `archInt` were not unfolded, so the paraphrase of each component follows its formula and its name.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The conclusion `ArCalc` sits in the project's `Published` namespace and has the shape of the standard arithmetic intersection theory of Hermitian line bundles (Gillet–Soulé, Bost–Gillet–Soulé); the theorem derives it from two other literature statements. The exact formulation is the project's own."
+  }
+ },
  "GlobalTheory.BigOn.ontoX_of_hypotheses_alt_alt": {
   "title": "The 'onto' inequality at family points from twelve published inputs",
   "summary": "Hypotheses: twelve propositions, ten of them in the project's `Published` list and two of the same kind: Green's cuspidal characters of finite general linear groups, Clozel's theorem that regular algebraic cuspidal representations are cohomological, l-adic characters attached to algebraic Hecke characters (two versions), Chebotarev density with degree-one primes, existence of l-adic Galois representations for polarized regular algebraic cuspidal representations over CM fields (`CuspUAlt`), base change for definite unitary groups, Bhatt–Scholze crystalline lattices, rapid decay of cusp forms, existence of a local reciprocity map for GL_n satisfying the project's list of laws, a parametrisation of discrete series, and the Casselman–Wallach theorem. Conclusion `SurjectiveOntoX`: for every parameter family in the project's class `FamHyp` (small ε, large parameters) satisfying a divisor condition `DIVinN`, there is C0 ≥ 0 such that at all sufficiently large points of the family meeting the point conditions, and all C ≥ C0, the numerical condition `ON` holds. `ON` is a system of inequalities at the twisting places: a sum of local index terms at a place and its conjugate is bounded by ramification-weighted main and error terms times a global factor, the error terms are nonnegative, and a weighted sum over places is bounded by a prescribed quantity.",
@@ -1425,6 +1497,42 @@
   "literature": {
    "status": "probably new",
    "basis": "All hypotheses are literature-labelled statements, but the conclusion is an inequality about point data of this project's parameter families."
+  }
+ },
+ "GlobalTheory.CarrierGap.theoremS_leaves_of_carrierG": {
+  "title": "Carrier bound and four inputs give the Theorem S hypotheses",
+  "summary": "Hypotheses: `CarrierP` (the 'carrier' statement: uniform constants exist such that for every project datum, pair of distinct words u ≠ u' and auxiliary choices meeting the size conditions, the property `CarrierFull` holds); `RowNGP` (a 'non-generic row' bound for kernel rows indexed by pairs of words, with uniform constants); `RowsFinDim` (finite-dimensionality of the range of a product of two operators on L² of an adelic unitary-group quotient, one a finite-level convolution and one built from discrete-series matrix coefficients at the real places); `UniqGap` (two Bessel functionals on the smooth vectors of a discrete series representation of a unitary group U(p,q), whose Harish-Chandra parameter has a large gap, are proportional); `SWXS` (finite volume of the adelic unitary quotient and a Siegel–Weil-type identity in the range 2n < M, in the project's formulation). Nine further side facts appear as instance arguments; all are supplied by instances elsewhere in the project. Conclusion: `TheoremSClosedHypotheses`, a conjunction of 19 project statements (local models, density inputs, row inputs, the carrier and non-generic row statements, convergence and finiteness statements, counting formulas, mass-data inputs, linkage and splitting).",
+  "role": "Final collection step before 'Theorem S': each of the 19 conjuncts is supplied either by a hypothesis or by an earlier result (for example independence of a choice from the Bessel uniqueness, decay from the same uniqueness, normalizing constants and mass data from Siegel–Weil). The bundle is exactly the input of `theoremS_of_conj`, which yields the off-diagonal bound ‖K0(u,u')‖² ≤ (1 + b^(−6))·d(u)d(u')/D* for u ≠ u'.",
+  "statement_name": "GlobalTheory.CarrierGap.theoremS_leaves_of_carrierG",
+  "confidence": "medium",
+  "caveat": "The five hypotheses were read at top level; `CarrierFull`, the row predicates and most of the 19 conjuncts of the conclusion were not unfolded, so their one-word descriptions follow their names. Two different definitions named `TheoremSClosedHypotheses` exist; the one meant here (by the opened namespaces and by the shape of the proof) is the 19-fold conjunction in `TheoremSConclusion`.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is a bundle of statements about the project's own kernel construction. Two of the hypotheses (Bessel uniqueness, Siegel–Weil) are of literature type, but the statement as a whole is proof-specific bookkeeping."
+  }
+ },
+ "GlobalTheory.CompanionTheory.Ar.Br.flatDegreeSt_of_resK_gaga": {
+  "title": "Flat sections exist and have an explicit arithmetic degree",
+  "summary": "Hypotheses: embedded resolution of singularities in characteristic zero, and a GAGA statement (compatible holomorphic local data on a smooth proper complex variety come from an algebraic section of a line bundle). Conclusion (`FlatDegreeSt`): for every CM field E with a 'host' structure, a Kronecker character χ modulo the host's integer d, a signature datum (p,q), level, moduli data, coefficient field and complex uniformisations satisfying a list of laws, on every component and for every embedding τ in the chosen CM type there is a 'flat section': an invertible section of the line bundle of parallel weight −1 at τ whose norm is constant at each archimedean place and whose valuation is constant at each finite place. Every such section has arithmetic degree (p−q)/2 · Re(γ + log(2π / rootdisc E) − L'(1,χ)/L(1,χ)) + q·(log d − lrd E), where γ is Euler's constant.",
+  "role": "A reduction. It takes the constant section with zero finite-place defect and degree (p−q)/2 · Re(...) from `exists_const_section_kronecker_char`, renormalises its finite-place data to the required defect, recomputes the degree, and uses the lemma that all such sections on a component have the same degree.",
+  "statement_name": "GlobalTheory.CompanionTheory.Ar.Br.flatDegreeSt_of_resK_gaga",
+  "confidence": "medium",
+  "caveat": "Read: `FlatDegreeSt`, `FlatDegree`, `FlatExistsAt`, `ConstSec`, `flatWt`, `flDefect_vw`, `flatDegVal`, `logOm`, the `Laws` structure, and both hypotheses. Not unfolded: `Host`, `IsHostField`, `Moduli`, `Unf`, the algebra `Rul` of functions on framed points, and `lrd` (by its name a logarithmic root discriminant). The degree formula has the shape of a Chowla–Selberg type period formula; that identification is mine and is not stated in the code.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The hypotheses are literature statements and the constant resembles known CM period formulas, but the statement itself is about sections on the project's own moduli and uniformisation data and is filed under the project's statements, not its published theorems."
+  }
+ },
+ "GlobalTheory.CompanionTheory.Ar.Link.good_tower_volume_theorem_bis": {
+  "title": "Good towers exist and the volume theorem holds",
+  "summary": "Hypotheses, ten statements phrased as known results: existence of a full arithmetic intersection system; a triple of arithmetic Hilbert–Samuel type statements; Moriwaki's bigness inequality (arithmetic self-intersection bounded by arithmetic volume); embedded resolution of singularities in characteristic zero; unique extension of homomorphisms of semi-abelian schemes over a normal base; a Fargues-type Hodge–Tate statement for p-divisible groups; a GAGA statement for sections of line bundles; a 'line of large degree' statement; quotients of abelian schemes by finite flat subgroups; Zarhin's trick. Conclusion (1): for every CM field, signature (p,q) with p,q ≥ 1 and integral model of the moduli problem that is 'global' with split components, there is a 'root tower' (an index j, finitely many components, a finite set of bad primes, a rational weight, and a projective 'root model' for each bound B and component) together with a good origin with extra local properties. Conclusion (2): there is a universal constant C such that for abelian CM fields, q ≥ 1, 3q+1 ≤ p+q and not too many bad primes, every such tower satisfies six properties: proportionality of geometric intersection numbers to flag-variety degrees, equal volumes of all components, a limit formula for arithmetic intersection numbers, an asymptotic formula with error O(log B / B), and lower bounds for arithmetic self-intersection and for the mean slope in terms of the root discriminant and L'/L(1,χ) of a quadratic character.",
+  "role": "Final assembly for this block: `given_of_use` turns eight of the hypotheses into a list of fourteen working statements, and `GlobalTheory.T.final_theorem_of_inputs_right` is applied to them together with three facts proved without hypotheses (integrability of points from resolution, `topAvoid`, `thetaUnifAV_closed`).",
+  "statement_name": "GlobalTheory.CompanionTheory.Ar.Link.good_tower_volume_theorem_bis",
+  "confidence": "medium",
+  "caveat": "Read: both conclusions, `RootTower` and its predicates (`Proportional`, `VolEq`, `T1`, `ThmB`, `T2`, `MeanSlope`), `GoodOrigin`, `IsGlobal`, and seven of the ten hypotheses. Not unfolded: `RootModel`, `Host`, `Datum`, `Moduli`, `Model`, the three components of `HSUse` and the 'line of large degree' statement, which are described from names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses are named after published results (Moriwaki, Zarhin, GAGA, resolution of singularities), but the conclusion is about 'root towers' and 'good origins', which are objects of this project; the volume and slope bounds are not a named theorem."
   }
  },
  "GlobalTheory.ConjClassSum.conj_lifts": {
@@ -1439,6 +1547,66 @@
    "basis": "Rationality and Galois-equivariance of theta lifts is a known theme (Shimura, Harris), but this statement is formulated for the project's own data and one-map normalisations and I found no marker tying it to a published theorem."
   }
  },
+ "GlobalTheory.Core.Rk.Exh.Top.downNe_k_of_hypotheses'": {
+  "title": "Theta lift to a smaller unitary group is nonzero",
+  "summary": "Hypotheses: `DM`, a doubling-method package (meromorphic continuation with finite pole orders of Siegel Eisenstein series on the doubled unitary group, the basic identity for the doubling zeta integral of two cusp forms, and continuation of that integral); and `SimplePole`, which says that a partial L-function whose unramified parameters have 'lift shape' (r bounded parameters, twisted, together with a string of length t ≥ r+5) has a simple pole at s = (1+t)/2. Conclusion: for every master record D for which the Euler-product identity `EulerRight` holds (unramified doubling integrals yield the partial L-function divided by a normalising factor), the property `DownNe` holds. `DownNe` says: for a positive definite Hermitian space A and a Hermitian space W of positive rank with rank A = rank W + t, a cusp form u on U(A) invariant under a principal level subgroup whose unramified parameters have lift shape, and a Fock-type Schwartz function Φ whose archimedean matching integral is nonzero, the theta lift of u to U(W) is not identically zero.",
+  "role": "Direct application of `downNe_of_core`, with the project's proven residue statement `resCore` substituted for one of its hypotheses. It is a bookkeeping step that removes a hypothesis.",
+  "statement_name": "GlobalTheory.Core.Rk.Exh.Top.downNe_k_of_hypotheses'",
+  "confidence": "medium",
+  "caveat": "`DownNe`, `NoLift`, `Form`, `Occ`, `Defin`, `Places`, `EulerRight`, `DM` and `SimplePole` were read. The meaning of the Weil-representation datum, the Fock and spherical conditions on Φ and the theta-lift operator `up` is taken from names.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The shape matches the known criterion relating poles of L-functions and nonvanishing of theta lifts via the doubling method (Rallis inner product formula; Kudla–Rallis; Ginzburg–Jiang–Soudry), but the statement is phrased for the project's records and is conditional on two hypothesis bundles, so I cannot match it to a specific published theorem."
+  }
+ },
+ "GlobalTheory.Core.Rk.ScalarsRow.scalars": {
+  "title": "Theta-chain steps scale inner products by positive L-value multiples",
+  "summary": "Hypotheses: seven statements named after published results (covers by discrete series, Harish-Chandra finiteness, Harish-Chandra modules, Casselman–Wallach, rapid decay of cusp forms, Howe duality in the unramified case, the unramified doubling computation for GL), plus the unitary Siegel–Weil formula and continuation of Siegel Eisenstein series; the project's 'Hecke form' statement for every master datum (a Rallis-type formula expressing the Petersson pairing of two theta lifts through a value of a partial L-function); the standing conditions `Given` on the real datum R and a face F (a core package, existence of parameters, absolute irreducibility of characters, type and guard conditions, and gaps of size at least 100·r^4 between consecutive Harish-Chandra parameters); and a condition on the host field. Conclusion (`Scalars`): there are positive constants κ_1..κ_m such that for every label t and every Hecke eigensystem c with nonzero row part, an L-function parameter exists, and at each step k of the chain of m theta lifts there is a positive real number l, the value of a partial twisted L-function at the point (1+T)/2, where T is a rank parameter of the master datum, such that every vector reached at step k lifts to step k+1 and the lift multiplies inner products by κ_{k+1}·l; the same holds for the last step into the top space.",
+  "role": "A wrapper: it forwards to the preceding lemma `scalars_of_heckeFormNS`, which applies the project theorem `thetaChain_steps_positive_multiple_of_LValue` after deducing a separation of Harish-Chandra parameters from the cubic gap. The Siegel–Weil, Eisenstein-continuation and host-field hypotheses appear in the signature but are not used.",
+  "statement_name": "GlobalTheory.Core.Rk.ScalarsRow.scalars",
+  "confidence": "medium",
+  "caveat": "The seven literature hypotheses were identified from their names only. The spaces in the conclusion (`MMap`, the 'row part', the multiplicity inner product) and the bundle `Given` were read at the level of their definitions without unfolding the underlying real datum.",
+  "literature": {
+   "status": "probably new",
+   "basis": "It is conditional on literature-named hypotheses and on a project statement, and concludes a scaling property of the project's own chain of theta lifts; the general type (Rallis inner product formula) is classical, the statement is not."
+  }
+ },
+ "GlobalTheory.CovTop.FlatDegProof.flatDeg_alt_alt": {
+  "title": "Flat-section degree formula along the project's families",
+  "summary": "Hypothesis: `PublishedHodgeBundleTheorems`, a bundle of 28 assumed literature statements (toroidal compactification, volume and nefness statements, de Rham and Dieudonné theory, class field theory, semistable reduction, strong approximation, Chern–Weil, Kawamata–Viehweg and Nadel vanishing, arithmetic Hilbert–Samuel, heights of cycles, resolution and algebraisation, and others). Conclusion: `FlatDegreeCondition`: for all sufficiently small ε and all sufficiently large members of the project's families of data, at every construction point, every index i below the top one and every 'good' cover Y, the flat-degree property holds for the uniformisation attached to Y. That property says that on each component and for each CM type component a flat section exists and every flat section has the same degree, equal to ((p − q)/2)·log Ω + q·(log d − log of the root discriminant of E), where (p, q) is the signature and log Ω = γ + log(2π / root discriminant) − Re L'(1,χ)/L(1,χ) for the quadratic character χ.",
+  "role": "Bookkeeping lift: the pointwise formula is the earlier statement `FlatDegreeSt`, obtained from `flat_tensor_swap_isIso`, and is transported to the 'eventually along families' form with trivial constants. The lemma producing `FlatDegreeSt` discards its three arguments, so the literature bundle is not actually used in this proof.",
+  "statement_name": "GlobalTheory.CovTop.FlatDegProof.flatDeg_alt_alt",
+  "confidence": "medium",
+  "caveat": "`FlatSec` (flat section) and its degree, the cover structure `Cov`, `GoodCov` and the family class `FamHyp` were not unfolded in detail. The sign convention of the degree was read off two nested definitions and should be checked before quoting. The 28 field names of the hypothesis bundle were read, not their definitions.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is stated for the project's own families, construction points and covers. The underlying degree formula is of Chowla–Selberg / Colmez type, but it is proved inside the project and not taken from the literature bundle."
+  }
+ },
+ "GlobalTheory.CovTop.GoodDom.weight_lattice_span_on_domain": {
+  "title": "Integral cusp forms of dominant weight span all cusp forms",
+  "summary": "Hypotheses: the bundle `PublishedHodgeBundleTheorems` (28 named literature statements, among them toroidal compactification, arithmetic Hilbert–Samuel, Kawamata–Viehweg, Nadel vanishing, semistable reduction, strong approximation); a master datum D of the project with its core package T; an index j whose Hermitian datum has signature (p, q) with p, q ≥ 1; a 'deep' cover Y of the j-th unitary moduli space (larger coefficient field, extra level) satisfying the project's goodness conditions with parameters (e, o); the CM field has degree at least 6 over the rationals; and a weight λ whose rows are non-increasing with a gap of at least 1 between positions p and p+1. Conclusion: inside the space of cusp forms of weight λ on Y (a vector space over the coefficient field), the lattice of integral forms, those with nonnegative valuation at every valuation of the project's set attached to finite places, spans the whole space. Equivalently, every such cusp form has a nonzero scalar multiple that is integral.",
+  "role": "A bounded-denominators step. It combines an earlier result that some power of a form times an auxiliary form is cuspidal of a matched weight, a result that a suitable multiple of that product has nonnegative valuations, and an algebraic lemma passing from integrality of a power to integrality of a multiple of the form. Together with finite generation (previous lemma) it gives the regularity of the weight lattice used next in the file.",
+  "statement_name": "GlobalTheory.CovTop.GoodDom.weight_lattice_span_on_domain",
+  "confidence": "medium",
+  "caveat": "The 'deep cover', its goodness conditions (about 14 clauses) and the valuation set defining integrality were read only at the level of their declarations. The space of cusp forms is the project's `cuspW`, defined by holomorphy conditions on uniformizations, which I did not unfold further.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The statement is conditional on a bundle of literature theorems and concludes a property of lattices of cusp forms on the project's own covers of unitary moduli spaces; no standard reference states it in this form."
+  }
+ },
+ "GlobalTheory.DeRham.charpoly_push_eq": {
+  "title": "Characteristic polynomial on de Rham homology equals the l-adic one",
+  "summary": "Let k be an algebraically closed field, A an abelian scheme over k, and f an endomorphism of A as a group scheme. Suppose L is a free ℤ-module of finite rank with an endomorphism φ, l is a prime invertible in k, and for each j there is a map ev_j from L to A(k) that is additive, intertwines φ with f, has kernel exactly l^j·L and image exactly the l^j-torsion points; so L with φ models the l-adic Tate module of A with the action of f. Assume the de Rham homology of A (defined as the dual of the primitive part of first de Rham cohomology) is finite-dimensional over k. Conclusion: the characteristic polynomial of the map induced by f on de Rham homology equals the characteristic polynomial of φ, with coefficients mapped from ℤ to k.",
+  "role": "Combines two earlier results: the lattice model computes the project's integer characteristic polynomial of an endomorphism of an abelian variety (`l_power_torsion_endomorphism_evaluation`), and that integer polynomial maps to the characteristic polynomial on de Rham homology (proved separately in characteristic p and characteristic 0). A short assembly after packaging A as an abelian variety.",
+  "statement_name": "GlobalTheory.DeRham.charpoly_push_eq",
+  "confidence": "medium",
+  "caveat": "The de Rham homology `HdR` and the pushforward were traced to a dual of primitive classes in a first cohomology group for the trivial divided-power structure; the underlying cohomology definition and `IsAbelianScheme` were not unfolded further.",
+  "literature": {
+   "status": "known",
+   "basis": "This is the classical independence of the characteristic polynomial of an endomorphism of an abelian variety from the cohomology theory (l-adic Tate module versus de Rham or crystalline H^1; in general Katz–Messing), stated with an explicit lattice model for the Tate module."
+  }
+ },
  "GlobalTheory.Fc.StageOneU.member_bundles_large_unramified_exponents_alt": {
   "title": "Mass ratio, staged membership and bundle existence from literature bundle",
   "summary": "Hypotheses: a bundle `UnitaryGroupThirdPlaceHypotheses` of about sixty propositions, almost all named after published theorems (Clozel, Chebotarev, global Artin reciprocity, Siegel–Weil, doubling method, Bernstein–Zelevinsky, Harish-Chandra, Casselman–Wallach, discrete series classification, strong approximation, local Tate duality, and others); a project-specific 'row rationality' condition `RowRat`; existence of a local reciprocity map for GL_n satisfying the project's laws; a real number cDep; and a property A of twisted base data that holds for all sufficiently large bases. Conclusion, three parts: (1) the Siegel mass ratio for CM fields: for an 'unramified' CM field and M ≥ 3, the ratio of the masses of the standard Hermitian lattices of ranks M and M−1 equals an explicit expression; (2) `MemberE` for the slot system built from a specific 'extension' (the origin extension with parameter cDep, restricted by A): a base condition plus three construction stages (a core exists, it exports, and a second pass produces a good core); (3) eventually, at every good point of that slot system there exists a bundle satisfying the linkage `BundleLinkage`.",
@@ -1449,6 +1617,30 @@
   "literature": {
    "status": "probably new",
    "basis": "Part (1) is a classical mass-formula statement, but parts (2) and (3) are existence statements about the project's own staged construction, conditional on literature hypotheses."
+  }
+ },
+ "GlobalTheory.FinMatch.exists_finite_place_theta_match": {
+  "title": "Two theta lifts to one unitary group match",
+  "summary": "Hypotheses: a bundle `ThetaLocalInputs` of about 50 statements named after published theorems (Howe duality, Weil representation, discrete series, doubling method and others); a project statement `LocalMatching` saying that matched local data exist for every admissible triple; and a concrete setting: three Hermitian spaces A, A', W over the CM extension of the project's global datum with rank A + rank A' = rank W, Weil representations for the pairs (A, W) and (A', W) attached to Hecke characters α and β, a condition that α/β is ramified exactly at places below a given finite set, and test vectors f, f' of the required finite type. Conclusion: there is a single irreducible module Π for the unitary group of W (finite adelic part together with Lie algebra actions at the infinite places) and maps p, p' from the two Weil representation spaces onto coinvariant quotients in Π, such that for suitable polynomials P, P' the vectors built from f and P and from f' and P' have the same nonzero image in Π.",
+  "role": "Existence of an object with a comparison: it builds local lattice data at the ramified places, applies `LocalMatching` to get local models, assembles a restricted tensor product, and uses earlier results (surjectivity, equivariance and irreducibility of the triple assembly) to check the properties; it is then used for the theorem `finite_place_theta_matching` in the same file.",
+  "statement_name": "GlobalTheory.FinMatch.exists_finite_place_theta_match",
+  "confidence": "medium",
+  "caveat": "The predicates `IsMatch`, `IsTriple`, `Tri.Is` were read, but the notions under them (coinvariant map, 'Fock' vectors, finite type of test vectors) were not unfolded, so 'theta lift' is my reading of the structure. The literature bundle was read as field names only.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The statement is conditional on literature inputs but concludes a matching between objects defined inside the project's construction (its global datum, its triples of Hermitian spaces and test vectors)."
+  }
+ },
+ "GlobalTheory.FlipRun.cuspStep_of_large_flipRun": {
+  "title": "Theta lifts along grid arrows preserve cusp forms",
+  "summary": "Hypotheses: `LiftsCuspidal`, a project statement that for every datum the theta lifts between neighbouring unitary groups of the project's grid send cuspidal functions to cuspidal functions (in a multiplicity form and a smooth form), and `ThetaLocalInputs`, a bundle of sixteen published statements (Bernstein-Zelevinsky finiteness, Bernstein irreducibility, the geometric lemma, Jacquet-Shalika, finiteness of automorphic forms on GL_n, temperedness of cohomological conjugate-self-dual representations, Galois representations of polarised cuspidal representations, local-global compatibility above l, purity, global Artin reciprocity, l-adic Hecke characters, de Rham implies potentially semistable, Chebotarev and others). Conclusion, for all sufficiently large scales and every admissible 'choice' in the project's Hida-type setting: for every index t and every system of Haar measures and fundamental domains on the grid of unitary groups, and for every arrow of the grid (rightward or downward), every local test vector and Fock-model polynomial, and every smooth cuspidal automorphic function F on the source group that is 'listed', the theta-kernel integral defining the lift of F converges and the lift is again a smooth, cuspidal, listed automorphic function on the target group.",
+  "role": "It first derives smoothness of cuspidal lifts at the cusps, then joins two earlier results, one for rightward arrows (`cusp_transition_rightward`) and one for downward arrows (`flipRun_descending_cusp_transition`), into a single statement for all grid arrows. A case-merging step.",
+  "statement_name": "GlobalTheory.FlipRun.cuspStep_of_large_flipRun",
+  "confidence": "medium",
+  "caveat": "`CuspStep`, `Big`, `Vol`, `liftA`, `LiftConv`, `IsGridArrow`, `LiftsCuspidal` and `ThetaLocalInputs` were read. The grid data (`GridData`, the Weil-representation data `W`, `RealMatch`, the `HidaSetting` conditions) and the predicates 'listed', `IsAutFunSm`, `IsCuspFun`, `IsLocVec` were not unfolded; that the nodes are unitary groups of Hermitian spaces and that the kernel is a theta kernel is inferred from the surrounding definitions and names. The individual entries of `ThetaLocalInputs` are described by their names only.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Preservation of cuspidality under theta lifts in a tower is a classical theme (Rallis), but this statement concerns the project's own grid of spaces, levels and 'listed' functions and is conditional on a project-specific hypothesis in addition to published ones."
   }
  },
  "GlobalTheory.HeightCounting.Up.all_stages_of_specializations_alt": {
@@ -1463,6 +1655,30 @@
    "basis": "The statement is about levels and states of this project's construction; only its hypotheses are literature statements."
   }
  },
+ "GlobalTheory.InputsAtRecord.inputsNet_recPlus": {
+  "title": "Input bundle with finite net for the extended point system",
+  "summary": "The statement asserts the existence of an absolute constant CL and two real functions Cq and Z₀ of two variables such that the following holds for every master record D, every 'Top' record T over D satisfying the law bundle `LawsP`, every index j with 1 ≤ j ≤ m, all weights ka, wL, wF and numerical parameters. If the parameter conditions `ParOK` and page conditions `PageOK` hold and the base size is at least Z₀(CA, CK), then (a) the bundle `InputsNet` holds, with explicit constants (1, 4, Cq(CA,CK), 4, 7), for the recorded graded system of cusp forms at step j after its point sets have been enlarged to all valuation points, and (b) the support conditions `PageSupp` hold. `InputsNet` is a large conjunction: base hypotheses (a lattice condition, a lower bound for log sup-norms of integral forms, a recursive lattice bound when j < m), existence of a family G of global forms together with a finite net of bounded log-cardinality, about a dozen tie, share and domination conditions on G, and local point data at every finite place satisfying a combined valuation bound and height bounds.",
+  "role": "Assembly step. It combines about ten earlier results (absolute lower bound for log sup-norms of integral forms, recursive page lattice bound, polynomial domination, run hypotheses from parameter conditions, existence of admissible theta lattice generators and of an auxiliary scalar-weight form, share statements for cusp-form bases split into the cases j < m and j = m, a combined bound for run scalars, a net construction, existence of prime data with height bounds) and then transfers them from the recorded system to the one with extended points.",
+  "statement_name": "GlobalTheory.InputsAtRecord.inputsNet_recPlus",
+  "confidence": "medium",
+  "caveat": "I unfolded `InputsNet`, `BaseIn`, `FamIn`, `PtIn`, `NetIn`, `PageOK`, `ParOK`, `PageSupp` and the graded-forms structure `PJ` one or two levels, but not their leaves (`HypC`, `LatAt`, `TiedW`, `ShareRd`, `PolyDom`, `CombBound`, `Heights`, ...). The descriptions of those leaves, and of the ingredients in the proof, rest on names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Every object in the statement (the master record, the recorded graded system of forms, the extended point system, the page and tie conditions) exists only inside this project's construction."
+  }
+ },
+ "GlobalTheory.InputsAtRecord.sharesAt_all": {
+  "title": "Cusp-form generators share a basis with controlled index counts",
+  "summary": "Setting: a master datum D of the project, its top-level package T satisfying the law bundle `LawsP`, a level j between 1 and m, size data, numerical constants, three weights (κ, w_L, w_F) and integers. Hypotheses: parameter conditions `ParOK`; the 'page' numerical conditions `PageOK`; the bundle `HypC` (eight groups of conditions on parameters, scalars and a weighted prime sum); the integral cusp forms of weight κ form a lattice; a family datum G (a finite list of cusp forms of weight w_L and auxiliary forms) that is admissible, meaning the forms generate the designated integral lattice, are few, have no common zero, and satisfy a lower bound on their size; an auxiliary form condition when j < m; and a set Sh spanning the cusp forms of weight w_F. Conclusion (`SharesAt`): there are a number δ and forms θ'_1..θ'_δ taken from Sh such that, however the remaining slots of the family datum are filled, at every finite place the images of the θ' form a basis of a local quotient module; δ times a binomial coefficient is at most the rank of the weight-κ lattice; two auxiliary dimensions are at most 22·(dim)^2·rank/T; and the span of a 'highly vanishing' subspace of weight-κ forms is contained in the span of monomials in the generators times the θ' together with an auxiliary family.",
+  "role": "Case assembly: for j < m it is the 'indefinite' theorem `cuspFormBasisShares_indefinite_liftIndex`, for j = m the 'definite' one, both proved elsewhere. It supplies one of the inputs to the theorem `inputsNet_recPlus` that follows it in the file.",
+  "statement_name": "GlobalTheory.InputsAtRecord.sharesAt_all",
+  "confidence": "low",
+  "caveat": "The hypotheses are deep project bundles (`LawsP`, `ParOK`, `PageOK`, `HypC`, `GenOK`, `EtaOK`) that I read only at the level of field names, and the objects in the conclusion (the local quotient modules, the families `zAll` and `MggK`, the rank `rhoP`) were read one level deep. The summary of the conclusion follows the definition of `SharesAt` literally; its mathematical purpose is not established.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Every object in the statement belongs to the project's internal construction of cusp-form lattices and family data; nothing corresponds to a named theorem."
+  }
+ },
  "GlobalTheory.LocalRows.sLp_sO_hTF_of_siegelWeil": {
   "title": "Three selection conditions follow from the unitary Siegel–Weil formula",
   "summary": "Hypothesis: the Siegel–Weil formula for unitary groups in the convergent range, in the project's formulation (for a CM extension E/F and a nondegenerate Hermitian form in M variables, the unitary quotient has finite volume, and for 2n < M the average of theta series over representations of a Hermitian matrix T equals a product of local densities). Conclusion: for every 'slot' Q (a predicate on stages of the project's construction) and every linkage Lk attaching bundles of data to construction points, three conditions hold. They say that for every family class and every selection of bundles built at points of slot Q: (1) a 'loop row' bound holds, i.e. certain kernel rows indexed by pairs of words are small relative to a threshold; (2) the 'Theorem S' off-diagonal estimate holds for distinct words u ≠ u', bounding the squared norm of a kernel entry by (1 + b^(-6)) · d(u)d(u')/D*; (3) a 'frame' lower bound holds for the family. Each is asserted eventually along the family, for small enough ε and large enough parameters.",
@@ -1473,6 +1689,30 @@
   "literature": {
    "status": "probably new",
    "basis": "The hypothesis is a literature statement (Siegel–Weil for unitary groups), but the conclusion concerns bundles, slots and selections that exist only inside this project's construction."
+  }
+ },
+ "GlobalTheory.Mem.SRe.exists_sPack_integrable_alt": {
+  "title": "Existence of a spectral package with integrable archimedean kernel",
+  "summary": "Hypotheses: the Siegel–Weil formula for unitary groups in the convergent range (project formulation: finite volume of the unitary quotient and, for 2n < M, mean of theta series equals a product of local densities); a statement `RowsFinDim` that certain spaces cut out of L² of an adelic unitary quotient by a matrix-coefficient operator are identified with finite-level evaluation spaces; a datum D of the project's main construction type `D7` with a family F of level-zero form data for every 'word' u; a gap condition on D (rank at least 1801 and consecutive weight parameters separated by at least 16·r^19); and local identifications at every finite place (`LocTied`). Conclusion: there exists a package P (`SPack`) for D and F such that the archimedean function ph of its underlying setting (a product of formal degrees times conjugated matrix coefficients of discrete-series-type representations at the infinite places) is integrable for the product Haar measure on the archimedean unitary group.",
+  "role": "Repackaging step: it unpacks the long existential statement `local_bessel_uniqueness_holds` (same hypotheses), adds a 'good operator' obtained from `rowDict_goodOp_nonempty`, and bundles everything into the structure `SPack` together with the integrability clause.",
+  "statement_name": "GlobalTheory.Mem.SRe.exists_sPack_integrable_alt",
+  "confidence": "low",
+  "caveat": "`SPack` is a structure with about 18 fields (a 'Hida setting' tying an adelic unitary-group instance to D, an adele bridge, an additive character with measure-compatibility conditions, transports of the forms F(u) with injectivity/bijectivity/level/isometry conditions for a 'column dictionary', a good operator, pinning equalities); these fields and the type `D7` (a very large record) were only skimmed. The name `local_bessel_uniqueness_holds` of the source lemma does not match its content.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The first hypothesis is a literature statement (Siegel–Weil for unitary groups), but the conclusion is the existence of a package of data for objects (`D7`, `Forms0`, `SPack`) that exist only inside this project's construction."
+  }
+ },
+ "GlobalTheory.Mem.Top.Bl.exists_baseLattice_of_prime_alt": {
+  "title": "Membership conditions and bundle existence for origin-extended parameters",
+  "summary": "Hypotheses: three bundles (`HypAAlt`, about 21 items, mostly published results on real representation theory, class field theory, Siegel–Weil and mass formulas; `EllipticHypothesis`, 25 items, mostly Galois cohomology and automorphic statements such as Poitou–Tate, Greenberg–Wiles, Chebotarev, plus several project-internal ones; `MultiplicityCoverHypotheses`, including two project-internal multiplicity statements), the existence of an 'unlocalized saturated state', existence of the local Langlands correspondence for GL_n in the project's form, a further bundle depending on it, and, for a real number cDep, a multiplicity-equality condition for the parameter set built from the 'extension with origin'. Conclusion, for that parameter set: (1) the four membership conditions `MemberE` hold (a base condition, a first-generation step, an export step and a second-generation step, each asserted eventually in the project's scale parameters); (2) there is an auxiliary slot R, implied by the 'built' slot for large bases, such that eventually, at every base point in the slot 'good and R' and for every real c, a `BundleCondition` object linked to that point exists.",
+  "role": "Assembly step. It derives a weight-case condition, an extension of adelic data to a larger field, the list of stage statements at members, finiteness and second-nonvanishing statements, a 'has three' step and level-three conditions, and then feeds them to the preceding theorem `exists_baseLattice_of_pair_alt`, which combines `automorphy_of_hypotheses_alt_alt`, `memberE_closing_alt_alt` and `geometric_parameter_uniform_alt`.",
+  "statement_name": "GlobalTheory.Mem.Top.Bl.exists_baseLattice_of_prime_alt",
+  "confidence": "low",
+  "caveat": "The definitions of `MemberE`, `ExBL`, `BaseCond`, `FirstG`, `ExportF`, `SecondG`, `LargeBaseCondition`, `ExB`, `BundleCondition` and the three hypothesis bundles were read, but they are stated in terms of the project's internal construction (contexts, bases, slots, stages, twist data), which was not unfolded to ordinary mathematics. The declaration name mentions a base lattice and a prime; nothing in the statement was identified as such. Items of the bundles are described from their names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is entirely about objects of the project's own construction (slots, parameter sets, bundles linked to construction points); the hypotheses mix literature statements with project-internal ones."
   }
  },
  "GlobalTheory.Mem.Top.Closing.memberE_closing_alt_alt": {
@@ -1487,6 +1727,90 @@
    "basis": "The conclusion asserts membership in a staged construction that exists only in this project; the literature statements appear only as hypotheses."
   }
  },
+ "GlobalTheory.NLinkE.main_alt_alt": {
+  "title": "Congruence bound holds eventually along a parameter family",
+  "summary": "Hypothesis: a bundle of seven literature statements (Fontaine's B_cris, global Artin reciprocity, the local Bloch-Kato statement, local Tate duality, the local Euler characteristic formula, local finiteness of Galois cohomology, and an integral Bhatt-Scholze comparison). Conclusion: for every parameter family there is x0 such that for every scale x at least x0 and every index i, if the datum D(x,i) satisfies the bundle `NormChoiceFacts` (about twenty internal conditions: admissibility, residual irreducibility, tame eigenvalues, weight and block parameters, de Rham conditions, base change for definite unitary groups, and others), then the congruence bound holds at that datum: for each auxiliary prime l of the datum above a size threshold, different from the two host primes and not exceptional, each good family of l-adic Galois representations of the host CM field, each point pi in the prescribed set and each rank-r part rho of its representation, the l-adic valuation of the congruence ideal at pi is at most the length of a Selmer-type module attached to (pi, rho), plus the sum of the lengths of Tate-Shafarevich-type groups for Tate twists strictly between 0 and t, plus the l-adic valuation of the class number of the host field, plus t times the sum of the valuations of zeta_P - 1 over an auxiliary set of primes P.",
+  "role": "A long assembly at a single point of the family: eventual local position data off exceptional primes, eventual jump facts, eventual admissibility of parameters, unramifiedness of the host at l, several admissibility lemmas for rank-r summands, construction of global step objects, a Wach-functor comparison from Bhatt-Scholze, a Bloch-Kato statement from local Tate duality and the Euler characteristic formula, and finally a congruence count using Artin reciprocity.",
+  "statement_name": "GlobalTheory.NLinkE.main_alt_alt",
+  "confidence": "medium",
+  "caveat": "`CongBound_at` and its four summands were read; `Hypotheses₂` (in namespace `GlobalTheory.NLink`) and `NormChoiceFacts` were read as lists of fields. The entries of the literature bundle and of `NormChoiceFacts`, the notions `GoodR`, `IsRankRPart`, `WeightTie`, `HG`, the exceptional set, and the Selmer-type module were not unfolded and are described by their names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses are literature statements, but the conclusion is a congruence-ideal bound for Galois representations attached to data of this project's construction."
+  }
+ },
+ "GlobalTheory.RowClaim.Join.thetaLift_row_properties_conj": {
+  "title": "Five row properties of iterated theta lifts (conditional)",
+  "summary": "Hypotheses: `ThetaLocalInputs`, a bundle of roughly fifty assumed literature statements (Weil representation and Howe duality, Siegel–Weil and Rallis inner product, doubling method, discrete series, Bernstein–Zelevinsky, cusp form decay, class field theory, and others), together with five statements about theta integrals in two formulations: convergence of theta integrals in a stated rank range, existence of local matching data between two Weil representations, and agreement of the two theta integrals up to a non-zero constant. Conclusion: five claims, each asserted for all admissible choices in the project's 'row' setting once a scale parameter is large enough: (1) certain sums attached to the chosen test functions are well defined; (2) the comparison constants c(i,j,t) are non-zero and a 'square' integral does not vanish; (3) a convergence property of the pairing between a column vector, a test function and a form; (4) a formula: there are a constant κ and roots of unity ζ(t) with ζ(t)·(product of the c(i,j,t))·ψ(a, θ-image of x) = κ·v(t,x,a) for all good x; (5) the values v(t,x,a) lie in the image of the project's number field LL in ℂ.",
+  "role": "Assembly of earlier conditional results: non-vanishing of constants from all six hypotheses, cuspidality of the twisted theta lift, a period identity, flip invariance, unfolding of the theta integral, and assembly of jets. The following theorem in the file restates the same result under another name.",
+  "statement_name": "GlobalTheory.RowClaim.Join.thetaLift_row_properties_conj",
+  "confidence": "medium",
+  "caveat": "The hypothesis definitions and the top-level definitions of the five claims (`SumOKK`, `ConstK`, `LinK`, `Formula2K`, `SumRatK`, the quantifier wrapper `Big`, `FormulaAt`) were read. The underlying objects (`Choice`, `psiK`, `vK`, `ConvK`, `SumOK`, `SquareNonzero`) were not unfolded, so claims (1)–(3) are described partly from names. The row setting structure is called `HidaSetting` in the source without any visible relation to Hida theory.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses are literature bundles and theta-correspondence statements, but the conclusion concerns the project's own 'row' construction and choices."
+  }
+ },
+ "GlobalTheory.RowTestAssembly.test_vector_at_datum_of_join": {
+  "title": "Rational separating functionals for theta rows at every datum",
+  "summary": "Hypotheses: nine propositions. Four are literature-type: Siegel sets for unitary groups, Howe duality over the reals, Green's cuspidal characters of finite general linear groups, and the Hecke–Tate functional equation; one is a bundle `ThetaLocalInputs` of about fifty statements from the project's `Published` list (Weil representation, discrete series, Siegel–Weil, doubling method, Bernstein–Zelevinsky, Flath, Dixmier–Malliavin, Linnik, and others). The remaining four are project-formulated: `JoinOut` (five statements on toric denominators, lattice norm transport, zeta denominators and a reflection), `ThetaIntegralsAgree` and `LocalMatching` (existence of matched local data for triples on unitary dual pairs, decay, uniqueness of constants and two step relations between consecutive ranks), and `FunctionalsSeparate` (for large parameters, every nonzero smooth row vector is detected by some theta pairing). Conclusion: in the project's step calculus (eventually, for large parameters, at every pinned column configuration and every later stage with real data satisfying group, existence and geometry conditions), the complex attached to the real data passes the 'row test': there are finitely many linear functionals on its complex row space that jointly separate points and take values in the embedded base number field on all theta images of rational row vectors.",
+  "role": "Assembly: derives convergence of the twisted Weil representation, twisted local matching and agreement of theta integrals, combines them into row properties of the theta lift, gets non-vanishing of an L-value from the functional equation, and feeds these with an injectivity statement from `FunctionalsSeparate`, a local factor ratio and an extension-field existence result into `atDat_rowTest_of_exField`.",
+  "statement_name": "GlobalTheory.RowTestAssembly.test_vector_at_datum_of_join",
+  "confidence": "medium",
+  "caveat": "`RowTest`, `AtDat`, `ThetaLocalInputs`, `JoinOut`, `ThetaIntegralsAgree`, `LocalMatching` and `FunctionalsSeparate` were read; the stage calculus (`StepW`, the real data record, the complex `toCx3`) and the inner predicates of the project-formulated hypotheses (`IsTriple`, `IsMatched`, `StepAlpha`, the five parts of `JoinOut`) were not unfolded. The four literature hypotheses are identified by name and folder only.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Several hypotheses are literature statements, but others and the conclusion (a rationality test for theta rows at stages of the construction) are formulated only inside this project."
+  }
+ },
+ "GlobalTheory.RowsAtRealTBClose.rowsB_of_decay_alt": {
+  "title": "Rapid decay of cusp forms gives the bounded-rows property",
+  "summary": "Hypothesis: `CuspRapidDecay`, a statement placed in the project's 'Published' namespace: on the adelic unitary groups of the project's data, a smooth, uniformly moderate-growth cuspidal automorphic function decays faster than any power of the height on the quotient. Conclusion: for every project datum D and a long tower of auxiliary structures built on it (size data, ties, lattice data, a 'row side family', a record `RealTBAlt` bundling an 'indefinite realisation' with weights, vectors and several tie conditions), if 8·f·r + 4 ≤ nV for the rank parameters of D and the existence conditions `ExAt` hold (eight existence clauses for intertwining and theta-type maps), then `IndefiniteRealisationBoundedRows` holds. That conclusion has two parts: for each index i there is an extremal vector that pairs with some unit vector to a prescribed constant, and for each i a 'one-map row' statement holds (existence of constants realising a specified map, with a refined version under a guard condition on primes).",
+  "role": "A short assembly: rapid decay plus the rank inequality gives a uniformity property (`LUnif`), an earlier lemma gives the extremal-vector property from the weak characterisation in the data, and `rowsB_of_clauses_alt` combines these with the existence conditions.",
+  "statement_name": "GlobalTheory.RowsAtRealTBClose.rowsB_of_decay_alt",
+  "confidence": "low",
+  "caveat": "The datum `D7` and the hypothesis `CuspRapidDecay` were read. The auxiliary structures (`RealTBAlt`, `RecTAlt`, `RowSideFamily`, `STiesRAlt`) and the predicates in the conclusion (`IoExt`, `OneMapRowR`, `OneMapOf`, `ExAt`) were read only at top level and could not be reduced to ordinary mathematical terms; their descriptions partly follow names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypothesis is a literature statement (rapid decay of cusp forms), but the conclusion concerns structures that exist only inside this project's construction."
+  }
+ },
+ "GlobalTheory.SqTower.tower_alt_bis": {
+  "title": "Theta constant ratios along the Witt tower via Hecke L-values",
+  "summary": "Hypotheses: a bundle `ThetaLocalInputs` of 53 statements named after published theorems (Howe duality, Weil representation, Siegel–Weil, Rallis inner product, doubling method, discrete series, Bernstein–Zelevinsky and others); two project statements on theta integrals for pairs of unitary groups (`ThetaIntegralsAgree`, `LocalMatching`); and `LNe`, non-vanishing of certain Hecke L-functions at a range of integers. Conclusion (`Tower`), in the project's large-parameter regime: for every grid datum, labels t and base label μ0, indices i, j, suppose c and c0 are the constants relating the 'big' and 'small' theta-kernel integrals at t and at μ0, and c0(·) is the constant of a bottom-stage triangle, and Λ, Λ0 are the entire Hecke L-functions of two explicit Hecke characters. Then (c/c0) times a product of q ratios Λ(n)/Λ0(n) at consecutive integers equals an algebraic number that is a unit away from a fixed integer, times a product of p+q 'step ratios' (each again such a unit times ratios of divisors of prime powers), times the ratio of bottom constants, times a product of p ratios Λ(n)/Λ0(n) at other integers. Here p and q are about (m−j)/2.",
+  "role": "Assembly by descent along the tower: it combines a top-stage norm formula, a factorisation of stage constants, norm-step results for small and large rank, and a comparison at the bottom stage (all proved elsewhere under the same hypotheses), then cancels using the non-vanishing of the L-values.",
+  "statement_name": "GlobalTheory.SqTower.tower_alt_bis",
+  "confidence": "medium",
+  "caveat": "The kernel integrals defining the constants, the notions of grid datum, matching and bottom triangle were read only at the level of their definitions' headers; the description of the hypotheses `ThetaIntegralsAgree` and `LocalMatching` rests partly on their names. The exact index ranges of the L-value products are given in the Lean text and were paraphrased.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The statement is conditional on literature hypotheses and concludes an identity between constants of the project's own theta-tower construction, of the general type of a Rallis inner product formula but not a statement found in the literature."
+  }
+ },
+ "GlobalTheory.SupFull.bdd_mem_span_shortGen": {
+  "title": "Bounded automorphic sections are spanned by short theta series",
+  "summary": "Setting: a CM field E, a unitary PEL moduli problem over it with level structure, a coefficient field with a 'good' complex embedding sigma, and a complex uniformisation of the moduli space by finitely many components, each given by a Hermitian form, a lattice and an arithmetic group, of rank r at least 1. Hypotheses include chart-independence of certain power-series expressions (`ChartIndepSt2`), triviality of one level parameter, all components sharing the same Hermitian form, the arithmetic groups containing the principal congruence subgroups, technical conditions on an auxiliary level datum d, a dominant weight a with n even and n at least 4[E:Q]r + 4, triviality of the automorphy character on the arithmetic groups, and total definedness of the 'short values' (`ShortValTot`). Conclusion: every tuple of functions on the components that are holomorphic, equivariant of the weight determined by (a, n), have bounded pointwise Petersson-type norm, and vanish outside the domain, lies in the complex span of the uniformisation readings of the short generators, i.e. of those algebraic sections of weight (a, n) whose values are given by short theta-type sums attached to a unimodular rank-n Hermitian lattice, a level and a harmonic polynomial.",
+  "role": "The main spanning step of this file. It moves all components to one level family, identifies readings of short generators with classical theta series, uses invariance of pulled-back bounded sections under a stabiliser, applies a result that stable forms are sums of theta series with free lower rows, and rewrites harmonic rows as integral harmonic polynomials; the next theorem in the file uses it to get a span statement over the coefficient field.",
+  "statement_name": "GlobalTheory.SupFull.bdd_mem_span_shortGen",
+  "confidence": "low",
+  "caveat": "`IsBddSec`, `IsSec`, `Unf`, `IsUnf`, `rdU`, `laU`, `shortGen`, `ShortValTot`, `HasPrinc`, `ChiOne`, `Dom` and `ChartIndepSt2` were read. The underlying objects (`Host`, `Datum`, `Level`, `Moduli`, `Coeff`, `DeltaDat`, `NabV`, `GenLat`, `ShortValAt`, `IsNab`, `UnitC`, `PhiPin`) were not unfolded, so the description of the moduli problem and of the 'short theta-type sums' rests partly on names and on the lemma names used in the proof.",
+  "literature": {
+   "status": "unclear",
+   "basis": "Spanning spaces of cusp forms on unitary groups by theta series in a stable range is a known type of result, but this statement is formulated for the project's own moduli data, uniformisation and 'short generators', and I could not match it to a specific published theorem."
+  }
+ },
+ "GlobalTheory.SupFull.fullAt_of_pins": {
+  "title": "Integral cusp forms form a full finitely generated lattice",
+  "summary": "Hypotheses: a project datum D, a 'core' T over it (moduli data with a coefficient number field F, complex uniformisations for each index j and each embedding of F, and related dictionaries), the pinning conditions on the parameters of T, an index j with 1 ≤ j ≤ m, the condition that the uniformisation at index j and the base embedding is a genuine uniformisation (`IsUnf`), and a weight w for index j with positive parallel part n. Conclusion (`FullAt`): inside the F-vector space of cusp forms of weight w at index j, the submodule of forms that are integral, meaning they have non-negative value under every valuation in a set of valuations attached to algebraic points over each finite prime of F, is finitely generated over the ring of integers of F and spans the whole space of cusp forms over F.",
+  "role": "Proved directly. Finite generation uses finite-dimensionality of the cusp form space and, for each non-zero form, evaluation at a suitable CM point with bounded denominators; spanning uses that a power-type multiple of any cusp form lies in the span of a short explicit datum and that some non-zero scalar multiple is integral. It supplies the lattice statement used later for all weights (`FullKappa`).",
+  "statement_name": "GlobalTheory.SupFull.fullAt_of_pins",
+  "confidence": "medium",
+  "caveat": "`FullAt`, the lattice `supLat`, `Core`, `Par` and the generic `latIn` were read. The pinning conditions (`Pins`), the valuation set (`valSet`, `algCls`), the cusp form space (`cusp`) and `IsUnf` were read only partly, so 'integral' is described from the membership lemma for the lattice and 'cusp forms' from the name of the space.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The content resembles the classical fact that integral automorphic forms form a full lattice in the space of cusp forms, but it is stated and proved for the project's own moduli data and valuation sets, so it cannot be matched to a specific published statement."
+  }
+ },
  "GlobalTheory.Svd.servH_row_linkR_alt": {
   "title": "Kernel service conditions at good points from Artin reciprocity",
   "summary": "Hypothesis: global Artin reciprocity in the project's formulation (for every number field there is an Artin map from the ideles onto the abelianised Galois group with the expected kernel and the expected behaviour on local units and Frobenius). Conclusion: for every parameter set p of the construction, the 'row' statement holds for good points of p's slot system, reciprocity records linked by `ReciprocityLinkage p`, and the property `ServH` of the record's kernel. Unfolded: there is a property of records, valid eventually at all such points, such that any selection of such records over a family class satisfies (a) eventually along the family, a comparison-and-twisting condition `RowTwU` on local lattice systems, and (b) at every selected point, the kernel entry satisfies the list `Pdv.At`: a unit condition, rationality of the kernel map, a finiteness and a stabiliser condition, and existence of auxiliary data with parity conditions at inert and special places, an orbit bound, jet integrality, a theta-kernel shape condition and a shape condition.",
@@ -1497,6 +1821,66 @@
   "literature": {
    "status": "probably new",
    "basis": "The hypothesis is classical class field theory, but the conclusion is about records and kernels of this project's construction."
+  }
+ },
+ "GlobalTheory.T.amplitude_bounds_uniform_large_gap_families": {
+  "title": "Uniform amplitude bounds along families with large gaps",
+  "summary": "Hypotheses: the Siegel mass ratio formula for Hermitian lattices over CM fields (`SiegelMassRatio`), a bundle `GapIn.Hyp` of four representation-theoretic inputs (branching support, uniqueness of Bessel functionals under a gap condition, multiplicity one of the lowest K-type, a formal degree statement), and a bound `ThmBpDS` for matrix coefficients of discrete series. Conclusion: for any constants Cg, cb, Cu, cT, CT, C0, A, C1 there are constants C, C2, Ch and a threshold such that for every family of the project's global data (indexed by a real parameter x) whose own constants exceed the threshold and which satisfies a rank hypothesis, a conjunction of eight bounds holds for all members with x large. The eight bounds control local 'amplitude' operators (integrals of products of matrix coefficients): a constant-term bound, a pointwise Hilbert–Schmidt bound, a pointwise operator-norm bound, absolute convergence of the integral, bounds for products of the loss factors over places, and two refined versions with extra decay.",
+  "role": "A restatement under a different name: the body just calls `amplitude_bounds_uniform_gap`, which collects seven family-level estimates (wide-range amplitude bound, Plancherel difference, critical level, degree normalization, formal degree ratio, absolute bounds, Schur bound) and feeds them to a general lemma.",
+  "statement_name": "GlobalTheory.T.amplitude_bounds_uniform_large_gap_families",
+  "confidence": "low",
+  "caveat": "The objects in the conclusion (the global datum `D7`, the families `FamP`, the amplitude operator, the loss and size factors) are project-internal structures with many fields and were not unfolded; the description of the eight bounds rests partly on their names and on the shape of the inequalities. The three hypotheses were read only at statement level.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is about families and operators that exist only inside this project's construction; only the hypotheses correspond to literature-type statements."
+  }
+ },
+ "GlobalTheory.T.bundle_bothParts_of_standardKernel_and_six_hypotheses": {
+  "title": "Kernel service conditions from six CM-curve hypotheses",
+  "summary": "Hypotheses: six project statements about a CM elliptic curve attached to the datum and its behaviour at inert primes p ≥ 5 (algebraicity of torsion/Taylor data `AlgTAll`; existence of a genus-one model over Witt-type integers with a Lubin–Tate formal group, for a suitable curve ideal; a dictionary between p-adic Weierstrass invariants and sigma series `CurveDict`; integrality of certain power-series combinations `IntInert`; and two statements `AdmAtEnt2`, `CurveEx`). Further, a 'slot' Q of construction points all of which carry a 'part' structure (`HasPart`), a linkage Lk attaching bundles to points, and a map ker assigning to each bundle a tied kernel entry, such that eventually every linked bundle at a point of Q has a kernel of 'standard' form (`StdTie`). Conclusion: the row statement `Row Q Lk (ServH ker)` holds: there is an eventually-valid property E of linked bundles such that for every family class and every selection of bundles satisfying E, (1) every family in the class satisfies `RowTwU` (for large x, at every index, local formal-group systems with comparison maps and lower bounds exist), and (2) at every index of every family the kernel entry of the selected bundle satisfies the list of conditions `Pdv.At`.",
+  "role": "A renamed alias of `GlobalTheory.Svd.servH_row`, which combines two row statements: `rowTwU` (fed by existence of local models at constructed points, from `AdmAtEnt2` and `CurveEx`) and `rowAt_of_stdTie` (from the other four hypotheses and the standard-kernel assumption). It is a reduction step inside the project's 'row' formalism.",
+  "statement_name": "GlobalTheory.T.bundle_bothParts_of_standardKernel_and_six_hypotheses",
+  "confidence": "low",
+  "caveat": "The 'row' formalism (`Row`, `RowE`, `IsSel`, `AtAll`, `ParEv`) and the shapes of `ServH`, `StdTie`, `HasPart`, `RowTwU`, `Pdv.At` were read, but the underlying objects (kernel entries `KerEntTied`, `Obj`, family parameters `FamP`, the conditions inside `Pdv.At` such as orbit bounds and jet integrality) were not unfolded. The description of the six hypotheses rests partly on names; `AdmAtEnt2` and `CurveEx` were not read.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Both the hypotheses about kernels and the conclusion are about kernel entries, bundles and family classes that exist only inside this project's construction; elsewhere the six hypotheses are derived from a CM/Artin reciprocity statement."
+  }
+ },
+ "GlobalTheory.T.exists_member_of_construction_steps_secondPass": {
+  "title": "Slot-system membership from two passes of construction steps",
+  "summary": "Hypotheses: four number-theoretic statements (existence of ray class fields, the principal ideal theorem for the Hilbert class field of a totally complex field, existence for primes p ≡ 3 mod 4, p > 3, of a CM elliptic curve with good reduction outside p and minimal discriminant −p³, and a Siegel mass ratio formula for standard Hermitian lattices over unramified CM fields); and, for two 'slot systems' S and S' (each a choice of four type-valued predicates on stages of the construction), a list of step statements: from the start conditions one reaches level 3 for S, from level 3 level 4, ambient data, divisor data and theta data exist at level 4, built objects of S export in the untwisted case, a 'pass' from built objects of S to start-plus-level-3 for S' after enlarging the base and retwisting, the same level-4 and existence steps for S', and every built object of S' is a good object of S with all twists admissible. Conclusion: `MemberE S`, a four-part statement: the base condition holds, a built core exists in the untwisted case, built cores export, and after retwisting there is a core that is built, has all twists admissible, and is good.",
+  "role": "A restatement of `memberE_of_steps2`: that proof derives the base condition from the four number-theoretic inputs, chains the steps for S into the first existence part, chains the steps for S' with the last hypothesis, and feeds the result through the pass to obtain the second existence part.",
+  "statement_name": "GlobalTheory.T.exists_member_of_construction_steps_secondPass",
+  "confidence": "low",
+  "caveat": "The step calculus (`StepW`, `Step`, `Pass`, `ExportF`, `MemberE`, `positionOf`, `Slots`, levels `Lv3`/`Lv4`, `Built`) was read, but the stages themselves (bases, column data, twist data, cores, what 'export' and 'good' mean for a datum) were not unfolded, so the statement is described by shape. The four number-theoretic hypotheses were read.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The four inputs are classical statements, but the conclusion is about slot systems and stages that exist only inside this project's construction."
+  }
+ },
+ "GlobalTheory.T.exists_short_integral_vector_of_determinant_bound": {
+  "title": "Short integral cusp form with non-degenerate level determinant",
+  "summary": "Hypotheses: six bundles of published results (a 28-item bundle on Hodge bundles and toroidal compactifications including arithmetic Hilbert–Samuel and semistable reduction, Grothendieck deformation theory, a bundle with Kawamata–Viehweg vanishing, L2 extension and Chow forms, a Siegel toroidal integral statement, toroidal compactification for a fan, seminegativity of the Lie algebra of a semi-abelian scheme). Conclusion: there is a universal constant C ≥ 0 such that for every project datum D, every 'core' T satisfying its laws, every index j in range with signature (p,q), p,q ≥ 1, and every 'deep' level structure Y that is good and satisfies explicit size bounds in terms of a parameter Lb (level, field size, field degree times rank, flat-section degree) and numeric conditions (f ≥ 8, r ≥ 100), and for every type frame, there exists a cusp form u of weight c₀ times the Hodge weight (c₀ an explicit integer depending on D and j) such that: u lies in the integral lattice of forms; the determinant of the matrix of translates of u under a finite group of level automorphisms is a non-zero-divisor on the ring of sections; and multiplying any cusp form f of even weight by a translate of u increases the Petersson norm at every complex embedding by at most the factor exp(C·(f·r·Lb)^9).",
+  "role": "A verbatim restatement of `GlobalTheory.ShortDet.exists_short_integral_vector` in the same file. That proof combines a Tamagawa-number bound, a comparison of norms of short generators, separation of orbits at a regular cusp, a covering-domain lattice regularity lemma and an abstract short-vector lemma (`exists_short`), then tracks the constants. It is an existence statement with a quantitative bound.",
+  "statement_name": "GlobalTheory.T.exists_short_integral_vector_of_determinant_bound",
+  "confidence": "medium",
+  "caveat": "Read: the spaces of cusp forms (`cuspW`), integral lattice (`latW`), Petersson-type norm (`normW`), level determinant (`levDet`), section ring, `cZero`, `fieldSz`, the `Deep` and `Good` structures, `LawsJ`. Not unfolded: the datum `D7` beyond its first fields, `Core`, `Moduli`, `Unf`, `Rul`, `GoodEmb`, and the six hypothesis bundles, whose content is taken from field names such as `ArithHilbertSamuel` or `KawamataViehweg`.",
+  "literature": {
+   "status": "probably new",
+   "basis": "All hypotheses are named as published theorems, but the conclusion concerns cusp forms on the project's own moduli data (`D7`, `Deep` level structures) with project-specific constants; it does not restate a known theorem."
+  }
+ },
+ "GlobalTheory.T.exportSt_of_discrete_series_cover": {
+  "title": "The 'export' statement from five published inputs and series rationality",
+  "summary": "Hypotheses: five propositions from the project's `Published` list (rapid decay of cusp forms on the adelic unitary groups of the construction, existence of the global Artin map, existence of ray class fields, the parametrisation of discrete series of U(p,q) by Harish-Chandra parameters with their lowest K-types, and the Casselman–Wallach extension of a (g,K)-map to smooth vectors), plus one project-internal proposition `SeriesRatS` asserting, for every datum of the construction satisfying a list of compatibility conditions, that certain theta series built from low-weight vectors are rational up to a unit complex phase. Conclusion: the project's `ExportedStatement`. It says: for every admissible family of data (small ε, large constants, family hypotheses), eventually along the family, at every 'point' (a bundle of realised data attached to one datum) satisfying the point conditions, for every twisted place v and every index j there is a semilinear 'reading' map from coefficient vectors to a space of integral forms that reads off the theta base and theta tuple at v with the chosen character.",
+  "role": "A restatement under a descriptive name: the proof is a direct application of `exportSt_of_hypotheses_alt`, which fills a thirteen-field record of induction conditions (twist admissibility, twist characters from Artin reciprocity, base and twisted conjugation, upper and lower bounds for base and twist) and applies its `exportSt` consequence.",
+  "statement_name": "GlobalTheory.T.exportSt_of_discrete_series_cover",
+  "confidence": "medium",
+  "caveat": "The five published hypotheses and the outer quantifier structure (`AtPtsAlt`, `Closed`, `EventuallyAtPoints`, `More`) were read. The innermost predicate `ExportTie`/`Reads` and the objects it mentions (theta base, theta tuple, form spaces, the 'point' bundle `PtAt`) were read only at the level of their signatures, so the conclusion is described by shape. `SeriesRatS` was read, but its inner predicate `SeriesRatOn` was not unfolded.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Five hypotheses are literature statements, but the sixth hypothesis and the conclusion concern families, points and reading maps that exist only inside this project's construction."
   }
  },
  "GlobalTheory.T.hasSemiAbelianUniformisation_complete_normal_base": {
@@ -1511,6 +1895,78 @@
    "basis": "The statement has the form of Mumford's construction of degenerating abelian varieties over a complete normal base (Mumford 1972; Faltings–Chai, Chapter III), and the project's namespace `Mum` points to it; the exact packaging of 'uniformised' is the project's own, so the match is not verified in detail."
   }
  },
+ "GlobalTheory.T.loopRowBounds_along_family_largeGaps": {
+  "title": "Uniform loop-row bounds along a family, large-gap case",
+  "summary": "Hypotheses: a Siegel mass-ratio statement for Hermitian lattices over CM fields; a bundle `GapIn.Hyp` of four representation-theoretic statements (among them uniqueness of Bessel functionals up to scalar and a low K-type multiplicity-one statement); and a bound `ThmBpDS` for Bessel-type coefficients of discrete series. Conclusion: for any ten real constants there are a constant C₀ and a threshold such that, for every family of project data indexed by a real parameter x whose own constants exceed the threshold and which satisfies a rank hypothesis: (1) for all large x the standing hypotheses imply a 'form' statement for every word u; and (2) for every choice of 'term ties' and 'loop ties' (structures identifying the abstract terms with lattices and flags) satisfying compatibility, injectivity and a small-cell volume bound, and every C ≥ C₀, for all large x and all word pairs (u,u') satisfying the counting hypotheses, three row bounds hold. Each row bound says that the sum of weights over any finite set of pairs in a given class (nondegenerate of size s, degenerate of size s, or the class 'one') is at most the row mass times a dimension factor times an explicit quantity.",
+  "role": "A verbatim restatement of `GlobalTheory.LoopRowBoundsGap.rows_along_family`. That proof takes uniform constants from a row-count lemma and from amplitude bounds in the large-gap regime, adds a mass identity for rows, and combines them into the three bounds. It is a uniform bound.",
+  "statement_name": "GlobalTheory.T.loopRowBounds_along_family_largeGaps",
+  "confidence": "low",
+  "caveat": "Read: `OwnEv`, the thresholds `sC'`, `sCl`, `Cnt.Hyp0`, the start of `Cnt.Hyp`, `RowBound`, `RowsND`, `RowsDeg`, `RowsOne`, `TermTie`, `LoopTie`, `wordPairTermInjective`, `wordPairBetaLattice`, `GapIn.Hyp`, and the head of `SiegelMassRatio` and `ThmBpDS`. Not unfolded: the family structure `FamP`, the datum `D7` and its words, terms and pairs, the weight `wP`, `massRows`, the explicit bound functions, `FormAt`, `TermVolumeSmallCellBound`. The meaning of 'row', 'loop' and 'word' in ordinary terms was not determined.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion bounds sums over 'pairs' and 'rows' attached to the project's own data families; only the hypotheses resemble literature statements (Siegel mass formula, uniqueness of Bessel models)."
+  }
+ },
+ "GlobalTheory.T.real_data_weight_vector_family_alt": {
+  "title": "Conjugate inner-product identity and positivity at all places",
+  "summary": "Hypotheses: a bundle of fourteen statements named after published theorems (unramified Howe duality, rapid decay of cusp forms, Harish-Chandra finiteness and modules, discrete series of U(p,q), Casselman–Wallach, the Siegel–Weil formula for unitary groups in two forms, the doubling method, unramified doubling for GL, Bernstein–Zelevinsky finiteness, Green's cuspidal characters, the Weil representation, Schur orthogonality), plus continuation and non-vanishing of partial Hecke L-functions on Re s ≥ 1. Then for any datum with three-layer real data R, a face F and auxiliary weights, vectors and one-map data: assume the two tie bundles `TiesB` and `TiesG` (compatibility and normalisation conditions), equality of cuspidal multiplicities across the finite-adelic isomorphisms (`MultEq`), the row test (rational separating functionals), positivity of the two levels, and positivity of the scalar κ and of the scalars λ at the base archimedean place. Conclusion: (1) the identity `GalD`: at every archimedean place v other than the base one, the Hermitian inner product of the lifted vectors built from rational coordinates equals λ at v times the majorant form at v; and (2) κ and all λ are positive at every archimedean place.",
+  "role": "A restatement of `stage4_alt`. That proof derives unit and equivalence statements from the multiplicity equality, lift tests from the ties, level and Hecke separation properties from positivity, a partial L-function surjectivity statement, then applies a 'twisted scalar conjugation invariance' theorem to get the identity, and a final lemma to propagate positivity to all places.",
+  "statement_name": "GlobalTheory.T.real_data_weight_vector_family_alt",
+  "confidence": "medium",
+  "caveat": "`GalD`, `PPos`, `RowTest`, `MultEq`, `TiesB`, `TiesG` and the published bundle were read; the complex `toCx3`, the maps `tC`, `wC`, `liftMat`, the scalars `lam3` and `kap`, and the individual fields of the tie bundles were not unfolded, so the identity is described by shape. The declaration name (weight vector family) does not match the content.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The first two hypotheses are literature bundles, but the remaining hypotheses and the conclusion concern real data, faces and lift scalars that exist only inside this project's construction."
+  }
+ },
+ "GlobalTheory.T.realisation_extends_by_newTuples_keeping_laws": {
+  "title": "Extending a realisation by new twisting characters, keeping its laws",
+  "summary": "Hypotheses: five propositions from the project's `Published` list (rapid decay of cusp forms, global Artin reciprocity, ray class fields, discrete series of U(p,q) with lowest K-types, Casselman–Wallach); a datum D with a 'realisation' R (a large record of real/archimedean and level data over an index type of tuples), a face F and auxiliary vectors and one-map data, such that the gap conditions `HostHyp` on the Harish-Chandra parameters hold and the eight-part condition `Laws` holds at index j and base B; and a finite family, indexed by N, of finite-order tame Hecke characters χ_n of the CM field E, trivial on F, with their circle-valued idele characters, ramification sets Q_n and residue characters, each satisfying the level conditions `TwLev` relative to R, pairwise distinct, different from the characters already in R, and compatible with R at the two distinguished primes. Conclusion: there is a new index type and a new realisation R' (with new face, vectors and one-map data) that again satisfies `Laws` at j and B, extends the old one in the sense of `Ext` (base fixers persist, conjugation relations pull back, and extension coefficients carry over with the same pairing values), and contains each given pair (ξ_n, Q_n) as one of its tuples.",
+  "role": "Existence of an object; a restatement of `extend_tuples`, the step that enlarges the tuple set of a realisation so that later arguments can assume prescribed twisting characters are present.",
+  "statement_name": "GlobalTheory.T.realisation_extends_by_newTuples_keeping_laws",
+  "confidence": "medium",
+  "caveat": "`TwLev`, `Laws`, `Ext` and `HostHyp` were read; the components of `Laws` (`Hk3.Core`, `FWTie`, `IoExt`, `QGuard`, `OMPins`, `PhaseTie`, `BaseOf`) and the record `RealDat` were not unfolded beyond their headers. The proof of `extend_tuples` was not read.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The five named inputs are literature statements, but the conclusion is the existence of an extended 'realisation', an object defined only inside this project."
+  }
+ },
+ "GlobalTheory.T.semiAbelianScheme_uniformisation_exists_geometric": {
+  "title": "Semi-abelian extension of a theta-level abelian scheme over a model",
+  "summary": "Hypotheses: unique extension of homomorphisms between semi-abelian schemes over a discrete valuation ring from the generic fibre; the semistable reduction theorem for polarized abelian varieties over p-adic fields; a uniformisation statement (a polarized abelian variety over the fraction field of a complete discrete valuation ring with a semi-abelian model of split type has degeneration data and a uniformisation); five bundles of statements about line bundles on abelian schemes (theorems of the cube and square, rigidity, Weil pairing, base change of sections and others); and a description of torsion points and the Weil pairing through the uniformisation. Conclusion (`ZHGeoSt`): for every arithmetic base, every 'theta system' with a realisation as a polarized abelian scheme with level structure that is big enough, and every integral model Z of the function field with an open subset and a lattice satisfying compatibility and a finite-generation condition, there exists a commutative semi-abelian group scheme G over Z, smooth of the right dimension and quasi-projective, which restricts to the given abelian scheme over the open subset and carries a rigidified symmetric cubical line bundle extending the polarization, together with: unique extension of endomorphisms, split torus parts on fibres, a description of the abelian locus, uniformisations over complete normal local rings, theta sections with prescribed generic values, and projective immersions given by sections.",
+  "role": "A verbatim restatement of `GlobalTheory.ZH.GeoHalf.zhGeo`, which applies `zhGeo_of` to a list of earlier results (test points of theta systems, closure of a semi-abelian group scheme with cubical bundle, identification of the abelian locus, local bases of theta coordinates, existence of uniformisations). It is an existence statement for a geometric object.",
+  "statement_name": "GlobalTheory.T.semiAbelianScheme_uniformisation_exists_geometric",
+  "confidence": "medium",
+  "caveat": "Read: `ZHGeoSt`, the output structure `ZHOut`, `ThmUSt`, `UTorsSt`, the semistable reduction statement, the heads of `RatModel` and of the realisation structure, and the field names of the five `Laws` bundles. Not unfolded: `ThetaSys` and its conditions `Big`, `Over₀`, `IsEE`, the notions `DegData`, `Unif`, `HypS`, `CubicalStr`, and the individual statements inside the `Laws` bundles, which are described from their names.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The statement is of the same kind as the Mumford and Faltings–Chai constructions of degenerating abelian varieties, and its hypotheses are literature-type statements, but the formulation through the project's theta systems and models is its own and it is filed under the project's statements, not its published theorems."
+  }
+ },
+ "GlobalTheory.T.stage_c_nonempty_of_prints_third_layer": {
+  "title": "Stage-C data exist over every third-level state",
+  "summary": "Hypotheses: three items from the project's `Published` list (a classification of discrete series of U(p,q) by parameters with prescribed K-types, the Casselman–Wallach extension theorem for smooth representations, and Harish-Chandra's results on (g,K)-modules of unitary representations); a bundle `PublishedInputsThirdLayerAlt` of 14 further inputs (rapid decay of cusp forms, Harish-Chandra finiteness, Green's cuspidal characters, Zelevinsky, ray class fields and Artin characters, base change for definite unitary groups, generic unitary dual and standard modules of GL, Chebotarev, unramified Howe duality, local theta inputs); a bundle `SerN` of six project statements about rationality and integrality of series and Hecke operators; and existence of a local Langlands-type reciprocity map `RecTExists`. Conclusion: eventually along the project's parameter scheme, at every column datum satisfying the 'Start' condition and for every state x, every 'third intermediate level' structure over x can be completed by a 'character data' structure (a choice of twisting data with tuple, character, level and theta compatibility conditions matching the given k and ψ).",
+  "role": "A renamed alias of `stage_c_nonempty_of_published_inputs` in the same file, which obtains the result from `stageCExists_of_casselmanWallach` through the conversion `sc_of_sck_alt`. It is an existence step in a staged construction (levels A, intermediate, B, C).",
+  "statement_name": "GlobalTheory.T.stage_c_nonempty_of_prints_third_layer",
+  "confidence": "low",
+  "caveat": "The structures `ThirdIntermediateLevel` and `HeightCountingCharacterData` and the wrapper `AllSt`/`StepW Start` were read only at the level of their field lists; their fields (`NChoice`, `TupTied`, `ChoiceSide`, `EMtTheta`, `InMt`, `InRat`, ...) were not unfolded. The identifiers `StrictHenselianAcyclicLevel` and `HeightCounting` are misleading: nothing in these structures concerns strictly henselian rings or height counting (parallel files call the same objects `LA`, `LI`, `StC`). Descriptions of the published hypotheses rest partly on their names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses are literature statements, but the conclusion is non-emptiness of a data structure attached to states of this project's own staged construction."
+  }
+ },
+ "GlobalTheory.T.tuplesHaveLocalModels_of_standardColumnObjects": {
+  "title": "Standard column objects have admissible local models",
+  "summary": "Hypotheses: `AdmAtEnt2`, a long conditional statement saying that a p-adic system built at a good inert prime from a chain of lattice levels is 'admitted' once a curve condition, theta-series data hypotheses below the maximal level, and several law and tie conditions hold; and `CurveEx`, which says that for every curve ideal with a twelfth root of its discriminant and every prime p ≥ 5 that is coprime to the ideal and inert, the required curve data (an element g with a Lubin–Tate type isomorphism) exists. Conclusion: for every base record B, frame f, twist datum T, column record w, later step Z and bundle of auxiliary data O over the master record attached to (w, Z): if O carries a `Part` structure (it is tied to the standard column data of w at Z: pinned column, kernel family, error terms, tuple ties), then `ModelsAt` holds for O. `ModelsAt` says that, under a lattice-tie condition and a size inequality, a normalisation identity for the twist forms holds and for every used tuple, word and admissible place outside an exceptional prime set there are level and chain data satisfying a comparison condition and a site-admissibility condition.",
+  "role": "A restatement under a new name of `modelsAt_of_part`, which combines a result that all joints of a standard column object are standard, triviality of stabilisers at step zero, and a result producing local theta models from split unramified joints. Bookkeeping.",
+  "statement_name": "GlobalTheory.T.tuplesHaveLocalModels_of_standardColumnObjects",
+  "confidence": "low",
+  "caveat": "The top-level definitions `ModelsAt`, `ModelsOK`, `Part`, `Obj`, `ColW`, `AdmAtEnt2`, `CurveEx` were read, but their constituents (`admitted`, `CmpLite`, `SiteAdm`, `KerFam`, `CurveIn`, `LTIso`, `Base`, `Fr`, `TwDat`) were not unfolded. The description is a structural paraphrase and the mathematical meaning rests largely on names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "All objects (column records, bundles of auxiliary data over the master record, local model conditions) exist only inside this project's construction."
+  }
+ },
  "GlobalTheory.T.volume_theorem_of_inputs": {
   "title": "Volume theorem for towers over unitary moduli, from ten inputs",
   "summary": "Hypotheses: ten propositions: a large bundle `Given` (toroidal level and Hecke compatibilities, a key formula, extension of homomorphisms of semi-abelian schemes, a Fargues Hodge–Tate statement, GAGA for sections, a slope bound, and other inputs), integrability of fibre sums of point densities, the properties of the Weil pairing on torsion of polarized abelian schemes, existence of two constants Ch, Cu for a nine-part geometric statement, a Hodge lattice flag bound, triviality of a flag on the Hodge bundle, a flat degree statement, a twisting automorphism statement, and two comparison statements. Conclusion `VolumeTheoremX`: there is a constant C ≥ 0 such that for every abelian CM field E, every unitary-type moduli datum of signature (p, q) with q ≥ 1 and 3q + 1 ≤ p + q, every integral model Y, every 'root tower' T over it with a good origin, and every full intersection system, if the tower has at most 4·|CM type|·(p+q)² bad primes, then: geometric degrees on each component are a positive volume times flag-variety degrees and do not depend on the level B; all components have the same volume; certain top arithmetic intersection numbers and their ratios to degrees converge as a parameter s tends to 0; an asymptotic formula for arithmetic intersection numbers holds with error O(log B / B); and the arithmetic intersection number and the mean slope over components are bounded below by −C times an explicit bracket term.",
@@ -1521,6 +1977,78 @@
   "literature": {
    "status": "probably new",
    "basis": "The conclusion concerns root towers and good origins defined in this project and gives a new-looking uniform lower bound; the proportionality part resembles Hirzebruch–Mumford proportionality but the statement as a whole has no literature marker."
+  }
+ },
+ "GlobalTheory.T.w_of_weight_residue_char": {
+  "title": "Weight case reduced to multiplicity equality and rational row test",
+  "summary": "Hypotheses: a bundle `PublishedThetaConditionTheorems` of 14 literature inputs (unramified Howe duality, rapid decay of cusp forms, Harish-Chandra finiteness and (g,K)-modules, discrete series classification, Casselman–Wallach, Weil's Siegel formula and Siegel–Weil for unitary groups, doubling zeta integrals, Bernstein–Zelevinsky finiteness, Green's cuspidal characters, Weil representation of a unitary pair, Schur orthogonality); analytic continuation and non-vanishing on Re s ≥ 1 of partial Hecke L-functions; and a step statement saying that, eventually along the project's parameter scheme, at every column datum satisfying 'Start' and every datum z satisfying nine listed side conditions (group and level conditions, existence, geometry, a core condition, the weight set Wt equal to a set W1 determined by z, and all places in Wt having residue characteristic in a prescribed set), two things hold: equality of cuspidal multiplicities between the base level and each higher level (`MultEq`), and a 'row test' (finitely many linear functionals that separate points and take values in the image of a number field on theta images of rational rows). Conclusion: `WeightCaseCondition`, i.e. under the same scheme and the same side conditions the full bundle `Holds z.R z.F` is valid (primitive-row properties including Hecke, unit and equivariance conditions and the row and lift tests, auxiliary existence/conjugation/level/integrality statements, and two conditions on the family of types).",
+  "role": "A renamed alias of `w_of_multEq_and_test_at_weights` in the same file, which composes the assumed step with `atDat_holds_alt` (a long argument showing that at each datum `MultEq` and `RowTest` imply `Holds`, using a rational sized family, ledger/host frame existence and the published inputs). It is a reduction step.",
+  "statement_name": "GlobalTheory.T.w_of_weight_residue_char",
+  "confidence": "low",
+  "caveat": "`WeightCaseCondition`, `StepW`, `Start`, `Holds`, `PrimRows3`, `UnusedChoiceStatements`, `MultEq`, `RowTest` and the two published bundles were read at the level of their statements, but the data type `Dat`, the side conditions (`GrpTrue`, `GrpAt`, `KapDef`, `ExAt`, `InGeo`, `CoreP`, `GIs2`, `W1`) and the fields of `Holds` were not unfolded. Descriptions of the literature inputs rest on their names. The declaration name ('weight residue char') only loosely reflects the content.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses include literature statements, but both the assumed step and the conclusion concern data (`Dat`, `RealDat3`, `Face3`, column data) that exist only inside this project's construction."
+  }
+ },
+ "GlobalTheory.Top.link_brest_alt": {
+  "title": "Remaining division bounds for selected families, with constant 2",
+  "summary": "Given a class of parameter families (a family assigns to each real scale x and index i a datum of the construction with size data and many constants), a 'twist selection' on it, and a chain of further choices and conditions attached to the selection (a spectral condition, a base-level choice of row-side families, a definite-height record, square-integrable column choices, and a bundle tying these together), assume: the indefinite realisations in the bundle have bounded rows; all realisations are primitive; two divisibility-row properties hold at every point; the definite rows statement holds for all sufficiently large families of the refined class; and the real-place second-layer conditions hold for such families. Conclusion: there is a threshold eps1 > 0 such that for every eps up to eps1 there are constants K such that every family of the refined class `D3 3` whose constants exceed K satisfies: if the 'Tu size' and 'D-Gamma size' conditions hold, then the 'remaining division bounds' hold with absolute constant 2. These bounds consist of a frame-number bound for the family (conditional on two further properties) and, for all large x, rationality of a certain map of the datum, fullness of a certain lattice-type object, and nonnegativity of a size parameter.",
+  "role": "A direct specialisation of `bRest_all_alt` to the absolute constant 2; pure bookkeeping.",
+  "statement_name": "GlobalTheory.Top.link_brest_alt",
+  "confidence": "low",
+  "caveat": "Only the outer shape was unfolded: `FamP`, `FamClass`, `Closed`, `D3`, `TuSize`, `DGamSize` and the four fields of `RemainingDivisionBounds` were read. The selection data (`TwistSelection`, `SelectionBundle`, `IndefiniteRealisationBoundedRows`, `DivRows3G`, `DcPtG`, `RowsAtSelAlt`, `RealPlaceSecondLayerConditions`) and the objects inside the conclusion (`BuRational`, `RRFull`, `FrameNumberBoundFamily`) were not unfolded; their descriptions rest on names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "Every object in the statement (parameter families, selections, rows, division bounds) exists only inside this project's construction."
+  }
+ },
+ "GlobalTheory.UChartJoin.rigidForFan_of_uStB": {
+  "title": "Smooth toroidal model with rigid boundary charts, from compactification",
+  "summary": "Hypothesis: the statement `UStB`, i.e. for every unitary PEL moduli space and admissible polyhedral cone decomposition φ there is a projective normal compactification, its normalized blow-up along a boundary ideal with the right vanishing orders, and a separation property. Conclusion (`RigidForFan`): in the same setting there is a normal projective model Y over the coefficient field carrying a semi-abelian family that extends the universal abelian variety, with an effective Cartier divisor, such that Y is smooth of the expected dimension, its boundary is a strict normal crossings divisor, the divisor is supported on the boundary, every boundary point has a formal chart (a power series ring in which the boundary is a product of coordinates, the degeneration is monomial with forms from a cone of φ, and the divisor is the corresponding monomial), a combination of the determinant bundle and the divisor is ample, and every closed boundary point has a 'rigid' chart: a first-order deformation of the chart that keeps the degeneration data constant is trivial.",
+  "role": "A reduction between two packaged statements: from the compactification it obtains charts at boundary points, a model structure, and smoothness with normal crossings boundary from three earlier theorems, then transports the divisor and the ampleness along an isomorphism by a computation in the Picard group.",
+  "statement_name": "GlobalTheory.UChartJoin.rigidForFan_of_uStB",
+  "confidence": "medium",
+  "caveat": "The definitions of `RigidForFan`, `HasChartOf` and `HasRigidChart` were read; the inner notions (monomial degeneration, `IsRigid`, `IsConstAlong`) were followed only one level, and the plain-language reading of rigidity is an interpretation.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The conclusion resembles known properties of smooth toroidal compactifications of PEL Shimura varieties (Faltings–Chai, Lan), and the chart notion sits in the project's `PublishedTheorems` folder, but the implication is between two project-specific packages and the rigidity clause was not matched to a published statement."
+  }
+ },
+ "GlobalTheory.UPel.HT.model_nonempty": {
+  "title": "Unitary PEL moduli problem has a smooth quasi-projective model",
+  "summary": "Let p be a prime and D a PEL datum of unitary type: a CM field F containing an imaginary quadratic element whose minimal polynomial splits modulo p, an order O of rank m^2 over the integers of F with an involution of the second kind and split at p, an O-lattice with an alternating form that is perfect up to a factor prime to p, and signature data given by a set of `a` complex embeddings. Let R be a Noetherian ring in which every integer prime to p is invertible, with base data (a root of the quadratic and homomorphisms from the integers of F to R that are pairwise distinct in every characteristic-p fibre), and let N be at least 3 and prime to p. Then there exists a model: a scheme X quasi-projective over Spec R and smooth of relative dimension a(n-1), carrying a universal object (an abelian scheme with O-action, a symmetric rigidified relatively ample line bundle giving a polarisation of degree prime to p and compatible with the involution, a Lie-algebra condition of the prescribed signature, and a level-N structure compatible with the Weil pairing) such that every such object over any R-scheme is the pullback of the universal one along a unique morphism.",
+  "role": "Final assembly of the representability statement: it combines the existence of a quasi-projective representing family (`exists_quasiProjective_harrisTaylor_family`) with the smoothness and relative-dimension computation for such a family (`smoothOfRelativeDimension_repFam_of_isQProjOver`).",
+  "statement_name": "GlobalTheory.UPel.HT.model_nonempty",
+  "confidence": "high",
+  "caveat": "The structures `Datum`, `Base`, `Obj` and `Model` were read in full; auxiliary notions inside `Obj` (line bundles on the product, `LieMult`, the Weil-pairing predicate) were taken at the level of their signatures.",
+  "literature": {
+   "status": "known",
+   "basis": "This is the representability, quasi-projectivity and smoothness of the integral model of a unitary PEL Shimura variety at a prime of good reduction with level at least 3 prime to p (Kottwitz 1992; the case used by Harris-Taylor, after whom the project names it), which rests on Mumford's construction of moduli of polarised abelian schemes."
+  }
+ },
+ "GlobalTheory.UPoincTop.uPoinStX_sep": {
+  "title": "Compactifications of unitary moduli spaces with separation property",
+  "summary": "Setting: a CM field E with extra structure (a 'host': a prime d ≡ 7 mod 16 with a square root of −d in E, E unramified over its real subfield), a PEL datum of unitary type with signature (p, q), p + q ≥ 1, a level, a fine moduli space X of abelian varieties with that structure, a coefficient number field F, and a function φ on positive semidefinite Hermitian forms that defines an admissible polyhedral cone decomposition without self-intersections. Conclusion: there exist a normal projective F-scheme Z containing X over F as a dense open subscheme, with an ample line bundle whose pullback is a power of the determinant (Hodge) bundle and with extension of degenerating families across discrete valuation rings; an ideal sheaf J supported on the boundary; and the normalized blow-up S of Z along J, projective, containing X as a dense open subscheme, with an effective Cartier divisor whose ideal is the pullback of J, such that the order of vanishing along a one-parameter degeneration is d times φ of its monodromy form and a large power of the ample bundle twisted down by the divisor is ample. In addition a separation property `SepB` holds for the open immersion of X into S: for a degenerating family with monomial degeneration data over a local domain, the non-boundary coordinates of the limit point are determined over the algebraically closed field of definition of the point.",
+  "role": "Assembly of an existence statement: it takes the integral minimal-type compactification, an ideal sheaf on its boundary and the separation property from three earlier theorems, passes to the generic fibre, forms the normalized blow-up and checks ampleness of the twisted bundle. The lemma `uStB` after it restates the result as the named proposition `UStB`.",
+  "statement_name": "GlobalTheory.UPoincTop.uPoinStX_sep",
+  "confidence": "medium",
+  "caveat": "The bundles `UPoinOnX` and `SepB` were read, but their inner notions (monomial degeneration data, the valuation condition, `SepAtB`) were followed only one level; the wording of the separation property is an interpretation of that definition. Calling Z a minimal (Baily–Borel type) and S a toroidal compactification is my reading of the properties, not the project's wording.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The content matches the standard theory of minimal and toroidal compactifications of PEL Shimura varieties (Ash–Mumford–Rapoport–Tai, Faltings–Chai, Lan), with the toroidal one obtained as a normalized blow-up of the minimal one. The exact packaging, in particular the separation clause, is the project's own and was not matched to a specific published statement."
+  }
+ },
+ "GlobalTheory.carrierNeedsFromD": {
+  "title": "Three archimedean inputs for the carrier bound, bundled",
+  "summary": "No hypotheses. It asserts three project-specific statements about analysis at the real places of a CM field at once. (1) `ThmPActualCpt` ('Theorem P', compact-support version): for the data of one real place (ranks k and r, parameters z, z', two finite-dimensional representations, a Haar measure and level data satisfying the project's `IsData` conditions) there is a chain of subspaces K_0, ..., K_r of a space of radial functions on which a family of forms indexed by admissible words is given by integrals of explicit densities, is sesquilinear and positive semidefinite, is stable under the slice operators, satisfies a composite integral formula at level zero, and such that K_0 contains the radial restriction of every smooth compactly supported coefficient function supported away from the singular set. (2) `ModelPlaceBuilt2`: there is one constant such that in every 'built place' setting over a CM field, each real place admits model data (level data, a map j, real parameters, positive constants) for which the principal Hermitian form of the cut-off test function equals a positive constant times a model cutoff energy form, together with decay, adjointness and eigenvalue properties. (3) `BuiltBounds2Cpt`: assuming (1), for every constant there are further constants such that every 'leading form setting' satisfies a positivity statement, integrality conditions, existence of wave and lift level data with barriers and thresholds, and a concrete sum-form bound.",
+  "role": "Bookkeeping: it pairs three earlier results (`actual_compact_theorem`, `model_place_built_holds`, `pb_builtBounds2Cpt`) into one conjunction. The conjunction is consumed by `carrierP`, which feeds the off-diagonal 'Theorem S' estimate.",
+  "statement_name": "GlobalTheory.carrierNeedsFromD",
+  "confidence": "medium",
+  "caveat": "The three statements were read at their top level and one level below (`ThmPOn`, `IsModelPlace`, `IsBuiltPlace`, the setting structure). The inner predicates (the forms, densities, 'slice' and 'wave' operators, `IsLeadingFormSetting`, `SumFormConcrete`) were not unfolded, so the wording for them follows the structure of the definitions and their names. The setting structure is called `HidaSetting` in the source, but nothing in it refers to Hida theory.",
+  "literature": {
+   "status": "probably new",
+   "basis": "All three conjuncts are about objects defined only inside this project (radial function spaces, word-indexed forms, 'built place' settings), and no standard theorem is restated."
   }
  },
  "Main": {
@@ -1535,6 +2063,126 @@
    "basis": "The statement is the generalised Riemann hypothesis for primitive Dirichlet L-functions (and the file also concludes RH itself); no accepted proof of either existed in the literature."
   }
  },
+ "PositivityTheory.AdelicQuotientData.rsPole": {
+  "title": "Rankin–Selberg partial L-function has a pole only for equal representations",
+  "summary": "No hypotheses. For a totally complex number field E, cuspidal automorphic representations π of GL_m and π' of GL_k with 1 ≤ k ≤ m, both invariant under the split centre, and a real number u, there is a finite set S0 of primes such that for every finite S containing S0 and every choice of Satake parameters α of π and β of π' outside S the following holds. There are functions Z and ZS holomorphic on Re s > 0, with ZS non-vanishing at all points σ + iu with σ > 0, such that Z(s) = (s − 1)·ZS(s)·L^S(s) for Re s large, where L^S(s) is the Euler product over primes outside S of the factors (1 − α_a·conj(β_b)·N(w)^(−s))^(−1); and Z(1) = 0 whenever π and π' are different (as classes, including the case m ≠ k). In classical terms: the partial Rankin–Selberg L-function of π and the contragredient of π' continues to Re s > 0 along the line Im s = u with at most a simple pole at s = 1, and has no pole there unless π = π'.",
+  "role": "Final assembly of this result from about twenty earlier lemmas in the same folder (Whittaker functionals, mirabolic induction step, multiplicity one, almost-everywhere sphericity, local Cauchy identity, the Jacquet–Shalika bound on Satake parameters). It is the analytic input from which the file then derives `JacquetShalikaRigidity` (strong multiplicity one for isobaric sums).",
+  "statement_name": "PositivityTheory.AdelicQuotientData.rsPole",
+  "confidence": "high",
+  "caveat": "The definition of cuspidal representation (`CuspSub`: an irreducible stable subspace of cusp forms) and of `HasSat` (Satake parameters) were taken at face value. The auxiliary factor ZS is a project device; the statement is weaker than full holomorphy of (s − 1)·L^S(s) on Re s > 0.",
+  "literature": {
+   "status": "probably known",
+   "basis": "It lies in the project's `PublishedTheorems/JacquetShalikaRigidity` folder and is a weak form of the Jacquet–Shalika / Jacquet–Piatetski-Shapiro–Shalika theorem on poles of Rankin–Selberg L-functions; the exact formulation with the auxiliary factor is the project's own."
+  }
+ },
+ "PositivityTheory.Rg.BcB.Plug2.bci_of": {
+  "title": "Base change from definite unitary groups to GL(n), reduced",
+  "summary": "Hypotheses: three project statements `FrameEx`, `FrameBound`, `FrameRead`. They concern auxiliary data ('frames') attached to an automorphic representation π of a definite unitary group and finite sets of places: the first says a run frame exists for every finite set of places, the second is a growth bound for traces of powers of operators in a star-algebra generated by Hecke-type operators, the third says that suitable characters of that algebra produce candidate base-change data. Conclusion (`BaseChangeIsobaricN`): for every CM field E unramified at all finite places over its real subfield, every n ≥ 1 and every automorphic representation π of the definite unitary group in n variables, there are discrete conjugate-self-dual automorphic representations of GL(N_i) over E with N_1 + ... + N_c = n whose isobaric sum is a base change of π: local components match at split places and at unramified inert places (through Satake parameters), unramified goes to spherical, and the infinitesimal characters match the weight of π.",
+  "role": "A reduction: the three hypotheses are combined with facts already proved in the project (finiteness of the discrete spectrum, a diagonal algebra statement, a limit statement and an initial frame) to produce the needed data for every finite set of places, and a rigidity argument then gives the base change.",
+  "statement_name": "PositivityTheory.Rg.BcB.Plug2.bci_of",
+  "confidence": "medium",
+  "caveat": "The conclusion was read in full. The three hypotheses were read only at the level of their statements; the structures `Frame0`, `RunFrame` and `GenIn` they refer to have many fields and were not unfolded, so their description is approximate.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The conclusion is the base change (weak transfer) from unitary groups to GL(n) as an isobaric sum, known from Labesse and later work; the project keeps a nearly identical statement in its `PublishedTheorems` folder. The hypotheses are internal to the project's own proof of it, so the implication as stated is not a literature result."
+  }
+ },
+ "PositivityTheory.Rg.BcB.Plug2B.bci_of": {
+  "title": "Three frame hypotheses imply isobaric base change for unitary groups",
+  "summary": "Hypotheses: three project statements about 'frames'. A frame is a large package of data attached to an automorphic representation π of the definite unitary group U_n over a CM field E (unramified over its totally real subfield) and finite sets of places: weights at infinity, a Hecke character, level subgroups, auxiliary operators and a distinguished eigenvector. `FrameEx` says that every initial frame extends to a 'run frame' for every finite set of places; `FrameBound` says that the operator data derived from a run frame satisfies a trace-growth bound (traces of k-th powers bounded polynomially times operator norms); `FrameRead` says that characters of the generated star-algebra that match the eigenvector yield the desired output datum. Conclusion: `BaseChangeIsobaricN`: for every such E, every n ≥ 1 and every automorphic representation π of U_n, there are integers N_1 + ... + N_c = n and discrete automorphic representations of GL_{N_i} over E, conjugate self-dual in the project's sense, together with irreducible representations P_w of GL_n over each completion E_w that are subquotients of the product built from their local components, such that: at split places P_w is the local component of π, at unramified inert places the Satake parameters of P_w are the base change of those of π, and the weights of π at infinity determine the infinitesimal characters.",
+  "role": "A reduction: the conclusion is obtained from a 'run' statement, itself assembled from finiteness of the discrete spectrum, a diagonal-algebra statement, existence of initial frames and a limit statement, all proved elsewhere, plus the three hypotheses. It leaves exactly those three frame statements open.",
+  "statement_name": "PositivityTheory.Rg.BcB.Plug2B.bci_of",
+  "confidence": "medium",
+  "caveat": "The frame structures (`Frame0`, `RunFrame`) have 30+ and 20+ fields and were read only superficially; the predicates for local components, Satake parameters and 'conjugate self-dual' in the conclusion were taken from their names and field names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is a variant of weak base change from unitary groups to GL_n, which the project also lists among published theorems (`Published.BaseChangeIsobaric`; in the literature Labesse, Mok, Kaletha–Minguez–Shin–White), but this declaration is an implication from frame statements that exist only in this project."
+  }
+ },
+ "PositivityTheory.Rg.Rs.ascSeed_holds2": {
+  "title": "Discrete spectrum of GL_N: Speh-type embedding and local components",
+  "summary": "No hypotheses. The statement `AscSeed` has two parts, for a totally complex number field E. (1) Every discrete (square-integrable, irreducible) automorphic representation V of GL_N over E whose infinitesimal character at some embedding is regular with integral differences admits integers a, d with ad = N and a unitary cuspidal representation π of GL_a, normalised to be trivial on the split centre, such that V embeds equivariantly into the space of automorphic forms parabolically induced from d twists of π by prescribed powers of the adelic absolute value. (2) Whenever a discrete V embeds in this way for a unitary normalised cuspidal π, each local component of V at a finite place is the Speh representation built from the corresponding local component σ of π, i.e. the unique irreducible quotient (cosocle) of the product of σ|·|^((d-1)/2 - i), i = 0..d-1.",
+  "role": "Assembly: `ascSeed_of_locSub` gives part (1) from `ascAll_holds` (which uses Jacquet–Shalika rigidity and several slice/induction lemmas) and part (2) from a local sub-representation statement `LocSub` plus a local duality lemma; `LocSub` is proved just above from a restriction-at-a-point statement, an existence-of-projection lemma and Frobenius reciprocity.",
+  "statement_name": "PositivityTheory.Rg.Rs.ascSeed_holds2",
+  "confidence": "medium",
+  "caveat": "`AscAll`, `Clause3Asc`, `AscEmb`, `IsDiscrete`, `RegInt`, `IsSpeh`, `spehFactor` were read. The exact exponents in `AscEmb` ((a-1)·((d-1)/2 - i) in the project's convention for induced forms) were not reconciled with the usual normalised-induction exponents, and `indForms`, `IsLocComp`, `IsCosocle` were not unfolded further.",
+  "literature": {
+   "status": "probably known",
+   "basis": "This is the Mœglin–Waldspurger description of the residual spectrum of GL_N (discrete representations are Speh representations attached to a cuspidal π), restricted to regular integral infinitesimal character and stated in embedding form; the companion definitions live in a `PublishedTheorems` file and the proof cites Jacquet–Shalika from the project's published list."
+  }
+ },
+ "PositivityTheory.SiegelWeilCoefficients.lit": {
+  "title": "Siegel–Weil formula for unitary groups beyond the convergent range",
+  "summary": "Setting: the CM extension E/F carried by a project master record, a Hermitian space V of rank m over E, and the quasi-split unitary group G in 2n variables, with n < m ≤ 2n and n + (Witt index of V) < m (Weil's convergence condition for the theta integral). Data: an additive character ψ of the adeles of F, a Hecke character χ of E whose restriction to the ideles of F is the m-th power of the quadratic character of E/F, a Weil representation ω of G(A) on Schwartz functions on V^n given by the usual Schrödinger-model formulas on the Siegel Levi, the unipotent radical and the Weyl element, a height function H adapted to the Siegel parabolic P, and a Schwartz function Φ that is polynomial times Gaussian at the infinite places and Schwartz–Bruhat at the finite places. Conclusion: for every g, the Siegel Eisenstein series, i.e. the sum over P(F)\\G(F) of H(γg)^(s−s0)·(ω(γg)Φ)(0), has as a function of s a meromorphic extension that is analytic at s0 = (m−n)/2, and its value there equals the average of the theta series θ(g,h;Φ) over the automorphic quotient of U(V).",
+  "role": "Obtained by feeding three earlier results into the project's continuation theorem `top7`: a generation statement `genA_hf`, an idelic statement derived from convergence of Weil's theta integral (`wtc`), and `coefND` (each nondegenerate Fourier coefficient of the Eisenstein series has value at s0 equal to that of the theta integral). The proof itself only repackages the hypotheses into the project's bundles; it is the final assembly of this formula.",
+  "statement_name": "PositivityTheory.SiegelWeilCoefficients.lit",
+  "confidence": "medium",
+  "caveat": "The record of global data (`D7`) is a very large project structure; only its CM-field part matters here. The exact meaning of several side conditions (`IsInfFam`, `IsCovolOne`, `IsCartanInv`, the half-plane-agreement clause inside the meromorphic-extension predicate) was taken from names or read only superficially. The classical name is my identification from the unfolded formulas.",
+  "literature": {
+   "status": "known",
+   "basis": "The statement type is `GlobalTheory.Published.SiegelWeilUnitarySchrodingerLit` in a `PublishedTheorems/SiegelWeilSchrodinger` folder, and the unfolded content is the Siegel–Weil formula for unitary groups in the range n < m ≤ 2n under Weil's convergence condition (Weil; Ichino for this range). Here it is proved inside the project rather than assumed."
+  }
+ },
+ "PositivityTheory.ThKR.theoremK_head2": {
+  "title": "Theta integrals of two unitary dual pairs are proportional",
+  "summary": "Hypotheses: (1) `EisBL`: Siegel Eisenstein series on the doubled unitary group attached to a Hermitian or skew-Hermitian space over a CM-type extension E/F converge in a half-plane and continue meromorphically in s, with finite-order poles and control against linear forms of moderate growth; (2) `SiegelWeilStd`: the Siegel–Weil formula when one space is definite, expressing the value of the Eisenstein series at s = (m-n)/2 as 1 or 2 times the average of the theta function over the unitary quotient. Conclusion, for all 'triples' (a good CM extension with Hermitian spaces V, V' of dimensions a > a' and a skew-Hermitian space W of dimension a + a', Hecke characters α, β, and Weil representations ω of U(V)×U(W) and ω' of U(V')×U(W)): local matching data (irreducible archimedean and finite quotient maps relating the two Schwartz spaces) exist; the theta integrals converge with decay bounds; for any matching data there is a unique constant c, nonzero, with I(Φ) = c·I'(Φ') as functions on U(W) for all matched Schwartz functions; local coinvariant statements hold at good split places; and two recursion formulas relate the constants c for neighbouring signatures through an explicit factor and a value of the partial L-function of α/β.",
+  "role": "Final assembly of the project's 'Theorem K': it specialises `theoremK_head2_of_mod` to the proved statement `modSt2`, which in turn calls `Tr.closeSph` with about a dozen proved inputs (coinvariant and multiplicity-one statements at ramified, split and inert places, Howe duality at inert places, local lifts and archimedean statements, a Siegel-set statement, existence of Weil representations) plus the two hypotheses.",
+  "statement_name": "PositivityTheory.ThKR.theoremK_head2",
+  "confidence": "medium",
+  "caveat": "`ThetaIntegralsAgree`, `LocalMatching`, `IsTriple`, `IsMatched`, `IsConst`, `Decay`, `OneConst`, `Coinv`, `StepAlpha`, `StepBeta`, `EisBL`, `SiegelWeilStd` were read. The theta integrals `Model.I`, the Schwartz subspaces `So`, `Pol`, the predicate `IsWeil` and the factor `stepFac` were not unfolded, so the summary gives the shape of the identities rather than exact normalisations.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The two hypotheses are literature statements (continuation of Siegel Eisenstein series, Siegel–Weil with a definite space). The conclusion is an identity between theta integrals from two different unitary groups, in the spirit of Siegel–Weil/seesaw arguments, but it is the project's own 'Theorem K' and I could not match it to a named published theorem."
+  }
+ },
+ "SquareStatements.good_tower_antisymmetry": {
+  "title": "Root-tower height defect is antisymmetric under adjacent weight swaps",
+  "summary": "Hypotheses: three assumed statements, namely `CmpSt` (for two analytic realisations of the same multi-projective arithmetic variety with the same singular metrics, the degree-weighted difference of arithmetic intersection numbers tends to 0), `Given` (a bundle of about seventeen statements: toroidal compactification compatibilities, a 'key formula', and items named after literature results such as extension of homomorphisms of semi-abelian schemes, a Hodge–Tate statement attributed to Fargues, GAGA for sections, a slope bound, Zhang-type height bounds), and existence and bilinearity of the Weil pairing on polarised abelian schemes. Setting: a CM field E, unitary PEL-type data of signature (p,q) with p,q ≥ 1, moduli spaces at all levels, a normal projective flat integral model Y at one level, a 'root tower' T (a family of multi-projective arithmetic models indexed by a bound B and a component), a 'good origin' tying T to Y and satisfying an extra immersion condition, and a full arithmetic intersection system. Conclusion: for every B ≥ 2, component c, embedding τ, adjacent indices a, a+1 with a+1 different from the tower's distinguished index, and every weight λ, the number P(B,c; ℓ_λ^(d+1)) − vol(c)·h_Fl(ℓ_λ^(d+1)) changes sign when the a-th and (a+1)-th entries of λ at τ are swapped. Here ℓ_λ is the linear form attached to λ, d is the flag-variety dimension, P is the limiting arithmetic intersection number on the tower model, and h_Fl is the corresponding intersection number on the flag variety.",
+  "role": "A one-line application of `antisymmetry_of_singular_statement` to the project's proven singular-metric statement `stSing`; that lemma in turn combines seven sub-statements (base, embedding, form, height cancellation, comparison, transposition factor). It is a reduction step that discharges one hypothesis.",
+  "statement_name": "SquareStatements.good_tower_antisymmetry",
+  "confidence": "medium",
+  "caveat": "The conclusion `I8`, the structures `RootTower`, `GoodOrigin`, `Extra`, the hypothesis lists `CmpSt`, `Given`, `WeilSt` and the definitions of P and h_Fl were read. The individual members of `Given`, the meaning of 'good origin', and the content of `stSing` were not unfolded and are described from names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion concerns 'root towers' and 'good origins', which are constructions of this project; the statement is conditional on hypothesis bundles (partly named after literature results) and concludes something specific to the proof."
+  }
+ },
+ "UpperTheory.BaseChangeIdentities.Conclusion1_alt_alt_alt": {
+  "title": "Base change for definite unitary groups, in the project's datum",
+  "summary": "Hypotheses: (1) `DefiniteN`: for a CM field E unramified over its maximal real subfield at all finite places, every automorphic representation of the rank-n unitary group has a base change to GL_n over E, written as an isobaric sum of discrete conjugate-self-dual pieces with matching local components, Satake parameters and infinitesimal characters; (2) three published local statements about GL_N over a p-adic field (Bernstein's irreducibility of a product of irreducible unitarisable representations, the classification of generic unitary representations as complementary products, and existence of the irreducible quotient of a standard product); (3) existence of a local Langlands reciprocity map with a list of laws; (4) a project datum D whose abstract 'automorphic side' is realised by actual objects: its abstract cuspidal GL classes correspond bijectively to genuine unitary cuspidal representations over the host CM field with matching local parameters, twists, infinitesimal characters and conjugate self-duality, and its abstract unitary-group classes are realised by genuine automorphic representations whose local parameters at split places are given by local Langlands. Conclusion: the datum's `Conclusion1` holds, i.e. if the fields F and K generate E, then (for E/F unramified CM, [F:Q] at least 2, 2 not in any non-split prime) every automorphic representation of a definite unitary group in the datum that is spherical at all non-split places has a base-change parameter: a multiplicity-free list of conjugate-self-dual cuspidal GL classes with Speh-type multiplicities, of total rank nV, matching the representation at split places, at non-split places (unramified base change of the Satake parameter) and at infinity.",
+  "role": "A thin wrapper: it discards the unused Bernstein hypothesis and calls `aux_of_cgTrue_of_auTrue` with the project's theorem `ascComp` (discrete automorphic representations of GL_N sit above cuspidal ones as Speh-type components). It is a transfer step that moves a base-change statement from concrete automorphic representations to the project's abstract datum.",
+  "statement_name": "UpperTheory.BaseChangeIdentities.Conclusion1_alt_alt_alt",
+  "confidence": "medium",
+  "caveat": "The datum type `D7` is a very large structure whose fields `nd`, `naut`, `nbc` (abstract Galois, GL-automorphic and unitary base-change data) were read only through the definitions that use them; `WDTie` (an identification of the abstract local parameters with Weil-Deligne representations) and the laws inside `RecTExists` were read only in part. The first hypothesis `DefiniteN` is itself a strong base-change statement, proved elsewhere in the project from a further hypothesis.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The conclusion is the weak base change from definite unitary groups to GL_n (Labesse, Clozel-Harris-Labesse) restated for the project's datum, and it is derived from a hypothesis that is the same theorem in concrete form plus hypotheses in the project's `Published` namespace. The packaging in terms of the project's datum is specific to this proof."
+  }
+ },
+ "UpperTheory.BaseChangeIdentities.baseChangeNB": {
+  "title": "Isobaric base change from definite unitary groups to GL_n",
+  "summary": "No hypotheses. For every CM field E that is unramified over its maximal real subfield at all finite places, every n ≥ 1 and every irreducible automorphic representation π of the definite unitary group U(n) of E (a space of functions on the adelic points, stable and irreducible under right translation), there is a base change to GL_n over E: a partition n = N_1 + ... + N_c, discrete (square-integrable) automorphic representations V_i of GL_{N_i} with local components σ_i,w and infinitesimal characters m_i, and irreducible local representations P_w of GL_n(E_w). Each V_i is 'conjugate self-dual of Speh type' in the project's sense (it embeds in the space induced from absolute-value twists of a unitary, conjugate self-dual cuspidal representation); P_w is a subquotient of the parabolic induction of the σ_i,w, is spherical where π is unramified, has the base-changed Satake parameters at inert places, is the local component of π at split places, and the m_i add up to the infinitesimal character given by the weight of π.",
+  "role": "Final assembly of the project's own proof of this base-change statement: `bci_of` is applied to three inputs, namely existence of 'frames' (from a finiteness statement for candidate eigen-systems), a frame bound, and a 'frame reading' statement. It is an existence theorem for the base-change data.",
+  "statement_name": "UpperTheory.BaseChangeIdentities.baseChangeNB",
+  "confidence": "medium",
+  "caveat": "The target proposition `BaseChangeIsobaricN` and its structure `IsBaseChangeN`, the definitions of automorphic representation of U(n), discrete representation, `CsdAsc` and `AscEmb` were read. The notions `HasSatAt`, `bcParam`, `HasWeightAt`, `infOfWeight`, `locProd` were taken at face value from their names and use. The three inputs of the proof (`FrameEx`, `FrameBound`, `FrameRead`) were not unfolded.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The statement is a variant of the project's own literature item `GlobalTheory.Published.BaseChangeIsobaric` (file `PublishedTheorems/.../BaseChangeIsobaric`, base change for definite unitary groups in the style of Labesse), with the conjugate-self-duality clause replaced by the project's `CsdAsc`. Here it is proved inside the project rather than assumed."
+  }
+ },
+ "UpperTheory.ConvolutionTheory.R2.quadBC2": {
+  "title": "Quadratic base change for GL(2) from totally real to CM",
+  "summary": "Let F be a totally real number field and E a totally complex quadratic extension of F. Let π be a regular algebraic cuspidal automorphic representation of GL(2) over F (in the project's model: a nonzero stable space of cusp forms whose infinitesimal characters at each real place are distinct and integral after the standard shift). Conclusion: either there is a Hecke character η of F that is the quadratic character of E/F at almost all places and π is isomorphic to its twist by η, or there is a cuspidal representation P of GL(2) over E that is a base change of π. Base change here means: the infinitesimal characters match at infinite places, the local components are isomorphic at places where the completions of F and E agree, and at almost all places the Satake parameters of P are the f-th powers of those of π, f being the residue degree.",
+  "role": "Proved by a theta-correspondence argument assembled from named lemmas in the same folder: existence of the quadratic-space datum, a Weil representation and measures; a case split on whether the 'trivial orbit terms' of the theta lift vanish; in one case the span of lifts is nonzero and contains an irreducible cuspidal piece with the base-change properties, in the other π is dihedral for E. Final assembly of this statement.",
+  "statement_name": "UpperTheory.ConvolutionTheory.R2.quadBC2",
+  "confidence": "medium",
+  "caveat": "`QuadBC2`, `IsBC`, `IsoTwist`, `IsQuadCharOf`, `CuspSub` and `IsRegAlg` were read. The lemmas used in the proof (`datEx`, `weilEx`, `irr`, `cap`, `split`, `unr`, `dih`) were not opened; the description of the method rests on their names and the shape of the proof.",
+  "literature": {
+   "status": "known",
+   "basis": "This is quadratic base change for GL(2) (Saito, Shintani, Langlands; Jacquet), here restricted to regular algebraic representations and a CM quadratic extension; the project's general version of the same statement is named `QuadBaseChange` and sits in a `PublishedTheorems` folder."
+  }
+ },
  "UpperTheory.FinalTheorems.everyCharacter_of_row": {
   "title": "Non-vanishing of all Dirichlet L-functions from a Galois-representation hypothesis",
   "summary": "Hypothesis `Row0b`: for every CM field E, prime l, isomorphism of the algebraic closure of Q_l with C, and every regular algebraic cuspidal automorphic representation π of GL_a over E that is polarized by a Hecke character of the maximal real subfield, there is a continuous semisimple a-dimensional l-adic representation of the Galois group of E with prescribed Hodge–Tate weights, compatible with π at places away from l in a weakened sense (equal dimension, equality in the toral case, matching characteristic polynomials on inertia-degree-zero elements in a tame case) and crystalline or de Rham / potentially semistable above l; compatibility is measured against any local map satisfying the project's local-Langlands laws. Conclusion: for every modulus N ≥ 1, every Dirichlet character χ mod N and every s with Re s > 1/2 (excluding s = 1 when χ is trivial), L(χ, s) ≠ 0.",
@@ -1547,6 +2195,114 @@
    "basis": "The conclusion is the generalised Riemann hypothesis for Dirichlet L-functions in non-vanishing form, which had no proof; the hypothesis itself resembles known theorems on Galois representations of polarized automorphic representations (Harris–Taylor, Shin, Chenevier–Harris, Caraiani)."
   }
  },
+ "UpperTheory.Gal.Int.Geo.steps_holds": {
+  "title": "All steps for Galois representations cut from towers hold",
+  "summary": "No hypotheses. The conclusion is the bundle `Steps`, 17 statements about l-adic Galois representations of a number field E attached to a 'tower': a smooth projective variety over E with a family of finite etale correspondences, together with an eigenvalue system θ. The statements say: for a nice tower there is a continuous semisimple representation that is a graded piece of the θ-part of the cohomology; at places not above l it is unramified and Frobenius is killed by the polynomial whose roots are given by the Hecke eigenvalues; at places above l it is crystalline, has prescribed Hodge–Tate jumps, and crystalline Frobenius is killed by the corresponding polynomial; a comparison between two forms of the local conditions; the same properties survive twisting by a character; l-adic characters exist for algebraic Hecke characters; a Satake multiset has the expected cardinality; and semisimplicity and continuity pass to summands, isomorphic representations and twists.",
+  "role": "Final assembly of a bundle: three of the fields (the crystalline step, the Hodge–Tate jump step, the Frobenius step) are supplied by named earlier theorems, the jump step being the lemma just above, and the remaining fourteen by `steps_of` from results proved elsewhere. The bundle is then used to realise weight-one data geometrically.",
+  "statement_name": "UpperTheory.Gal.Int.Geo.steps_holds",
+  "confidence": "medium",
+  "caveat": "I read the top-level definitions of the 17 fields, but the notions `HTower`, 'piece of cohomology', the crystalline and Hodge–Tate predicates and the congruence conditions were not unfolded, so the descriptions of individual fields follow their definitions only one level deep and partly their names.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The contents resemble standard facts (Eichler–Shimura type congruence relations, crystalline comparison, Galois characters of algebraic Hecke characters), but they are formulated for the project's own 'tower' objects and I could not match them to specific published statements."
+  }
+ },
+ "UpperTheory.Gal.KunnethLefschetz.Core.inputs": {
+  "title": "Full list of étale cohomology inputs from five core facts",
+  "summary": "Hypothesis: a bundle `Core` of five statements about étale cohomology with twisted Z/q coefficients, q invertible: vanishing in degrees ≥ 2 for finite-type Dedekind algebras over an algebraically closed field (C2); an invariance statement for étale algebras over a polynomial ring over an absolutely integrally closed local domain on passing to the fraction field (C3); invariance under A → A[T] (C4); the cohomology of Laurent polynomials over a strictly henselian ring (C5); and the projective bundle formula (D1). Conclusion: the bundle `In` of 24 statements holds: invariance under quasi-isomorphism, smooth Čech descent, level-wise and Mayer–Vietoris equivalences, killing of positive-degree classes on étale covers, naturality/ring axioms/support and additivity properties of cup products, first Chern classes and Kummer classes, the coefficient long exact sequence, change of coefficient ring, negative-degree vanishing and H^0 as sections, compatibility with reduction of coefficients and with filtered colimits of rings, acyclicity of strictly henselian rings, a fibrewise base-change criterion, homotopy invariance, the projective bundle formula, proper base change over a strictly henselian local ring, a smooth generic-fibre comparison (E3), finiteness for proper schemes over an algebraically closed field (E4), Gysin maps in every codimension, and a Kummer-theory goal.",
+  "role": "Bookkeeping assembly: most fields are filled by theorems already proved in the project, C4 and D1 come from the hypothesis, E3 and E4 are derived just above in the same file from the hypothesis, the duality/diagonal-class field and the Gysin field come from affine proper base change. It collects everything into one record used by the Künneth and Lefschetz arguments.",
+  "statement_name": "UpperTheory.Gal.KunnethLefschetz.Core.inputs",
+  "confidence": "medium",
+  "caveat": "The propositions A1–E4 were read in `GlobalTheory.EtC`; the cohomology theory itself (`Ht`, `Spc`, `Eqv`, `tw`, `Shv`) is the project's own construction and was not unfolded, and the meanings of `SH` (strictly henselian) and `AIC` (absolutely integrally closed) rest on their names. The fields `gys` and `kun` of `In` were not read.",
+  "literature": {
+   "status": "probably known",
+   "basis": "Hypotheses and conclusion are standard theorems of étale cohomology (SGA 4, SGA 4½: cohomological dimension of curves, homotopy invariance, projective bundle formula, proper base change, finiteness, Gysin sequences), restated for the project's own model of étale cohomology; the implication itself is a packaging step."
+  }
+ },
+ "UpperTheory.Gal.Seam.HT.htBij": {
+  "title": "Hodge-Tate decomposition for smooth projective good-reduction models",
+  "summary": "No hypotheses. For every prime l and every finite extension K of Q_l inside a fixed algebraic closure, there is a 'Hodge-Tate pairing' package: for each scheme X over the ring of integers of K, pairings between the l-adic etale cohomology of the geometric generic fibre in degree n and the duals of the graded pieces (index a) of the de Rham-type cohomology of the generic fibre, with values in C_l, semilinear in both arguments, Galois-equivariant up to the a-th power of the cyclotomic character, natural in X, and compatible with cup products, the unit class and first Chern classes of line bundles. For every model that is projective, strictly semistable and smooth over the integers of K, the pairing is injective in every degree and non-degenerate in top degree when the generic fibre is connected; if the model is smooth of some relative dimension d, the pairing is also surjective in every degree, and the Q_l-dimension of the degree-n etale cohomology equals the sum over a from 0 to n of the K-dimensions of the graded pieces.",
+  "role": "Final assembly of the Hodge-Tate comparison: it applies `htBij_of` to the existence and injectivity of the Hodge-Tate map (proved just above from the etale-side input for smooth models) together with three etale-side facts proved elsewhere (a diagonal/square-exactness statement, a diagonal class statement, and finite-dimensionality of etale cohomology).",
+  "statement_name": "UpperTheory.Gal.Seam.HT.htBij",
+  "confidence": "medium",
+  "caveat": "The graded pieces `Hdg` are defined as cohomology of the a-th graded piece of a filtered functor on a site of thickenings; I did not verify that this agrees with the usual Hodge cohomology H^(n-a)(X, Omega^a). The etale cohomology groups and the fields of the pairing package concerning Chern classes were read only at the level of their signatures.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The statement is the Hodge-Tate decomposition (bijectivity of the Hodge-Tate comparison and the resulting dimension formula) for smooth projective schemes with good reduction over a p-adic ring of integers, a theorem of Faltings; the formulation through the project's own pairing package is not standard."
+  }
+ },
+ "UpperTheory.GalC.linkN_of_twGood_galoisPreconditions": {
+  "title": "The N-link bound for a family with Galois preconditions",
+  "summary": "Hypotheses: (1) a bundle of seven literature statements (Fontaine's B_cris, global Artin reciprocity, Bloch–Kato local theory, local Tate duality, the local Euler characteristic formula, local finiteness, and an integral comparison attributed to Bhatt–Scholze); (2) the project hypothesis `CutGivesAlt`: every datum satisfying the 'Galois preconditions' and a four-part tie condition admits a good 'cut' (a restriction to selected localisations and eigen-systems) whose cut datum satisfies the full list of 'norm choice facts' and the tie condition again; (3) a family of data Fm with good twists, all of whose members beyond the starting point satisfy the Galois preconditions and the tie condition. Conclusion: `LinkN` for Fm, i.e. there are constants C and x0 such that for x ≥ x0, every member with finite odd Sha condition and every lift index j satisfy an explicit inequality: the sum over twisted places in the support of (log-weight) × (ramification index) × (η-exponent) is at most a rank d_Z0(j) times C·(f·m·b·L² + log²x·N_c) plus a sum over primes l of log l times lengths of Sha groups (when that sum converges).",
+  "role": "A reduction. The proof chooses a good cut at each member, proves the bound for the cut family from local bounds at 2 and 3 (`at23_family_alt`), a uniform constant from `exists_const_tieChi_bound_of_facts` and the chain 'family facts → local conclusion → LinkN', and then transfers it back to the original family with `linkN_of_gd` using a multiplicity-at-most-rank lemma.",
+  "statement_name": "UpperTheory.GalC.linkN_of_twGood_galoisPreconditions",
+  "confidence": "medium",
+  "caveat": "`LinkN`, `GaloisPreconditions` (18 fields), `NormChoiceFacts`, `Tie4`, `CutD`, `CutD.Good` and the literature bundle were read; the individual fields of the precondition bundles (admissible datum, residual irreducibility, depth-zero conditions, etc.) and the quantities in the inequality (η-exponents, d_Z0, the size parameters b, L, N_c) are taken from their names and signatures only.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is an inequality about the project's own families of data and the hypotheses include a project-specific cut hypothesis; only the first hypothesis bundle is literature."
+  }
+ },
+ "UpperTheory.LiteratureTheorems.arith_hilbert_samuel_of_literature": {
+  "title": "Arithmetic Hilbert–Samuel theorem for nef Hermitian line bundles",
+  "summary": "Hypothesis: the bundle `OpenLiteratureStatements`, three assumptions named after a local-global compatibility result of Caraiani (two fields) and the existence of the local Langlands correspondence for GL_n. Conclusion: the project's statement `ArithHilbertSamuel`. It says: let X be an integral scheme, projective and flat over the spectrum of a domain k that is finite over the integers, of Krull dimension D+1; let L and N be Hermitian line bundles on X (smooth metrics at every complex embedding, compatible with complex conjugation), with L nef (semipositive metric, nonnegative degree on vertical and horizontal curves) and with arithmetic self-intersection number a. Then for all large m the set of global sections of L^m ⊗ N of sup-norm at most 1 at every complex point is finite, and the logarithm of its cardinality equals a·m^(D+1)/(D+1)! + o(m^(D+1)).",
+  "role": "A one-line derivation: it applies the project's theorem that principalisation of ideal sheaves (resolution-type statement in characteristic zero) implies arithmetic Hilbert–Samuel, to the project's own proof of principalisation. The hypothesis bundle is carried in the signature but is not used in the proof; the result feeds the volume bounds and the bundle of 'published Hodge bundle theorems'.",
+  "statement_name": "UpperTheory.LiteratureTheorems.arith_hilbert_samuel_of_literature",
+  "confidence": "high",
+  "caveat": "The three fields of the hypothesis bundle were identified from their names; only the local Langlands field was read (as existence of a reciprocity map satisfying a list of laws), and they play no part in this proof. The self-intersection number is defined in the project through a recursively characterised height function, which I read but did not compare line by line with the standard definition.",
+  "literature": {
+   "status": "known",
+   "basis": "The conclusion is the arithmetic Hilbert–Samuel theorem (Gillet–Soulé, Abbes–Bouche, and Zhang for nef bundles), and the project places its statement in the namespace `Published`."
+  }
+ },
+ "UpperTheory.LiteratureTheorems.grothendieck_deformation_of_literature": {
+  "title": "Grothendieck–Messing deformation theory for abelian schemes",
+  "summary": "Hypothesis: the bundle `OpenLiteratureStatements` (three literature assumptions about Galois representations and local Langlands); it is not actually used in the proof. Conclusion: let R → R0 be a surjection of rings whose kernel carries nilpotent divided powers. Then (1) for an abelian scheme A over R with reduction A0, the comparison map from the crystalline to the de Rham realization is bijective and the Hodge filtration of A is an admissible lift of that of A0; (2) every admissible filtration (a direct summand lifting the Hodge filtration of A0) comes from an abelian scheme over R lifting A0; (3) a homomorphism A0 → B0 that respects the lifted filtrations lifts uniquely to a homomorphism A → B.",
+  "role": "A two-line combination of two results proved inside the project: the structure of the first de Rham cohomology of abelian schemes, and lifting of abelian schemes and homomorphisms along nilpotent divided-power thickenings.",
+  "statement_name": "UpperTheory.LiteratureTheorems.grothendieck_deformation_of_literature",
+  "confidence": "high",
+  "caveat": "The notions of crystalline realization and of the comparison map are the project's own constructions and were not unfolded.",
+  "literature": {
+   "status": "known",
+   "basis": "This is the Grothendieck–Messing theorem (Messing 1972; Mazur–Messing), and the project states it in its `PublishedTheorems` folder under the name `GrothendieckDeformation`."
+  }
+ },
+ "UpperTheory.LiteratureTheorems.literature_automorphy": {
+  "title": "Global automorphic and Galois literature bundle from three open inputs",
+  "summary": "Hypothesis: the structure `OpenLiteratureStatements`, which has three fields: existence of the local Langlands correspondence for GL_n over completions of number fields (in the project's axiomatised form), and, under two different field names but with the same type, existence of l-adic Galois representations attached to regular algebraic polarized cuspidal representations of GL_a over CM fields, with local-global compatibility away from l and prescribed behaviour at l. Conclusion: the 16-field bundle `GlobalAutomorphicGaloisHypotheses'`: rapid decay of cusp forms, Harish-Chandra finiteness, finite-dimensionality of spaces of automorphic forms on GL_n, Jacquet–Shalika, the cuspidal spectrum of GL_n, isobaric base change, Gelfand–Kazhdan duality, the Galois representations for polarized pairs, the local-global statement itself, Clozel's purity and cohomological statements, global Artin reciprocity, ray class fields, two statements on l-adic characters attached to algebraic Hecke characters, and de Rham implies potentially semistable.",
+  "role": "Bookkeeping: it fills each field with a separately named theorem `..._of_literature`. Most of these ignore the hypothesis and point to results proved elsewhere in the project (for example Jacquet–Shalika, Clozel purity, Artin reciprocity); only the Galois-representation field and the local-global field use the open inputs.",
+  "statement_name": "UpperTheory.LiteratureTheorems.literature_automorphy",
+  "confidence": "medium",
+  "caveat": "The three hypothesis fields (`RecTExists`, `Row0b` with `PropsB`) and the field `PairUAlt` were read. The other fifteen conclusion fields are described from their names in the `Published` namespace; their definitions were not opened. The proofs of the individual `..._of_literature` theorems were not checked beyond which constants they refer to.",
+  "literature": {
+   "status": "known",
+   "basis": "Every field of the conclusion is a statement the project labels as published (namespace `Published`, names of standard theorems), and the three hypotheses are likewise literature statements (local Langlands for GL_n; Galois representations for polarized regular algebraic cuspidal representations)."
+  }
+ },
+ "UpperTheory.LiteratureTheorems.literature_nonexistence": {
+  "title": "Assembly of the 'non-endoscopic' literature hypothesis bundle",
+  "summary": "Hypothesis: the bundle `OpenLiteratureStatements`, which has three fields. Two of them are the same proposition, that every regular algebraic polarised cuspidal automorphic representation of GL_a over a CM field has an attached l-adic Galois representation with the project's list of properties (labelled as Caraiani's local-global compatibility and as Galois representations of polarised pairs); the third is existence of the local Langlands correspondence for GL_n over completions of number fields, in the project's formulation. Conclusion: the structure `NonEndoscopicHypothesesAlt` holds. It bundles five parts: nineteen statements on representations of p-adic GL_n (Bernstein–Zelevinsky finiteness, geometric lemma, Zelevinsky and Langlands classification, local converse theorem, Moy–Prasad, and others), sixteen global automorphic and Galois statements (rapid decay of cusp forms, Jacquet–Shalika, base change, Clozel purity, Artin reciprocity, and others), twelve Galois-cohomology statements (Poitou–Tate, local Tate duality, Euler characteristic formulas, Greenberg–Wiles, a local Bloch–Kato statement), a five-part statement `JoinOut` on denominators of zeta values and transport of lattices, and the Hecke–Tate functional equation.",
+  "role": "Pure packaging: each field is filled by an earlier theorem named `..._of_literature`. Only a few of those use the assumed bundle (the Galois-representation and local Langlands fields); others, for example the Hecke–Tate functional equation, are proved in the project without it.",
+  "statement_name": "UpperTheory.LiteratureTheorems.literature_nonexistence",
+  "confidence": "medium",
+  "caveat": "The bundle structures and the three assumed fields were read. The individual statements inside the bundles (in the `GlobalTheory.Published` namespace) were not unfolded and are listed by name; the contents of `JoinOut` have project-specific names and were only skimmed.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The conclusion is a conjunction of statements that the project places in `Published` / `LiteratureTheorems` namespaces and names after published theorems, derived from three further literature-labelled assumptions. One component (`JoinOut`) has project-specific naming and I did not verify that it restates published results."
+  }
+ },
+ "UpperTheory.LiteratureTheorems.published_results_analytic": {
+  "title": "Bundle of twelve analytic and representation-theoretic published inputs",
+  "summary": "Hypothesis: the bundle `OpenLiteratureStatements`, which has three fields (two statements of a type called `Row` whose field names refer to Caraiani's local-global compatibility and to Galois representations of polarised pairs, and existence of the local Langlands reciprocity map for GL_n). Conclusion: a record of twelve propositions named after published theorems: the Weil representation for unitary dual pairs, existence of discrete series of U(p,q), Harish-Chandra's analyticity, classification of discrete series, trace-class property of convolution operators on the cuspidal spectrum, the Dixmier–Malliavin factorisation, Flath's tensor product factorisation, the Siegel–Weil formula for unitary groups, the doubling method for local zeta integrals, unramified doubling for GL, continuation and non-vanishing on Re s ≥ 1 of partial Hecke L-functions, and a statement `HtCard` about continuity and Hodge–Tate-type weight counts of l-adic Galois representations.",
+  "role": "Bookkeeping: each field is filled by citing a theorem proved elsewhere in the project (names ending in `_holds`, `_fromLibrary`, or similar); the open-literature hypothesis is passed along and is not visibly needed for most fields.",
+  "statement_name": "UpperTheory.LiteratureTheorems.published_results_analytic",
+  "confidence": "medium",
+  "caveat": "Seven of the twelve target statements were opened and match their names (Flath, Siegel–Weil, trace class, Dixmier–Malliavin, Hecke L partial continuation, discrete series existence, `HtCard`); the other five are identified by name only. The `Row` type of two hypothesis fields was not unfolded. The name of the record type (`GeometricGaloisRepCompatibility`) does not describe its contents.",
+  "literature": {
+   "status": "known",
+   "basis": "Every field of the conclusion lives in the project's `Published` namespace / `PublishedTheorems` folder and restates a theorem with a standard name; the statement only packages them."
+  }
+ },
  "UpperTheory.LiteratureTheorems.published_results_arithmetic": {
   "title": "Bundle of twenty-eight published arithmetic-geometry theorems",
   "summary": "Hypothesis: the three-field bundle `OpenLiteratureStatements` (existence of Galois representations for polarized regular algebraic cuspidal representations over CM fields, stated twice, and existence of a local reciprocity map for GL_n). Conclusion: the structure `PublishedHodgeBundleTheorems`, whose 28 fields are propositions from the project's `Published` list: toroidal compactification, arithmetic volume lower bound and nef volume, an Arakelov calculus statement, de Rham cohomology of abelian schemes, ray class fields, semistable reduction, strong approximation for special unitary groups, a Green series statement, good Chern–Weil forms, Landherr's theorem on Hermitian forms, the Hasse norm theorem for quadratic extensions, extension of homomorphisms of semi-abelian schemes, a lowest-alcove statement for induced modules, a section for principal polarisations, the count n^(2g) of n-torsion points of an abelian variety, Grothendieck–Messing, prismatic Dieudonné theory, Kawamata–Viehweg vanishing, nef numerics, L² extension, arithmetic Hilbert–Samuel, existence of Chow forms, heights of cycles, Serre's holomorphic sections, Nadel vanishing, principalisation, and formal algebraisation.",
@@ -1557,6 +2313,114 @@
   "literature": {
    "status": "probably known",
    "basis": "Every field lives in the project's `Published` namespace and those inspected restate standard theorems; the declaration only packages them. The exact Lean formulations are project-specific, so a full match with the literature was not verified for all fields."
+  }
+ },
+ "UpperTheory.LiteratureTheorems.published_results_eigen": {
+  "title": "Bundle of 60 literature inputs from three open assumptions",
+  "summary": "Hypothesis: a bundle `OpenLiteratureStatements` with three fields. Two of them (with the same type) say that every regular algebraic polarized cuspidal automorphic representation of GL(a) over a CM field has an l-adic Galois representation with the expected Hodge–Tate weights and a weak form of local–global compatibility; the third says that a local Langlands correspondence for GL(n) over completions of number fields exists, with a list of compatibility laws. Conclusion: the bundle `UnitaryGroupThirdPlaceHypotheses` holds. That bundle has 60 fields; 50 of them are statements in the project's `Published` namespace named after published theorems (Clozel, Green, Bernstein–Zelevinsky, Jacquet–Shalika, Harish-Chandra, Casselman–Wallach, Siegel–Weil for unitary groups, doubling method, class field theory, p-adic Hodge theory, and so on), and the rest are smaller sub-bundles and Galois-theoretic statements of the same kind.",
+  "role": "Bookkeeping: each field is filled by an earlier theorem of the same file. Almost all of those ignore the hypothesis and cite proofs made inside the project; only the fields about Galois representations and local–global compatibility actually use the three assumed statements.",
+  "statement_name": "UpperTheory.LiteratureTheorems.published_results_eigen",
+  "confidence": "medium",
+  "caveat": "The 60 target fields were not unfolded one by one; their content is described from their names and namespace. The three assumed statements were read (the Galois-representation statement down to its list of properties, the local Langlands statement only at the level of its list of laws).",
+  "literature": {
+   "status": "probably known",
+   "basis": "The conclusion is a conjunction of statements that the project itself files under `Published` and names after published theorems, and the three assumptions are named after literature results (Caraiani local–global compatibility, local Langlands for GL(n)). Whether each project formulation matches the published one was not checked."
+  }
+ },
+ "UpperTheory.Top.recS": {
+  "title": "Existence of design families from Minkowski's divisibility bound",
+  "summary": "Let QO be a property of pairs (datum, object over it) depending on a parameter record, and cT any real function of two real variables. Hypotheses: Minkowski's divisibility statement (the order of every finite subgroup of GL_n over the rationals divides an explicit Minkowski number), and the claim that this statement implies an existence property `RecExP` for QO strengthened by an extra condition: for all sufficiently large scales and all admissible input data there exist auxiliary sizes and a datum of the construction whose points satisfy the property. Conclusion (`ExD`): for every window parameter lambda > 1 and every requirement G on host fields such that hosts satisfying G exist at all large scales in windows, the 'design choices' exist: for every small eps and every threshold K there is a parameter family in the class defined by QO, satisfying G at all its points, with constants above K and satisfying a fixed list of about a dozen side conditions (thick-set, code-size, box, divisibility and tame-distinctness conditions).",
+  "role": "An existence step. It assembles `designS` and `kitS` from: a small-prime statement obtained from an unconditional primes-in-progressions estimate, existence of objects from an admissible twist datum, host existence with window shares (`hostWW`, `hostQ`), the preceding lemma `objC_true`, and a closed-form window-share requirement.",
+  "statement_name": "UpperTheory.Top.recS",
+  "confidence": "low",
+  "caveat": "`MinkDiv`, `ExD`, `DesignChoices`, `HostExW`, `RecExP` and `clsP` were read, but the notions inside them (`Par`, `Obj`, scales, `ChGood`, `HostGood`, the side conditions of `DesignChoices`, the class `cls7`) were not unfolded; the description of what the families and objects are rests on the shape of the definitions and on names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The only literature input is Minkowski's bound on finite subgroups of GL_n(Q); the conclusion asserts existence of parameter families that exist only inside this project's construction."
+  }
+ },
+ "UpperTheory.Top.zero_free_all_of_green_v_win": {
+  "title": "GRH for all primitive Dirichlet characters from three inputs",
+  "summary": "Hypotheses: (1) `Green`: for every prime g and every d > 0, the cuspidal irreducible characters of GL_d over the field with g elements are parametrised bijectively by monic irreducible polynomials of degree d with nonzero constant term, with the expected character values on elliptic elements and degree equal to the product of (g^i - 1) for i from 1 to d-1; (2) `VWin`: for every primitive Dirichlet character and certain auxiliary abelian number fields attached to it (subfields of cyclotomic fields cut out by the character and two auxiliary primes q, d in prescribed windows), the Tate-Shafarevich-type groups of Q_l/Z_l twisted by powers of the cyclotomic character have finite length for twists below a bound, and the sum over primes l of log l times these lengths is at most exp(x^eps / 2); (3) the bundle `HypsAlt` is inhabited: a family class together with a selection of auxiliary data and about forty-five properties of it (bounded rows, divisibility rows, class-number formulas, counting bounds, spectral conditions, period and point-integral conditions, mass formulas and others). Conclusion: for every primitive Dirichlet character, including the trivial one of conductor 1, the L-function has no zeros with real part greater than 1/2.",
+  "role": "A top-level reduction. It combines `zeroFreeAll_of_topG` (zero-freeness from the project's connectivity statement `TopG` with window parameter 3/2), `forall_goal_of_shape_of_hyps` together with `shape_closed_link_n_of_green` (which derive `TopG` from the bundle and from Green's parametrisation), and `supplyChi` (which turns `VWin` into existence of suitable host fields for each character).",
+  "statement_name": "UpperTheory.Top.zero_free_all_of_green_v_win",
+  "confidence": "medium",
+  "caveat": "The conclusion and the hypotheses `Green` and `VWin` were read down to their definitions. The bundle `HypsAlt` was read only as a list of fields; the meaning of most of its fields (families of data `FamP`, selections, rows, ties) was not unfolded, so I cannot say which of them are literature statements and which are internal claims of the construction.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The conclusion is the Riemann Hypothesis together with GRH for all primitive Dirichlet characters, which had no proof before; the statement is conditional on a large bundle of project-specific hypotheses and on a bound for Tate-Shafarevich-type groups."
+  }
+ },
+ "UpperTheory.V.HV.DescentVanishingReductions.vwin_of_hypotheses_H_E_alt": {
+  "title": "Window bound on Sha lengths from the literature bundle H'",
+  "summary": "Hypothesis: the bundle `HypothesesH'`, a nested record of literature-type statements (a rank-n literature package with local, automorphic, cohomological and CM parts; Clozel-type cohomological and conjugation statements; a Borel injectivity statement; Galois representations for totally real GL_2; strong multiplicity one; Gelfand–Kazhdan; quadratic base change; newforms; a weak descent from GL_n over a CM field to a unitary group for n between 2 and 4; cyclic base change of prime degree; existence of definite quaternion algebras; semisimplicity of cusp forms). Conclusion: `VWin`. For every primitive Dirichlet character ψ, every ε in (0, 1/52) and every choice of exponents e(x) with x^(2+8ε) ≤ 2^e(x) ≤ 2x^(2+8ε), there is J ≥ 1 such that for all large X and all prime pairs (q, d) in a prescribed size window with congruence conditions (q ≡ 3 mod 8, d ≡ 7 mod 16, q | d+1, d+1 divisible by all small odd primes), there is Y with X^(1/J) ≤ Y ≤ √X such that for all x in [Y, Y²] and every subfield E of a cyclotomic field cut out by ψ, the quadratic characters of q and d and the condition a ≡ ±1 mod 2^(e+2): the groups Sha¹ of Q_l/Z_l twisted by the (−e')-th power of the cyclotomic character have finite length for 0 < e' < x^401, and the sum over primes l of log l times these lengths is at most exp(x^ε / 2).",
+  "role": "Final assembly of the V-window: combines a 'Lemma K' derived from the literature package, two end-point statements, and four counting bounds (labelled I, II, III, V, obtained from Kato-type input with automorphy, an Sp4 input, and a reduced unitary lift) through `Core.of_four_alt`.",
+  "statement_name": "UpperTheory.V.HV.DescentVanishingReductions.vwin_of_hypotheses_H_E_alt",
+  "confidence": "medium",
+  "caveat": "`VWin` was unfolded completely down to Sha lengths. The hypothesis bundle was read at the level of field names and three of its fields (weak descent, cyclic base change, the rank-n package header); the remaining fields are described from their names. The counting lemmas used in the proof were not opened.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses are literature-type, but the conclusion is a uniform bound on Tate–Shafarevich lengths in special cyclotomic subfields that the project then uses (with further literature) to derive its statement for every Dirichlet character; no such bound is a standard published theorem."
+  }
+ },
+ "UpperTheory.V.Z.Bc.seedIIs_alt": {
+  "title": "Existence of an automorphic rank-four seed in case II",
+  "summary": "Hypothesis: the literature bundle `HypothesesH'` (a nested record of automorphic and Galois-theoretic statements: a rank-n literature package, Clozel-type statements, Galois representations for totally real GL_2, strong multiplicity one, quadratic and cyclic base change, weak descent to unitary groups, and others). Conclusion: `SeedIIAlt`. For every prime l, coefficient ring, 'raw' datum D (a list of l-adic characters of the absolute Galois group of Q defining a diagonal four-dimensional representation with characters θ, Ψ, α, 1) and tower T over D (a totally real abelian field F, an imaginary quadratic field K and L = FK, with places above l) satisfying the case-II context, and the conditions `Ok`, `Two`, `Deep`, and for every identification of the algebraic closure of Q_l with C, there exist a larger coefficient ring and a framed deformation Q of the Galois group of F over it such that: Q pairs with the frame, is continuous, has the prescribed residual shape, is irreducible on a subgroup, and after restriction to L and a twist by a character it is attached to a regular algebraic cuspidal automorphic representation of GL_4 over L with weights differing by even integers at least 4; in addition its reduction lies in a prescribed support pattern and has a nonzero entry in one of two specified positions.",
+  "role": "Existence of an object, obtained by reduction: the proof packages the bundle with a weight-one Hilbert Eisenstein statement and one further literature item, derives an induction-of-automorphy statement from quadratic base change, a cyclic rank-two lift and `indCs`, and applies `seedII_Z_alt`.",
+  "statement_name": "UpperTheory.V.Z.Bc.seedIIs_alt",
+  "confidence": "medium",
+  "caveat": "`SeedIIAlt`, `IsSeedAlt`, `SeedPairAlt`, `Raw`, `Tower`, `Ctx2` and `Deep` were read; the framed-deformation type `PD`, the conditions `Ok`, `Two`, `IsPair`, `Res`, `InV` and the precise meaning of 'attached' (`AttC`) were read only as signatures. Most fields of the hypothesis bundle are described from their names.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypothesis is a bundle of literature statements, but the conclusion is an existence statement about seeds for towers and raw data that are defined only in this project's modularity argument."
+  }
+ },
+ "UpperTheory.V.Z.Sym.W.adjoint_lift_w_of_literal_automorphy_spec_out": {
+  "title": "Adjoint lift from definite U(2) to U(3), with alternative",
+  "summary": "Hypotheses: a bundle `LiteratureRankNHypothesis` of literature statements (four sub-bundles: local representation theory of GL(n), automorphic forms and Galois representations, cohomological results, CM theory), and a form-level statement `SpecOutS`. Conclusion (`AdLiftW`): let L be a CM field unramified over its maximal totally real subfield, S0 a finite set and P a set of finite places, disjoint, all split over the real subfield, with distinct restrictions to it, and S0 covering the places above 2. Let π be an automorphic representation of the definite unitary group in 2 variables over L, of weight difference j ≥ 1 at every infinite place, unramified away from S0, whose local components at places of S0 and P are principal series with characters (ψ0, ψ1), unramified and with regular ratio at P. Then either there is an automorphic representation of the definite unitary group in 3 variables, unramified away from S0, whose components at S0 and at almost all places of P are subquotients of the principal series with characters (ψ0/ψ1, 1, ψ1/ψ0); or there is an automorphic representation of the 2-variable group whose components at almost all places of P have character ratio (ψ0/ψ1) squared.",
+  "role": "A passage from forms to representations: `SpecOutS` gives the same dichotomy for individual eigenforms at a fixed level and for every finite subset of P; finiteness of automorphic representations at fixed level and weight plus a pigeonhole argument gives one representation that works for almost all of P.",
+  "statement_name": "UpperTheory.V.Z.Sym.W.adjoint_lift_w_of_literal_automorphy_spec_out",
+  "confidence": "medium",
+  "caveat": "The automorphic and local notions (automorphic representation of the definite unitary group, local component, principal series subquotient) were read in the project's definitions. The contents of the literature bundle were read only as field names. `SpecOutS` is proved elsewhere in the project as `specOutS`; that proof was not read.",
+  "literature": {
+   "status": "unclear",
+   "basis": "The first alternative is a form of the adjoint (Gelbart–Jacquet type) lift from rank 2 to rank 3, which is a known kind of result, but the two-way alternative and this formulation on definite unitary groups are specific to the project, and the statement is conditional on a project-specific hypothesis."
+  }
+ },
+ "UpperTheory.V.Z.Sym.W.unitary_three_automorphy_dense_of_prints_and_row": {
+  "title": "Automorphic three-dimensional adjoint lifts in arbitrarily large weights (conditional)",
+  "summary": "Hypotheses: (i) `HypothesesH'`, a bundle of about fifteen assumed statements from the literature (a 'literature rank n' hypothesis, statements named after Clozel and Borel, Galois representations for GL2 over totally real fields, strong multiplicity one, Gelfand–Kazhdan, admissibility, quadratic and cyclic base change, descent, newforms, existence of definite quaternion algebras, semisimplicity of cusp forms); (ii) `RowT`: every regular algebraic polarized cuspidal representation of GL_a over a CM field has an attached l-adic Galois representation with the project's list of local and global properties. Conclusion: let K be an imaginary quadratic field, L an abelian CM field, l a prime, and χ', η, θ l-adic characters of the absolute Galois group of ℚ satisfying the project's field-and-character conditions (η cuts out K, splitting conditions at an auxiliary level, the parity χ'(c) = (−1)^j, a non-congruence condition), with χ' ≠ η and an integer M divisible by 2l controlling ramification. Then for every bound B there is m ≥ B with m ≡ j mod (l − 1) and a continuous 3-dimensional l-adic representation r of the Galois group of L, irreducible on every open subgroup, which preserves a symmetric pairing compatible with complex conjugation, has characteristic polynomials congruent to those of ε^j χ' ⊕ 1 ⊕ (ε^j χ')^(−1) (ε the cyclotomic character), has prescribed type (χ', 1, χ'^(−1)) away from l, is ordinary of weights (m, 0, −m) above l, and whose twist by ε^(−1) is automorphic in the project's conjugate self-dual sense.",
+  "role": "Assembly of three earlier conditional results: existence of 2-dimensional representations congruent to Eisenstein series in all large weights, the fact that their restrictions to L (after a character twist) lie in a class W, and automorphy of the trace-zero adjoint for that class (the only place the hypothesis (ii) is used). It is a reduction step; the next theorem in the file removes hypothesis (ii) by deriving it from the bundle (i).",
+  "statement_name": "UpperTheory.V.Z.Sym.W.unitary_three_automorphy_dense_of_prints_and_row",
+  "confidence": "medium",
+  "caveat": "The predicates for 'automorphic in the conjugate self-dual sense' (`IsAutCsdA`), 'ordinary' (`OrdAt`), 'type away from l' (`TypeAway`), the auxiliary condition `SlopeTestRemainingChoices`, the condition `UnrSplit` on L and M, and the property list `PropsB` in `RowT` were not unfolded. That r is the trace-zero adjoint of a 2-dimensional representation is read from the definitions of the proof ingredients (`AdAutW`, `SeedInW`, `PropEGW`), not from the conclusion itself, which only asserts existence of r.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The statement is conditional on literature bundles and concludes existence of representations with the project's own 'seed' package of properties. Adjoint (symmetric square) lifting from GL2 is classical, but this formulation is specific to the project's construction."
+  }
+ },
+ "UpperTheory.V.Z.Win.Dn.ends0_alt": {
+  "title": "Automorphy of points on two rank-3 ordinary deformation problems",
+  "summary": "Hypothesis: a bundle `HypothesesH'` of 15 assumptions, all formulated as literature results on automorphic forms and Galois representations (a rank-n literature bundle, two Clozel statements, Borel injectivity, Galois representations for totally real GL2, strong multiplicity one, Gelfand–Kazhdan, admissibility, quadratic and cyclic prime-degree base change, a weak descent to unitary groups in rank 2 to 4, a rank-2 descent alternative, existence of definite quaternion algebras, semisimplicity of cusp forms). Conclusion, two statements about homomorphisms from the absolute Galois group of Q into the group GL3 ⋊ {±1}. (1) For every CM field K and every datum of the project's type `Dat` (two characters η, Ψ and a complex conjugation), there is a marked group element g₁ such that: residual characteristic polynomials of all 'ordinary points' agree with a reference representation on a finite-index subgroup; every ordinary point over a discrete valuation ring that stays irreducible on all open subgroups of ker η becomes, after restriction to K and a cyclotomic twist, automorphic in the project's conjugate-self-dual sense; and for points of block type the associated 2-dimensional representation is attached to a newform of weight 2e+1. (2) For K = Q(i) and every 'host frame' (a deformation problem unramified outside lN built from the character mod 4 and a Dirichlet character ψ), there is a marked element such that for every universal deformation a certain weight-zero module is finite over the coefficient ring and every characteristic-zero point that is irreducible on ker η is automorphic over K after twisting by the inverse cyclotomic character.",
+  "role": "A one-line assembly: it applies `ends_u_alt` to the hypothesis bundle and discharges that lemma's remaining input `LinkedUnlE` using `linkedUnlE_holds_alt`, which in turn is fed a second 'seed' automorphy case (`seed2_alt`) and a density statement for unitary-three automorphy (`unitary_three_automorphy_dense_of_prints`).",
+  "statement_name": "UpperTheory.V.Z.Win.Dn.ends0_alt",
+  "confidence": "medium",
+  "caveat": "The definitions of the two conclusions (`GdEndAlt`, `ThmS6Core_s`) and of `OrdPt`, `FinEnd`, `AutEnd3Alt`, `AutEnd2Ao`, `HostData`, `IsHostFrame`, `IsAutCsdA`, `AutOnAlt` were read; the notions `IsUniv`, `Frame`, `wpart`, `WitAQ`, `AutCsd0` and the full `Dat` structure were not unfolded. Most fields of the hypothesis bundle are described from their names (e.g. `ClozelCohC`, `StrongMultOneReal`); `DescWeak`, `CycC`, `Desc2`, `DefQuatExists`, `CuspSemisimpleReal` were read.",
+  "literature": {
+   "status": "probably new",
+   "basis": "The hypotheses are literature statements, but the conclusion is an automorphy (modularity-lifting type) statement for the project's own deformation frames and 'ordinary point' conditions; it is not a named published theorem."
+  }
+ },
+ "_private.Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.AutomorphyLifting.PrimeIndexConstruction.AwReal.0.UpperTheory.V.Z.Win.Birth.RealAlgebraicWindow.plainUp": {
+  "title": "Unlinked principal series persists under CM quadratic base change (GL_2)",
+  "summary": "Setting: F totally real, E a CM quadratic extension of F, a prime l with an isomorphism of an algebraic closure of Q_l with C, and a continuous representation r of the absolute Galois group of F into GL_2 over that closure whose restriction to E is irreducible. Hypotheses: π is a regular algebraic cuspidal automorphic representation of GL_2 over F to which r is attached (r is semisimple and at almost all places Frobenius has the characteristic polynomial given by the Satake parameters of π), and P is a regular algebraic cuspidal representation of GL_2 over E to which the restriction of r is attached. Conclusion: for every finite place w of E with v the place of F below it, if π is 'plain' at v (its local component has cuspidal support consisting of characters, no two differing by the absolute value) or π is unramified at v, then P is plain at w.",
+  "role": "Private lemma proved by a detour through auxiliary fields: a second CM quadratic extension E' in which v splits (`splitCM`), quadratic base change of π to E' (`quadBC2`, the self-twist case excluded by `noTw`), cyclic base change to the compositum M (`upCycle`), comparison of the two base changes via attached Galois representations (`attBC`), and transfer of 'window' bounds on the support characters up and down (`winPt`, `winUpDown`, `plainOf`, `thruTr`, `splitTr`). It is the only input of the public theorem `awReal` in the same file.",
+  "statement_name": "_private.Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.AutomorphyLifting.PrimeIndexConstruction.AwReal.0.UpperTheory.V.Z.Win.Birth.RealAlgebraicWindow.plainUp",
+  "confidence": "medium",
+  "caveat": "`RealUp`, `PlainAt`, `PlainAtR`, `PlainTor`, `Unlinked`, `AttachedSys`/`AttC`/`AttR`, `IsRegAlg` and `HasSat` were read. The types of cuspidal representations (`CuspSub`, `TR.CuspSub`), `IsLocComp` and `HasSupport`/`IsCuspSupport` were taken at face value. The cited lemmas in the proof were not opened; their roles are inferred from their statements' shapes and names.",
+  "literature": {
+   "status": "probably known",
+   "basis": "The conclusion is what compatibility of quadratic base change with local base change at every finite place (Langlands, Arthur–Clozel) gives for principal-series components; the formulation with the project's predicates `PlainAt`/`PlainTor` is its own, so this is not marked as plainly known."
   }
  }
 }

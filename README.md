@@ -86,7 +86,7 @@ There are two maps, and the page header switches between them:
 A file is a unit of compilation, not of meaning, and its imports turn out to be
 about twice as wide as what it really uses (see [METHOD.md](METHOD.md)). The
 declaration map rests on real dependencies. The file map is kept because it came
-first, has more descriptions, and the two have not been shown to differ in quality.
+first and the two have not been shown to differ in quality.
 
 Each map has three nested levels. The 20 milestones of the coarsest level also
 appear among the 100, and those among the 1000. On the finer levels a box is a
@@ -119,8 +119,9 @@ Descriptions:
 - **File map:** every milestone of the 20 and 100 levels has one. On the 100 level
   the generated marks are 64 probably new, 11 known, 16 probably known, 9 unclear;
   the generated confidence levels are 13 high, 61 medium, 26 low.
-- **Declaration map:** every milestone of the 20 level has one (18 probably new,
-  2 probably known; confidence 3 high, 9 medium, 8 low), and 28 of the 100.
+- **Declaration map:** every milestone of the 20 and 100 levels has one. On the 100
+  level the generated marks are 61 probably new, 10 known, 18 probably known,
+  11 unclear; the generated confidence levels are 9 high, 66 medium, 25 low.
 
 ## How milestones are chosen
 
@@ -191,7 +192,7 @@ The declaration map:
   declarations and 15.2 million dependencies, as numpy arrays plus a list of names.
   It holds names and dependencies only, no Lean text.
 - [`data/descriptions/descriptions.json`](data/descriptions/descriptions.json) — the
-  130 generated descriptions, keyed by module name (file map) or declaration name
+  202 generated descriptions, keyed by module name (file map) or declaration name
   (declaration map).
 - [`code/`](code/) — the scripts that build the levels and the pages;
   [`code/decl-graph/`](code/decl-graph/) — the scripts that produced the declaration
