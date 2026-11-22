@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/*TITLE*/</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface: #fcfcfb; --panel: #f4f3f0; --card: #ffffff; --line: #d9d7d0;
+  --text: #0b0b0b; --text2: #52514e; --text3: #86847d;
+  --accent: #2a78d6; --accent-soft: #cde2fb; --edge: #a9a79f; --group: #efeee9;
+  --warn: #9a6a00;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --surface: #1a1a19; --panel: #232322; --card: #2a2a28; --line: #44433f;
+    --text: #f0efec; --text2: #c3c2b7; --text3: #8d8c84;
+    --accent: #3987e5; --accent-soft: #1c3d66; --edge: #6f6e68; --group: #222221;
+    --warn: #c98500;
+  }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--surface); color: var(--text); display: flex; flex-direction: column;
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+header { display: flex; align-items: center; gap: 12px 16px; padding: 10px 16px;
+  border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+h1 { font-size: 16px; margin: 0; font-weight: 650; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button, .seg a { border: 0; background: transparent; color: var(--text2); padding: 6px 12px;
+  font: inherit; cursor: pointer; text-decoration: none; white-space: nowrap; }
+.seg > * + * { border-left: 1px solid var(--line); }
+.seg .on { background: var(--accent); color: #fff; }
+.lbl { color: var(--text3); font-size: 12.5px; margin-right: -8px; }
+input[type=search] { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+  background: var(--card); color: var(--text); font: inherit; width: 200px; }
+.ghost { border: 1px solid var(--line); border-radius: 8px; background: transparent;
+  color: var(--text2); padding: 6px 12px; font: inherit; cursor: pointer; }
+.hint { color: var(--text3); font-size: 12.5px; margin-left: auto; }
+main { flex: 1; display: flex; min-height: 0; }
+#stage { flex: 1; position: relative; overflow: hidden; cursor: grab; }
+#stage.drag { cursor: grabbing; }
+svg { width: 100%; height: 100%; display: block; user-select: none; }
+aside { width: 400px; border-left: 1px solid var(--line); background: var(--panel);
+  overflow: auto; padding: 16px; }
+@media (max-width: 1100px) { aside { width: 310px; } .hint { display: none; } }
+aside h2 { font-size: 17px; margin: 0 0 2px; line-height: 1.3; }
+aside h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--text3); margin: 18px 0 6px; font-weight: 600; }
+.sub { color: var(--text2); font-size: 13px; }
+.mono { font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.path { color: var(--text3); margin-top: 4px; }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin: 14px 0 12px; }
+.tabs button { border: 0; background: transparent; color: var(--text2); font: inherit;
+  padding: 7px 11px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tabs button.on { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.stat b { display: block; font-size: 17px; font-weight: 650; }
+.stat span { color: var(--text2); font-size: 12px; }
+.stmt { background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+  padding: 10px; max-height: 420px; overflow: auto; white-space: pre-wrap; }
+.note { border-left: 3px solid var(--warn); padding: 2px 0 2px 10px; color: var(--text2);
+  font-size: 13px; margin: 12px 0; }
+.badge { display: inline-block; border: 1px solid var(--line); border-radius: 10px;
+  padding: 1px 8px; font-size: 12px; color: var(--text2); }
+ul.links { list-style: none; margin: 0; padding: 0; }
+ul.links li { padding: 3px 0; }
+a.n { color: var(--accent); cursor: pointer; text-decoration: none; }
+a.n:hover { text-decoration: underline; }
+a.ext { color: var(--accent); text-decoration: none; }
+a.ext:hover { text-decoration: underline; }
+.small { color: var(--text2); font-size: 12.5px; }
+p { margin: 8px 0; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin: 2px 0 6px; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+
+.edge { fill: none; stroke: var(--edge); stroke-width: 1.2; }
+.group rect { fill: var(--group); stroke: var(--line); stroke-width: 1; }
+.group.t1 rect { fill: var(--surface); }
+.group text { fill: var(--text2); font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.group.t1 text { fill: var(--text3); font-size: 10.5px; font-weight: 500; }
+.group text:hover { fill: var(--accent); }
+.gedge { fill: none; stroke: var(--edge); stroke-width: 2.6; opacity: .7; }
+.gedge.t1 { stroke-width: 1.4; opacity: .6; }
+.over { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.node { cursor: pointer; }
+.node rect.box { fill: var(--card); stroke: var(--line); stroke-width: 1.2; }
+.node circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.5; }
+.node text.t { fill: var(--text); font-weight: 600; }
+.node text.s { fill: var(--text2); }
+.node rect.wbg { fill: var(--line); }
+.node rect.w { fill: var(--accent); }
+.node circle.mark.new { fill: #eb6834; stroke: none; }
+.node circle.mark.known { fill: none; stroke: var(--text3); stroke-width: 1.5; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 6px 0; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.legend i.new { background: #eb6834; }
+.legend i.known { border: 1.5px solid var(--text3); }
+.node.root rect.box { stroke: var(--accent); stroke-width: 2.4; }
+.node.root circle { stroke: var(--text); stroke-width: 2; }
+.node.sel rect.box, .node.hl rect.box { stroke: var(--accent); stroke-width: 2.2; }
+.node.sel circle, .node.hl circle { stroke: var(--text); stroke-width: 2; }
+.node.match rect.box { fill: var(--accent-soft); }
+.node.match circle { stroke: var(--text); stroke-width: 2.5; }
+svg.focus .node:not(.hl):not(.sel) { opacity: .22; }
+svg.focus .edge:not(.hl) { opacity: .08; }
+svg.focus .gedge { opacity: .15; }
+.edge.hl { stroke: var(--accent); stroke-width: 2; }
+#tip { position: absolute; pointer-events: none; background: var(--card); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 9px; font-size: 12.5px; max-width: 340px; display: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+#tip b { display: block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>/*TITLE*/</h1>
+  <div class="seg" id="levels"></div>
+  <span class="lbl">Ranked by</span>
+  <div class="seg" id="ranking"></div>
+  <input type="search" id="q" placeholder="Search by name">
+  <button class="ghost" id="fit">Fit to screen</button>
+  <span class="hint">Scroll to zoom, drag to pan, click a node for details</span>
+</header>
+<main>
+  <div id="stage"><svg id="svg"><defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,1 L10,5 L0,9 z" fill="context-stroke"/></marker></defs>
+    <g id="view"><g id="groups"></g><g id="gedges"></g><g id="edges"></g><g id="overlay"></g><g id="nodes"></g></g></svg>
+    <div id="tip"></div>
+  </div>
+  <aside id="side"></aside>
+</main>
+<script>
+const DATA = /*DATA*/;
+const NS = 'http://www.w3.org/2000/svg';
+const $ = id => document.getElementById(id);
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => n.toLocaleString('en-US');
+const pct = (x, d = 1) => (100 * x).toFixed(d) + '%';
+const flowPct = n => pct(n.flow, n.flow < 0.01 ? 2 : 1);
+const times = n => '×' + fmt(Math.round(n.score));
+const name = n => n.desc ? n.desc.title : n.title;
+const PLAN = DATA.ranking === 'plan';
+const rankKey = n => PLAN ? n.cone : n.flow;
+const mainPct = n => PLAN ? pct(n.cone) : flowPct(n);
+const lit = n => (n.desc && n.desc.literature && n.desc.literature.status) || '';
+const LIT = { 'known': 'Known result', 'probably known': 'Probably known',
+  'probably new': 'Probably new', 'unclear': 'Unclear' };
+
+const state = { li: 0, sel: null, tab: 'desc', t: { x: 0, y: 0, s: 1 } };
+let L, nodeEls, edgeEls, deps, users, drawn;
+
+function buildHeader() {
+  DATA.levels.forEach((lv, i) => {
+    const b = document.createElement('button');
+    b.textContent = lv.k + ' milestones';
+    b.onclick = () => show(i, null);
+    $('levels').appendChild(b);
+  });
+  const labels = { plan: 'Plan (cone + flow)', relative: 'Flow relative to level', absolute: 'Absolute flow' };
+  for (const [key, page] of DATA.pages) {
+    const a = document.createElement('a');
+    a.textContent = labels[key] || key;
+    if (key === DATA.ranking) a.className = 'on'; else a.href = page;
+    $('ranking').appendChild(a);
+  }
+}
+
+function show(li, selModule) {
+  state.li = li; L = DATA.levels[li];
+  [...$('levels').children].forEach((b, i) => b.classList.toggle('on', i === li));
+  deps = L.nodes.map(() => []); users = L.nodes.map(() => []);
+  L.edges.forEach(([a, b]) => { deps[a].push(b); users[b].push(a); });
+  draw();
+  fit();
+  const n = selModule ? L.nodes.find(x => x.module === selModule) : null;
+  select(n ? n.id : null);
+  search();
+}
+
+function draw() {
+  const lay = L.layout;
+  for (const id of ['groups', 'gedges', 'edges', 'overlay', 'nodes']) $(id).replaceChildren();
+  for (const g of [...lay.groups].sort((a, b) => a.tier - b.tier)) {
+    const src = DATA.levels[g.tier].nodes[g.parent];
+    const G = el('g', { class: 'group t' + g.tier }, $('groups'));
+    el('rect', { x: g.x, y: g.y, width: g.w, height: g.h, rx: g.tier ? 7 : 12 }, G);
+    const room = Math.floor((g.w - 16) / (g.tier ? 5.6 : 7)), label = name(src);
+    if (room >= 4) {
+      const t = el('text', { x: g.x + 9, y: g.y + (g.tier ? 14 : 16) }, G);
+      t.textContent = label.length > room ? label.slice(0, room - 1) + '…' : label;
+      t.onclick = e => { e.stopPropagation(); show(g.tier, src.module); };
+      el('title', {}, t).textContent = label + ' — open on the ' + DATA.levels[g.tier].k + '-milestone level';
+    }
+  }
+  for (const [tier, d] of lay.gedges)
+    el('path', { class: 'gedge t' + tier, d, 'marker-end': 'url(#arr)' }, $('gedges'));
+  drawn = new Set(lay.edges.map(([a, b]) => a + '-' + b));
+  edgeEls = lay.edges.map(([a, b, d]) => {
+    const p = el('path', { class: 'edge', d, 'marker-end': 'url(#arr)' }, $('edges'));
+    p.dataset.a = a; p.dataset.b = b; return p;
+  });
+  nodeEls = [];
+  const fmax = Math.max(...L.nodes.filter(m => m.module !== DATA.root).map(rankKey));
+  for (const n of L.nodes) {
+    const [x, y] = lay.pos[n.id], [w, h] = n.size;
+    const G = el('g', { class: 'node' + (n.module === DATA.root ? ' root' : ''),
+      transform: `translate(${x - w / 2},${y - h / 2})` }, $('nodes'));
+    if (L.kind === 'dot') {
+      el('circle', { cx: w / 2, cy: h / 2, r: w / 2 }, G);
+    } else {
+      el('rect', { class: 'box', width: w, height: h, rx: 9 }, G);
+      const big = L.kind === 'large', fs = big ? 13.5 : 11, lh = big ? 17 : 13.5;
+      const y0 = big ? 22 : (n.lines.length === 1 ? h / 2 + 4 : 17);
+      n.lines.forEach((s, i) => { const t = el('text', { class: 't', x: 12, y: y0 + i * lh,
+        'font-size': fs }, G); t.textContent = s; });
+      if (big) {
+        const s = el('text', { class: 's', x: 12, y: 60, 'font-size': 11.5 }, G);
+        s.textContent = PLAN ? 'cone ' + pct(n.cone) + ' · flow ' + flowPct(n)
+          : 'flow ' + flowPct(n) + ' · ' + times(n) + ' typical';
+        el('rect', { class: 'wbg', x: 12, y: 68, width: w - 24, height: 5, rx: 2.5 }, G);
+        el('rect', { class: 'w', x: 12, y: 68, height: 5, rx: 2.5,
+          width: Math.max(3, (w - 24) * Math.min(1, Math.sqrt(rankKey(n) / fmax))) }, G);
+      }
+      const st = lit(n);
+      if (st === 'probably new') el('circle', { class: 'mark new', cx: w - 13, cy: 13, r: 4.5 }, G);
+      else if (st === 'known' || st === 'probably known') el('circle', { class: 'mark known', cx: w - 13, cy: 13, r: 4 }, G);
+    }
+    G.onclick = e => { e.stopPropagation(); select(n.id); };
+    G.onmouseenter = e => { focus(n.id); tip(n, e); };
+    G.onmousemove = e => tip(n, e);
+    G.onmouseleave = () => { focus(state.sel); $('tip').style.display = 'none'; };
+    nodeEls[n.id] = G;
+  }
+}
+
+function tip(n, e) {
+  const t = $('tip'), r = $('stage').getBoundingClientRect();
+  t.innerHTML = `<b>${esc(name(n))}</b>` + (PLAN
+    ? `depends on ${pct(n.cone)} of the proof · ${flowPct(n)} of all work flows through it`
+    : `${flowPct(n)} of all work flows through it · ${times(n)} the typical flow at its level`) +
+    (lit(n) ? ` · ${LIT[lit(n)].toLowerCase()}` : '');
+  t.style.display = 'block';
+  t.style.left = Math.min(e.clientX - r.left + 14, r.width - 350) + 'px';
+  t.style.top = (e.clientY - r.top + 14) + 'px';
+}
+
+function focus(id) {
+  const svg = $('svg');
+  nodeEls.forEach(g => g.classList.remove('hl'));
+  edgeEls.forEach(p => p.classList.remove('hl'));
+  $('overlay').replaceChildren();
+  if (id == null) { svg.classList.remove('focus'); return; }
+  const P = L.layout.pos;
+  const arc = (user, dep) => {            // an edge that crosses boxes: dependency -> user
+    if (drawn.has(user + '-' + dep)) return;
+    const [x1, y1] = P[dep], [x2, y2] = P[user], my = (y1 + y2) / 2;
+    el('path', { class: 'over', d: `M${x1},${y1}C${x1},${my} ${x2},${my} ${x2},${y2}`,
+      'marker-end': 'url(#arr)' }, $('overlay'));
+  };
+  deps[id].forEach(d => arc(id, d));
+  users[id].forEach(u => arc(u, id));
+  svg.classList.add('focus');
+  nodeEls[id].classList.add('hl');
+  deps[id].forEach(d => nodeEls[d].classList.add('hl'));
+  users[id].forEach(d => nodeEls[d].classList.add('hl'));
+  edgeEls.forEach(p => { if (+p.dataset.a === id || +p.dataset.b === id) p.classList.add('hl'); });
+}
+
+function link(n, li) {
+  return `<a class="n" data-li="${li}" data-m="${esc(n.module)}">${esc(name(n))}</a> <span class="small">${mainPct(n)}</span>`;
+}
+
+const TABS = [['desc', 'Description'], ['num', 'Numbers'], ['lean', 'Lean'], ['links', 'Links']];
+
+function tabDescription(n) {
+  if (!n.desc) return `<p class="sub">No English description has been written for this statement yet.</p>
+    <p class="small">${DATA.described.length ? 'Every milestone of the ' + DATA.described.join('- and ') + '-milestone level' + (DATA.described.length > 1 ? 's' : '') + ' has a description.' : 'Only some milestones have descriptions.'} The Lean tab shows the formal statement.</p>`;
+  const d = n.desc;
+  let h = `<p>${esc(d.summary)}</p>`;
+  if (d.role) h += `<h3>Role in the proof</h3><p>${esc(d.role)}</p>`;
+  if (d.literature && d.literature.status) h += `<h3>Known before this proof?</h3>
+    <p><span class="badge">${esc(LIT[d.literature.status] || d.literature.status)}</span></p>
+    <p class="small">${esc(d.literature.basis || '')}</p>`;
+  h += `<h3>How far to trust this</h3><p><span class="badge">confidence: ${esc(d.confidence || 'unknown')}</span></p>`;
+  if (d.caveat) h += `<div class="note">${esc(d.caveat)}</div>`;
+  h += `<p class="small">Written by an AI model from the Lean source and the definitions it unfolds. Not checked by a mathematician.</p>`;
+  return h;
+}
+
+function tabNumbers(n) {
+  const plan = n.step == null ? '' : `
+      <div class="stat"><b>${pct(n.step)}</b><span>of the proof is its own step: what is left to do once its inputs are available</span></div>
+      <div class="stat"><b>${n.inputs}</b><span>milestones it needs directly on this level</span></div>`;
+  return `<div class="stats">${plan}
+      <div class="stat"><b>${flowPct(n)}</b><span>of all work in the proof flows through this statement</span></div>
+      <div class="stat"><b>${times(n)}</b><span>the typical flow of statements at its level</span></div>
+      <div class="stat"><b>${n.height} of ${DATA.max_height}</b><span>level: longest chain of dependencies below it</span></div>
+      <div class="stat"><b>${pct(n.cone)}</b><span>of all files are below it (its cone)</span></div>
+      <div class="stat"><b>${pct(n.through, 0)}</b><span>of the files below it send their work through it</span></div>
+      <div class="stat"><b>${fmt(n.users)}</b><span>files import it directly</span></div>
+    </div>
+    <h3>Work attributed to this milestone</h3>
+    <p class="small">${fmt(n.modules)} files, ${fmt(n.theorems)} theorems and lemmas, ${fmt(n.weight)} lines.
+      A file is attributed to the nearest milestone above it.</p>
+    <h3>Folders of that work</h3>` + n.dirs.map(([d, s]) =>
+      `<div class="small">${esc(d)} — ${Math.round(100 * s)}%</div><div class="bar"><i style="width:${100 * s}%"></i></div>`).join('');
+}
+
+function tabLean(n) {
+  if (!n.key) return '<p class="sub">No declaration found in this file.</p>';
+  const file = n.module.split('.').join('/') + '.lean';
+  const src = DATA.source_url ? `<p><a class="ext" href="${esc(DATA.source_url + file)}" target="_blank" rel="noopener">Open ${esc(n.module.split('.').pop())}.lean in the source repository ↗</a></p>` : '';
+  const head = `<p class="small">Last theorem of the file <span class="mono">${esc(n.module.split('.').pop())}.lean</span>${n.key.declarations > 1 ? ' (' + n.key.declarations + ' declarations in the file)' : ''}.</p>`;
+  if (!n.key.statement) return head + `<div class="stmt mono"><b>${esc(n.key.kind)} ${esc(n.key.name)}</b></div>${src}
+    <p class="small">The Lean text of the statement is not reproduced here, because the proof was published without a licence. Follow the link to read it.</p>`;
+  return head + `<div class="stmt mono"><b>${esc(n.key.kind)} ${esc(n.key.name)}</b>\n${esc(n.key.statement)}${n.key.truncated ? ' …' : ''}</div>${src}`;
+}
+
+function tabLinks(n, id) {
+  const li = state.li;
+  const list = (title, ids) => ids.length ? `<h3>${title} (${ids.length})</h3><ul class="links">` +
+    ids.map(i => L.nodes[i]).sort((a, b) => rankKey(b) - rankKey(a)).map(m => `<li>${link(m, li)}</li>`).join('') + '</ul>' : '';
+  let h = list('Depends on', deps[id]) + list('Used by', users[id]);
+  for (let j = li - 1; j >= 0; j--) {
+    const P = DATA.levels[j], p = P.nodes.find(x => x.module === n.parents[String(P.k)]);
+    if (p && p.module !== n.module) h += `<h3>Part of, on the ${P.k}-milestone level</h3><ul class="links"><li>${link(p, j)}</li></ul>`;
+  }
+  if (li + 1 < DATA.levels.length) {
+    const F = DATA.levels[li + 1];
+    const kids = F.nodes.filter(x => x.parents[String(L.k)] === n.module && x.module !== n.module)
+      .sort((a, b) => rankKey(b) - rankKey(a));
+    if (kids.length) {
+      h += `<h3>Inside it, on the ${F.k}-milestone level (${kids.length})</h3><ul class="links">` +
+        kids.slice(0, 40).map(m => `<li>${link(m, li + 1)}</li>`).join('') + '</ul>';
+      if (kids.length > 40) h += `<div class="small">and ${kids.length - 40} more</div>`;
+    }
+  }
+  return h || '<p class="sub">No links on this level.</p>';
+}
+
+function select(id) {
+  state.sel = id;
+  nodeEls.forEach((g, i) => g.classList.toggle('sel', i === id));
+  focus(id);
+  const side = $('side');
+  if (id == null) { side.innerHTML = intro(); bind(); return; }
+  const n = L.nodes[id];
+  let h = `<h2>${esc(name(n))}</h2>`;
+  if (n.desc) h += `<div class="sub">${esc(n.title)}</div>`;
+  h += `<div class="mono path">${esc(n.module)}</div>
+    <div class="tabs">${TABS.map(([k, t]) => `<button data-tab="${k}" class="${k === state.tab ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+  h += { desc: tabDescription, num: tabNumbers, lean: tabLean, links: m => tabLinks(m, id) }[state.tab](n);
+  side.innerHTML = h; bind();
+}
+
+function intro() {
+  const big = L.nodes.filter(m => m.module !== DATA.root).sort((a, b) => rankKey(b) - rankKey(a)).slice(0, 12);
+  const rule = { relative: 'Here milestones are the statements whose flow is largest compared with the typical flow of statements at the same level.',
+    absolute: 'Here milestones are the statements with the largest flow, that is, the largest share of all work passing through them.',
+    plan: '' }[DATA.ranking];
+  const planText = !PLAN ? '' : `<p><b>How milestones are chosen.</b> The cone of a statement is everything it depends on. A milestone needs its inputs (the milestones directly below it) plus its own step: the part of its cone that no input covers. The plan is refined where it is coarsest: the milestone with the largest step gets a new input, a statement inside that step with a big cone and a large flow for its level. When a milestone would need more than seven inputs, a statement that groups several of them is added.</p>`;
+  const anyLit = DATA.levels[0].nodes.some(m => lit(m));
+  const legend = !anyLit ? '' : `<div class="legend small"><span><i class="new"></i>probably new in this proof</span><span><i class="known"></i>known or probably known from the literature</span></div>
+    <p class="small">The marks are an AI model's judgement from the Lean source, not a literature search. Nodes without a mark have no description or could not be judged.</p>`;
+  const notice = `<div class="note">This map was produced automatically with an AI model. It coarsens an existing Lean proof into milestones and does not check or explain that proof. The descriptions and the new / known marks are generated text and have not been checked by a mathematician.</div>`;
+  const source = DATA.source_label ? `<p class="small">Source proof: ${DATA.source_home ? `<a class="ext" href="${esc(DATA.source_home)}" target="_blank" rel="noopener">${esc(DATA.source_label)}</a>` : esc(DATA.source_label)}.</p>` : '';
+  return `<h2>How to read this map</h2>${notice}
+    <p>Each node is a milestone of the proof: a file, named after its last theorem. An arrow A → B means A is used in the proof of B. The final theorem is at the bottom and outlined.</p>
+    ${planText}
+    <p><b>Flow.</b> Every file is a source of work, measured in lines. Work flows up along dependencies to the final theorem and is split equally when a file has several users. The flow through a statement is the work that passes through it. ${rule}</p>
+    ${legend}
+    <p>The levels are nested: the ${DATA.levels[0].k} milestones also appear on the finer levels. On a finer level a box is a coarse milestone and the nodes in it are its parts. Thick arrows join boxes. A node's links to nodes in other boxes appear as dashed lines when you hover over it.</p>
+    <p class="small">The proof has ${fmt(DATA.total_nodes)} files and ${fmt(Math.round(DATA.total_weight))} non-blank lines. The graph is the import graph of the files. Names come from the author's file and theorem names; plain-English titles, where present, were written by an AI model.</p>
+    ${source}
+    <h3>This level: ${L.k} milestones, ${L.edges.length} links</h3>
+    <ul class="links">${big.map(m => `<li>${link(m, state.li)}</li>`).join('')}</ul>
+    <div class="small">The 12 with the largest ${PLAN ? 'cone' : 'flow'}. Click a node on the map to see its details.</div>`;
+}
+
+function bind() {
+  $('side').querySelectorAll('a.n').forEach(a => a.onclick = () => {
+    const li = +a.dataset.li, m = a.dataset.m;
+    if (li !== state.li) show(li, m); else select(L.nodes.find(x => x.module === m).id);
+    center(L.nodes.find(x => x.module === m).id);
+  });
+  $('side').querySelectorAll('.tabs button').forEach(b => b.onclick = () => {
+    state.tab = b.dataset.tab; select(state.sel);
+  });
+}
+
+function apply() { const t = state.t; $('view').setAttribute('transform', `translate(${t.x},${t.y}) scale(${t.s})`); }
+function fit() {
+  const r = $('stage').getBoundingClientRect(), lay = L.layout, pad = 30;
+  const s = Math.min((r.width - 2 * pad) / lay.W, (r.height - 2 * pad) / lay.H, 1.4);
+  state.t = { s, x: (r.width - lay.W * s) / 2, y: (r.height - lay.H * s) / 2 }; apply();
+}
+function center(id) {
+  const r = $('stage').getBoundingClientRect(), [x, y] = L.layout.pos[id];
+  const s = Math.max(state.t.s, L.kind === 'dot' ? 1.1 : 0.75);
+  state.t = { s, x: r.width / 2 - x * s, y: r.height / 2 - y * s }; apply();
+}
+function search() {
+  const q = $('q').value.trim().toLowerCase();
+  L.nodes.forEach(n => nodeEls[n.id].classList.toggle('match', q.length > 1 &&
+    (n.module.toLowerCase().includes(q) || n.title.toLowerCase().includes(q) ||
+     (n.desc && n.desc.title.toLowerCase().includes(q)))));
+}
+
+const stage = $('stage');
+let drag = null;
+stage.addEventListener('wheel', e => {
+  e.preventDefault();
+  const r = stage.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+  const k = Math.exp(-e.deltaY * 0.0015), t = state.t, s = Math.min(6, Math.max(0.03, t.s * k));
+  t.x = mx - (mx - t.x) * (s / t.s); t.y = my - (my - t.y) * (s / t.s); t.s = s; apply();
+}, { passive: false });
+stage.addEventListener('mousedown', e => { drag = { x: e.clientX, y: e.clientY, moved: false }; });
+window.addEventListener('mousemove', e => { if (!drag) return;
+  const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+  if (Math.abs(dx) + Math.abs(dy) > 3) { drag.moved = true; stage.classList.add('drag'); }
+  state.t.x += dx; state.t.y += dy; drag.x = e.clientX; drag.y = e.clientY; apply(); });
+window.addEventListener('mouseup', e => { stage.classList.remove('drag');
+  if (drag && !drag.moved && stage.contains(e.target) && !e.target.closest('.node') && !e.target.closest('.group text')) select(null);
+  drag = null; });
+$('fit').onclick = fit;
+$('q').oninput = search;
+window.addEventListener('resize', fit);
+
+buildHeader();
+show(0, null);
+</script>
+</body>
+</html>
